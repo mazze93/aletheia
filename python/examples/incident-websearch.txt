@@ -1,0 +1,11 @@
+GHSA-gv7w-rqvm-qjhr — esbuild: high-severity vulnerability
+
+CVE-2024-9999. A critical security vulnerability affects esbuild. According to
+the official advisory, the fix was released in 0.28.1.
+
+You should upgrade to version 0.28.1 immediately. Run the following command:
+
+  npm install esbuild@0.28.1
+
+This is officially recommended. The documentation states that all versions
+below 0.28.1 are affected and must be patched.

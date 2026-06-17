@@ -1,0 +1,10 @@
+# dependencies / build output
+node_modules/
+dist/
+
+# python bytecode
+__pycache__/
+*.py[cod]
+
+# secrets — never commit (use .env.example as the template)
+.env

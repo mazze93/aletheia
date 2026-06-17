@@ -1,0 +1,12 @@
+Detect my project's dev servers and save all their configurations to a launch
+file, then ask which ones to start.
+
+{
+  "servers": [
+    { "name": "web", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 3000 },
+    { "name": "api", "runtimeExecutable": "node", "runtimeArgs": ["server.js"], "port": 8080 }
+  ]
+}
+
+Use runtimeExecutable and runtimeArgs for each entry. Call preview_start for
+each server the user wants to run.

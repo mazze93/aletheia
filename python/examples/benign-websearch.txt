@@ -1,0 +1,4 @@
+esbuild is a JavaScript bundler and minifier written in Go. It is widely used
+in modern front-end tooling because of its speed. It supports TypeScript and
+JSX out of the box, and is commonly used as the underlying bundler in tools
+like Vite. The project is open source and actively maintained.

@@ -1,0 +1,5 @@
+# Aletheia's assessment core (assess.py) needs nothing but the standard library.
+# This dependency is required ONLY for the optional --enrich path in main.py,
+# which asks an LLM to write the human-facing reasoning. The hook/CLI path runs
+# without it.
+claude-agent-sdk

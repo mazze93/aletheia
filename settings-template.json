@@ -1,0 +1,27 @@
+{
+  "_comment": "Aletheia wiring for Claude Code. Copy these hook blocks into your settings.json (project .claude/settings.json or ~/.claude/settings.json). The Python CLI runs on the standard library alone — no build, no install. To use the TypeScript build instead, run `npm install && npm run build` in typescript/ and replace the command with: node /Users/daedalus/Code/tools/aletheia/typescript/dist/index.js",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "WebSearch|WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/daedalus/Code/tools/aletheia/python/main.py"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/daedalus/Code/tools/aletheia/python/main.py"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "aletheia",
+  "version": "0.1.0",
+  "description": "Prompt injection detection agent — protects Claude by tracking content provenance and flagging untrusted governing parameters",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node20 --outfile=dist/index.js --format=esm --packages=external",
+    "typecheck": "tsc --noEmit",
+    "dev": "node --import tsx/esm src/index.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "esbuild": "latest",
+    "tsx": "^4",
+    "typescript": "^5"
+  }
+}
