@@ -1,4 +1,4 @@
-"""Aletheia — pure injection-risk *classification*.
+r"""Aletheia — pure injection-risk *classification*.
 
 Standard library only. No SDK, no network, no API key. Deliberately
 dependency-free so it can run inside a hook on the standard library alone.
@@ -13,8 +13,25 @@ describing a CVE remediation is indistinguishable from the injection it fixes �
 both name versions, both carry urgency, both tell you to run something. Letting
 the score decide made ordinary security work unperformable.
 
-It mirrors typescript/src/assess.ts weight-for-weight. If you change a weight,
-a threshold, or a pattern here, change it there too.
+**This file is the oracle.** `typescript/src/assess.ts` mirrors it
+weight-for-weight, and where the two disagree, this one is right and the port is
+wrong. That is not a matter of seniority: two peers can argue forever, and an
+asymmetry is what makes a divergence decidable.
+
+The mirroring used to be a request — *"if you change a weight, a threshold, or a
+pattern here, change it there too"* — which is a promise no build can keep. It is
+now enforced. `parity/compare.py` projects both implementations over
+`parity/vectors.jsonl` and CI fails on any difference in score, band, matched
+features, match ordering, or the per-family caps.
+
+It earned that on its first run, finding a divergence nobody had noticed:
+JavaScript's `\w` is ASCII-only and Python's is not, so `café@1.2.3` was a
+governing parameter here and invisible there. A non-ASCII character in a package
+name was an evasion.
+
+If you change anything below, regenerate the golden:
+
+    python3 parity/emit.py > parity/assess.golden.json
 """
 from __future__ import annotations
 

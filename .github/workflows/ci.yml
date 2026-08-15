@@ -26,6 +26,44 @@ jobs:
       - name: eval corpus
         run: PYTHONPATH=src python3 -m unittest tests.test_evals -v
 
+  # Two implementations of the same contract drift silently unless something
+  # makes them argue. The Python assessor is the oracle; the TypeScript port
+  # must agree with it, and the golden file is the sworn statement.
+  #
+  # Modelled on cognitive/stratum's reference-oracle + golden-projection gate,
+  # which solved this exact problem for its own dual implementation.
+  parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+        working-directory: typescript
+
+      # Gate 1 — the golden is a projection, not a document. If it drifts from
+      # the oracle, someone hand-edited it or changed assess.py and forgot to
+      # regenerate. Without this, a stale golden would happily certify a port
+      # that no longer matches anything.
+      - name: golden file is current
+        run: |
+          python3 parity/emit.py > /tmp/golden.expected.json
+          diff -u parity/assess.golden.json /tmp/golden.expected.json \
+            || { echo "::error::parity/assess.golden.json is stale — regenerate with 'python3 parity/emit.py > parity/assess.golden.json'"; exit 1; }
+
+      # Gate 2 — the port answers the same questions and must give the same
+      # answers. Covers weights, thresholds, the trust table, the combo
+      # penalty, the urgency multiplier, regex dialect differences, match
+      # ordering, dedupe, and the per-family caps.
+      - name: TypeScript port matches the oracle
+        run: |
+          npx tsx parity/emit.ts > /tmp/ts.json
+          python3 parity/compare.py parity/assess.golden.json /tmp/ts.json
+
   typescript:
     runs-on: ubuntu-latest
     steps:

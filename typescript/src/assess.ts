@@ -5,7 +5,18 @@ import { SOURCE_TRUST } from './types.js';
 // version numbers, paths, install commands, port numbers.
 const GOVERNING_PARAM_PATTERNS: RegExp[] = [
   /\b\d+\.\d+\.\d+(?:-[a-zA-Z0-9.+]+)?\b/g,              // semver: 0.28.1
-  /\b[a-z][\w-]*@\d+[\d.]*\b/g,                           // pkg@version: esbuild@0.28.1
+  // pkg@version: esbuild@0.28.1
+  //
+  // Unicode-aware on purpose, and not cosmetically. JavaScript's \w is
+  // ASCII-only while Python's is not, so the ASCII form `\b[a-z][\w-]*@...`
+  // could not see `café@1.2.3` at all and saw `naïve@2.0.0` only as
+  // `ve@2.0.0`. That is an evasion: a non-ASCII character in a package name
+  // hid a governing parameter from this implementation while the Python
+  // oracle flagged it. Found by parity/compare.py on its first run.
+  //
+  // The leading lookbehind replaces \b, whose JS definition is also
+  // ASCII-bound and would reintroduce the same blind spot at the boundary.
+  /(?<![\p{L}\p{N}_])[a-z][\p{L}\p{N}_-]*@\d+[\d.]*\b/gu,
   /(?:^|[\s"'`])(?:\/[a-zA-Z0-9_.~-]+){2,}/gm,            // Unix paths: /Users/daedalus/...
   /\b(?:port|PORT)\s*[=:]\s*\d{2,5}\b/g,                  // port: 3000
   /\b(?:npm|pip|pip3|yarn|pnpm)\s+(?:install|i|add)\s+\S+/g, // npm install x@y
