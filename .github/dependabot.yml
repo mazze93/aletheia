@@ -1,0 +1,22 @@
+# Dependabot for aletheia.
+#
+# Inherited on extraction: the workspace container previously watched
+# /tools/aletheia/typescript. Removing the unit from that repo would have
+# silently ended npm coverage, so the entry moves here rather than lapsing.
+# An extraction that quietly drops security monitoring is worse than no
+# extraction.
+#
+# There is no pip/uv entry on purpose: the Python package has zero runtime
+# dependencies (see pyproject.toml), and that is a design constraint rather
+# than an accident. If one ever appears, add the ecosystem here.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/typescript"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
