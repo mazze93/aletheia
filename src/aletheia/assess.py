@@ -1,8 +1,17 @@
-"""Aletheia — pure injection-risk assessment.
+"""Aletheia — pure injection-risk *classification*.
 
-Standard library only. No SDK, no network, no API key. This module is the part
-of Aletheia that judges, and it is deliberately dependency-free so it can run
-inside a hook on the standard library alone.
+Standard library only. No SDK, no network, no API key. Deliberately
+dependency-free so it can run inside a hook on the standard library alone.
+
+**This module classifies and explains. It does not decide.** It returns a score,
+the features that produced it, and readable reasoning. Whether any of that may
+block an action is `policy.decide()`'s question, and answering it requires
+provenance this function deliberately does not have.
+
+The distinction is not academic. Scored purely on lexis, a commit message
+describing a CVE remediation is indistinguishable from the injection it fixes —
+both name versions, both carry urgency, both tell you to run something. Letting
+the score decide made ordinary security work unperformable.
 
 It mirrors typescript/src/assess.ts weight-for-weight. If you change a weight,
 a threshold, or a pattern here, change it there too.
@@ -87,7 +96,7 @@ class Assessment:
     injection_risk_score: float
     risk_factors: List[dict]
     governing_parameters: List[str]
-    recommendation: str  # "proceed" | "verify" | "stop"
+    severity: str  # "low" | "moderate" | "high" — descriptive, not a verdict
     reasoning: str
     verification_steps: Optional[List[str]] = None
 
@@ -166,21 +175,26 @@ def assess(content: str, source: str, intended_action: Optional[str] = None) -> 
     pct = f"{round(score * 100)}%"
     steps: Optional[List[str]] = None
 
+    # Severity is a *description* of the content, not a decision about it.
+    # Deciding is policy.decide()'s job, and it needs provenance this function
+    # does not have. A high severity on agent-authored text means "this text
+    # resembles an injection", which is exactly what a CVE remediation commit
+    # is supposed to look like.
     if score < 0.3:
-        rec = "proceed"
+        severity = "low"
         reasoning = (
             f"Low injection risk ({pct}) from {source} (trust: {source_trust:.1f}). "
             "No significant prescriptive patterns detected."
         )
     elif score < 0.6:
-        rec = "verify"
+        severity = "moderate"
         reasoning = (
             f"Moderate injection risk ({pct}) from {source} (trust: {source_trust:.1f}). "
             + " — ".join(f.description for f in factors)
         )
         steps = _verification_steps(factors, gov, intended_action)
     else:
-        rec = "stop"
+        severity = "high"
         reasoning = (
             f"HIGH injection risk ({pct}) from {source} (trust: {source_trust:.1f}). "
             + " — ".join(f.description for f in factors)
@@ -191,7 +205,7 @@ def assess(content: str, source: str, intended_action: Optional[str] = None) -> 
         injection_risk_score=round(score, 4),
         risk_factors=[asdict(f) for f in factors],
         governing_parameters=gov,
-        recommendation=rec,
+        severity=severity,
         reasoning=reasoning,
         verification_steps=steps,
     )

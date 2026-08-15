@@ -1,0 +1,41 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # No install step and no dependency cache: the package has no runtime
+      # dependencies on purpose. If this job ever needs `pip install`, that is
+      # a design regression worth noticing here.
+      - name: tests
+        run: PYTHONPATH=src python3 -m unittest discover -s tests -t . -v
+
+      - name: eval corpus
+        run: PYTHONPATH=src python3 -m unittest tests.test_evals -v
+
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+        working-directory: typescript
+      - run: npm run typecheck
+        working-directory: typescript
+      - run: npm run build
+        working-directory: typescript

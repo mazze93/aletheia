@@ -1,0 +1,21 @@
+{
+  "_comment": "Aletheia wiring for Claude Code. Copy the hooks block into ~/.claude/settings.json or a project .claude/settings.json. SHADOW MODE by default: she scores and records every event and blocks nothing. Only PostToolUse on WebSearch|WebFetch is wired — that is the channel where provenance is meaningful and where her calibration is measured (incident 0.88 stop / benign 0.00 proceed).",
+
+  "_why_no_pretooluse": "A PreToolUse Bash|Edit|Write hook is deliberately NOT wired. Agent-authored command text is a plan, not an inbound document; scoring it lexically blocks ordinary maintenance, because a CVE remediation reads exactly like the injection it fixes. Measured before removal: a Dependabot PR body scored 0.82 and would have been blocked. If you want that channel, carry taint explicitly (aletheia_taint in the payload) rather than inferring it from vocabulary — policy.py already gates tainted content reaching destructive or egress tools.",
+
+  "_enabling_enforcement": "Set ALETHEIA_MODE=enforce in the hook environment once ~/.claude/aletheia/audit.jsonl shows an acceptable false-block rate. Review with: jq -r 'select(.would_block) | [.ts,.tool,.origin,.score,.action] | @tsv' ~/.claude/aletheia/audit.jsonl",
+
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "WebSearch|WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/Projects/tools/aletheia/integrations/claude-code/aletheia-hook.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

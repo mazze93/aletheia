@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aletheia"
+version = "0.2.0"
+description = "Prompt-injection detection agent for Claude. Tracks content provenance and flags untrusted sources supplying governing parameters."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Mazze LeCzzare Frazer" }]
+keywords = ["prompt-injection", "provenance", "claude", "agent-security"]
+
+# No runtime dependencies, and this is a design constraint rather than an
+# accident. The assessment path runs inside a hook on every tool call; a hook
+# that imports a dependency tree is a hook that can fail to load, and a
+# security layer that fails to load silently is worse than none.
+dependencies = []
+
+[project.optional-dependencies]
+enrich = ["claude-agent-sdk"]   # only for the optional LLM-written reasoning
+
+[project.scripts]
+aletheia = "aletheia.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"

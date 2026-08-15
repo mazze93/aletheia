@@ -8,7 +8,8 @@ that will govern an action — a version number, a file path, a command — and 
 it acted on as if the user had said it.
 
 Born 2026-06-17 from a live injection incident. The why is in
-[`CLAUDE.md`](./CLAUDE.md); this file is the how.
+[`CLAUDE.md`](./CLAUDE.md); the posture and known gaps are in
+[`SECURITY.md`](./SECURITY.md); this file is the how.
 
 ## The idea
 
@@ -20,77 +21,110 @@ The fix is provenance: **every parameter that governs an action must have a
 declared source, and untrusted sources cannot supply governing parameters
 without the human knowing.**
 
-### Source trust
-
 | source | trust | |
 |--------|-------|--|
 | `user` | 1.0 | the principal — what they say governs |
+| `agent` | 0.95 | the agent acting on the principal's instruction |
 | `file` | 0.9 | the codebase, committed, version-controlled |
 | `mcp_tool` | 0.5 | depends on the tool; can be compromised |
-| `web_search` | 0.2 | can be crafted — was crafted |
-| `web_fetch` | 0.2 | same |
+| `web_search` / `web_fetch` | 0.2 | can be crafted — was crafted |
 | `clipboard` | 0.1 | unknown origin; maximum suspicion |
-| `unknown` | 0.3 | default |
+| `unclassified` | 0.3 | **audit and ask — not "untrusted"** |
 
-### Scoring
+## Judging and enforcing are separate
 
-Five pattern families carry weights: governing parameters (0.30), urgency
-(0.25), prescriptive commands (0.35), authority claims (0.20), structural
-mimicry (0.30). Governing-params **and** prescriptive together add a +0.25 combo
-penalty (the canonical injection shape). Urgency multiplies the content risk by
-1.3. The final score scales content risk by source distrust:
+This is the load-bearing design decision, and it was learned the hard way.
 
 ```
-score = min(1, content_risk × (0.4 + 0.6 × (1 − source_trust)))
+assess.py       classify content, explain the score.        Decides nothing.
+provenance.py   where it came from; trust and carried taint.
+policy.py       the only module that may decide to block.
+audit.py        append-only JSONL; hashes, not payloads.
+hooks.py        Claude adapter: payload shape, exit semantics.
+cli.py          what a hook actually invokes.
 ```
 
-`< 0.3` proceed · `0.3–0.6` verify · `> 0.6` stop.
+The original design let the score *be* the decision. Measured against real
+traffic, that is disqualifying — because **remediation work is linguistically
+identical to injection.** Both name versions, both carry urgency, both tell you
+to run something.
 
-## Architecture
+| payload | score | old design | now |
+|---|---|---|---|
+| `npm audit fix` | 0.25 | proceed | proceed |
+| commit message with a version table | 0.49 | warn | proceed |
+| a real Dependabot PR body | **0.82** | **blocked** | proceed |
+| editing docs that quote an injection | **0.82** | **blocked** | proceed |
+| the same text arriving from `web_search` | 0.88 | blocked | **blocked** |
 
+The last row is the point. Nothing was made more permissive about *external
+content*; what changed is that a score is no longer allowed to mean anything on
+its own. `policy.py` asks where the content came from, whether taint was
+carried into it, and whether it reaches an effect that matters.
+
+**Taint is carried, never inferred.** If a command derives from external
+content, that fact travels with it explicitly. It is not re-derived from the
+presence of the word "critical", because that inference cannot separate a
+security advisory from an attack quoting one.
+
+## Shadow mode
+
+She starts in shadow mode and **blocks nothing**. Every event is scored, decided
+and written to `~/.claude/aletheia/audit.jsonl` with the action that *would*
+have been enforced.
+
+```bash
+# what would have been blocked, this week
+jq -r 'select(.would_block) | [.ts,.tool,.origin,.score,.action] | @tsv' \
+  ~/.claude/aletheia/audit.jsonl
 ```
-assess.ts  / assess.py   pure pattern detection — no SDK, no API, no network
-index.ts   / main.py     SDK agent wrapper + hook callbacks + CLI
-```
 
-The split is deliberate: the part that **judges** has zero dependencies, so it
-can run inside a hook on the standard library alone. The SDK is only needed for
-the optional `--enrich` path, which asks an LLM to write the human-facing
-reasoning for a flagged item.
+Enforcement is opt-in via `ALETHEIA_MODE=enforce`, and should stay off until
+that log shows a false-block rate you can live with. A security layer that
+blocks patching is a vulnerability with good intentions.
 
 ## Run it
 
-### Python (no build, no dependencies for the core)
+Python 3.11+, standard library only. No install required.
 
-```sh
-cd python
-python3 main.py --source web_search < examples/incident-websearch.txt   # → exit 2 (stop)
-python3 main.py --source web_search < examples/benign-websearch.txt      # → exit 0 (proceed)
+```bash
+PYTHONPATH=src python3 -m aletheia.cli --source web_search < evals/malicious/incident-websearch.txt
+PYTHONPATH=src python3 -m aletheia.cli --source web_search < evals/benign/benign-websearch.txt
+PYTHONPATH=src python3 -m aletheia.cli --mode enforce --source web_search < evals/malicious/incident-websearch.txt   # exit 2
 ```
 
-### TypeScript
-
-```sh
-cd typescript
-npm install
-npm run typecheck          # type-clean
-npm run build              # bundles to dist/index.js via esbuild
-echo "content" | node dist/index.js --source web_search
-```
+Or install it: `pip install -e .` then `aletheia --source web_search < file`.
 
 ## Wire into Claude Code
 
-Copy the hook blocks from [`settings-template.json`](./settings-template.json)
-into your `settings.json`. The CLI reads a hook JSON payload (or raw text with
-`--source`) on stdin, prints the assessment as JSON, writes the reasoning to
-stderr when it is not "proceed", and exits `0`/`1`/`2`. On a `PreToolUse` hook,
-exit `2` blocks the tool and surfaces the reason to Claude.
+```bash
+cp integrations/claude-code/settings.example.json /tmp/aletheia-hooks.json
+# merge the "hooks" block into ~/.claude/settings.json
+```
+
+Only `PostToolUse` on `WebSearch|WebFetch` is wired — the channel where
+provenance is meaningful and where her calibration is measured. A
+`PreToolUse Bash|Edit|Write` hook is deliberately **not** wired; see
+`SECURITY.md` for the measurement that removed it.
+
+## Tests
+
+```bash
+PYTHONPATH=src python3 -m unittest discover -s tests -t .
+```
+
+Deterministic, no network, no model. `tests/test_regressions.py` holds the cases
+that broke — real payloads from real maintenance work — and asserts them in
+*enforce* mode, because passing only in shadow mode would prove nothing.
+`tests/test_evals.py` asserts known failures still fail, so a gap cannot quietly
+close without someone noticing.
 
 ## What she does not do
 
-She is a layer, not a cure. She assesses content arriving from tools — web
-results, MCP output — and the inputs to `Bash`/`Edit`/`Write`. She does **not**
-audit the `user` channel (trust 1.0 by design), and she cannot score the agent's
-own momentum. The two channels that are hardest to guard are the ones labelled
-*self*: an instruction pasted as if from the principal, and the agent's own urge
-to finish. Those limits are real and are kept in the record on purpose.
+She is a layer, not a cure. She does not audit the `user` channel (trust 1.0 by
+design), and she cannot score the agent's own momentum. The two channels hardest
+to guard are the ones labelled *self*: an instruction pasted as if from the
+principal, and the agent's own urge to finish. Those limits are real and are
+kept in the record on purpose.
+
+MIT.
