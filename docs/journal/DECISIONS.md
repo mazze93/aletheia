@@ -92,3 +92,27 @@ the reasoning would otherwise be lost.
   missing script errors on every search. `~/.claude/` already hosts the other
   hook scripts. Two copies is a drift risk worth consolidating once the PR
   lands. *Reverse:* re-point the hook command in `~/.claude/settings.json`.
+
+- **2026-08-15 · Colocated jujutsu, and named bookmarks for humans.**
+  `jj git init --colocate` in the runtime clone, so jj and git operate on the
+  same repo and either can drive. Identity set to match the git one
+  (`Mazze LeCzzare <mazze@mazzeleczzare.com>`); the working copy's author was
+  empty at colocation time and was corrected with `jj metaedit --update-author`,
+  which is worth knowing because jj only applies a new identity to *future*
+  commits and will otherwise silently author as ` <>`.
+
+  **Bookmark naming is a convention, not a default.** Left alone, jj pushes
+  anonymous changes to bookmarks like `push-wxryvkvtnpql` — a name that tells a
+  reviewer nothing and is impossible to say out loud. Two rules:
+
+  - `git.push-bookmark-prefix` is `mazze/`, not `push-`, so anything
+    auto-created is at least attributable.
+  - Prefer creating the bookmark explicitly and descriptively before pushing:
+    `jj bookmark create fix/unicode-word-boundary -r @`. The same
+    `kind/short-description` shape the git branches already use
+    (`extract/aletheia`, `fix/aletheia-npm-alerts`, `map/register-palimpsest`),
+    so the two tools produce names that look like each other rather than like
+    two different projects.
+
+  *Reverse:* `rm -rf .jj` leaves the git repo untouched and complete —
+  colocation adds, it does not convert.
