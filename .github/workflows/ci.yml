@@ -64,6 +64,29 @@ jobs:
           npx tsx parity/emit.ts > /tmp/ts.json
           python3 parity/compare.py parity/assess.golden.json /tmp/ts.json
 
+      # Gate 3 — the mutation corpus is generated, so it must be regenerable.
+      # A hand-edited corpus is a corpus someone can quietly shrink.
+      - name: mutation corpus is current
+        run: |
+          cd parity && PYTHONPATH=. python3 unicode_boundary_mutations.py > /tmp/mutations.expected
+          diff -u parity/mutations.jsonl /tmp/mutations.expected \
+            || { echo "::error::parity/mutations.jsonl is stale — regenerate with 'cd parity && PYTHONPATH=. python3 unicode_boundary_mutations.py > mutations.jsonl'"; exit 1; }
+
+      - name: mutation golden is current
+        run: |
+          python3 parity/emit_mutations.py > /tmp/mutations.golden.expected
+          diff -u parity/mutations.golden.json /tmp/mutations.golden.expected \
+            || { echo "::error::parity/mutations.golden.json is stale — regenerate with 'python3 parity/emit_mutations.py > parity/mutations.golden.json'"; exit 1; }
+
+      # Gate 4 — 651 cases: every detection atom, decorated at both boundaries
+      # with every edge character. This is what closes the issue-3 family rather
+      # than the eleven fixtures that happened to expose it. It found the U+FEFF
+      # whitespace divergence that the 69 hand-written vectors missed.
+      - name: TypeScript port matches the oracle under Unicode mutation
+        run: |
+          npx tsx parity/emit_mutations.ts > /tmp/ts-mutations.json
+          python3 parity/compare.py parity/mutations.golden.json /tmp/ts-mutations.json
+
   typescript:
     runs-on: ubuntu-latest
     steps:

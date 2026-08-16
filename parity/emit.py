@@ -81,6 +81,7 @@ def project() -> dict:
             "by hand — regenerate. CI regenerates and diffs, so a stale golden "
             "cannot hide drift."
         ),
+        "_corpus": "vectors.jsonl",
         "precision": PRECISION,
         "vector_count": len(cases),
         "cases": [project_one(c) for c in cases],

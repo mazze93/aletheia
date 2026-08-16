@@ -1,0 +1,651 @@
+{"id": "critical::baseline", "seed": "critical", "mutation": "baseline", "content": "critical"}
+{"id": "critical::nfc", "seed": "critical", "mutation": "nfc", "content": "critical"}
+{"id": "critical::nfd", "seed": "critical", "mutation": "nfd", "content": "critical"}
+{"id": "critical::letter-prefix-U+00E9", "seed": "critical", "mutation": "letter-prefix-U+00E9", "content": "écritical"}
+{"id": "critical::letter-suffix-U+00E9", "seed": "critical", "mutation": "letter-suffix-U+00E9", "content": "criticalé"}
+{"id": "critical::letter-prefix-U+00FC", "seed": "critical", "mutation": "letter-prefix-U+00FC", "content": "ücritical"}
+{"id": "critical::letter-suffix-U+00FC", "seed": "critical", "mutation": "letter-suffix-U+00FC", "content": "criticalü"}
+{"id": "critical::letter-prefix-U+03B1", "seed": "critical", "mutation": "letter-prefix-U+03B1", "content": "αcritical"}
+{"id": "critical::letter-suffix-U+03B1", "seed": "critical", "mutation": "letter-suffix-U+03B1", "content": "criticalα"}
+{"id": "critical::letter-prefix-U+0416", "seed": "critical", "mutation": "letter-prefix-U+0416", "content": "Жcritical"}
+{"id": "critical::letter-suffix-U+0416", "seed": "critical", "mutation": "letter-suffix-U+0416", "content": "criticalЖ"}
+{"id": "critical::letter-prefix-U+05D0", "seed": "critical", "mutation": "letter-prefix-U+05D0", "content": "אcritical"}
+{"id": "critical::letter-suffix-U+05D0", "seed": "critical", "mutation": "letter-suffix-U+05D0", "content": "criticalא"}
+{"id": "critical::letter-prefix-U+0645", "seed": "critical", "mutation": "letter-prefix-U+0645", "content": "مcritical"}
+{"id": "critical::letter-suffix-U+0645", "seed": "critical", "mutation": "letter-suffix-U+0645", "content": "criticalم"}
+{"id": "critical::letter-prefix-U+0915", "seed": "critical", "mutation": "letter-prefix-U+0915", "content": "कcritical"}
+{"id": "critical::letter-suffix-U+0915", "seed": "critical", "mutation": "letter-suffix-U+0915", "content": "criticalक"}
+{"id": "critical::letter-prefix-U+4E2D", "seed": "critical", "mutation": "letter-prefix-U+4E2D", "content": "中critical"}
+{"id": "critical::letter-suffix-U+4E2D", "seed": "critical", "mutation": "letter-suffix-U+4E2D", "content": "critical中"}
+{"id": "critical::format-prefix-U+0301", "seed": "critical", "mutation": "format-prefix-U+0301", "content": "́critical"}
+{"id": "critical::format-suffix-U+0301", "seed": "critical", "mutation": "format-suffix-U+0301", "content": "criticaĺ"}
+{"id": "critical::format-prefix-U+200B", "seed": "critical", "mutation": "format-prefix-U+200B", "content": "​critical"}
+{"id": "critical::format-suffix-U+200B", "seed": "critical", "mutation": "format-suffix-U+200B", "content": "critical​"}
+{"id": "critical::format-prefix-U+200C", "seed": "critical", "mutation": "format-prefix-U+200C", "content": "‌critical"}
+{"id": "critical::format-suffix-U+200C", "seed": "critical", "mutation": "format-suffix-U+200C", "content": "critical‌"}
+{"id": "critical::format-prefix-U+200D", "seed": "critical", "mutation": "format-prefix-U+200D", "content": "‍critical"}
+{"id": "critical::format-suffix-U+200D", "seed": "critical", "mutation": "format-suffix-U+200D", "content": "critical‍"}
+{"id": "critical::format-prefix-U+202E", "seed": "critical", "mutation": "format-prefix-U+202E", "content": "‮critical"}
+{"id": "critical::format-suffix-U+202E", "seed": "critical", "mutation": "format-suffix-U+202E", "content": "critical‮"}
+{"id": "critical::format-prefix-U+FEFF", "seed": "critical", "mutation": "format-prefix-U+FEFF", "content": "﻿critical"}
+{"id": "critical::format-suffix-U+FEFF", "seed": "critical", "mutation": "format-suffix-U+FEFF", "content": "critical﻿"}
+{"id": "urgent::baseline", "seed": "urgent", "mutation": "baseline", "content": "urgent"}
+{"id": "urgent::nfc", "seed": "urgent", "mutation": "nfc", "content": "urgent"}
+{"id": "urgent::nfd", "seed": "urgent", "mutation": "nfd", "content": "urgent"}
+{"id": "urgent::letter-prefix-U+00E9", "seed": "urgent", "mutation": "letter-prefix-U+00E9", "content": "éurgent"}
+{"id": "urgent::letter-suffix-U+00E9", "seed": "urgent", "mutation": "letter-suffix-U+00E9", "content": "urgenté"}
+{"id": "urgent::letter-prefix-U+00FC", "seed": "urgent", "mutation": "letter-prefix-U+00FC", "content": "üurgent"}
+{"id": "urgent::letter-suffix-U+00FC", "seed": "urgent", "mutation": "letter-suffix-U+00FC", "content": "urgentü"}
+{"id": "urgent::letter-prefix-U+03B1", "seed": "urgent", "mutation": "letter-prefix-U+03B1", "content": "αurgent"}
+{"id": "urgent::letter-suffix-U+03B1", "seed": "urgent", "mutation": "letter-suffix-U+03B1", "content": "urgentα"}
+{"id": "urgent::letter-prefix-U+0416", "seed": "urgent", "mutation": "letter-prefix-U+0416", "content": "Жurgent"}
+{"id": "urgent::letter-suffix-U+0416", "seed": "urgent", "mutation": "letter-suffix-U+0416", "content": "urgentЖ"}
+{"id": "urgent::letter-prefix-U+05D0", "seed": "urgent", "mutation": "letter-prefix-U+05D0", "content": "אurgent"}
+{"id": "urgent::letter-suffix-U+05D0", "seed": "urgent", "mutation": "letter-suffix-U+05D0", "content": "urgentא"}
+{"id": "urgent::letter-prefix-U+0645", "seed": "urgent", "mutation": "letter-prefix-U+0645", "content": "مurgent"}
+{"id": "urgent::letter-suffix-U+0645", "seed": "urgent", "mutation": "letter-suffix-U+0645", "content": "urgentم"}
+{"id": "urgent::letter-prefix-U+0915", "seed": "urgent", "mutation": "letter-prefix-U+0915", "content": "कurgent"}
+{"id": "urgent::letter-suffix-U+0915", "seed": "urgent", "mutation": "letter-suffix-U+0915", "content": "urgentक"}
+{"id": "urgent::letter-prefix-U+4E2D", "seed": "urgent", "mutation": "letter-prefix-U+4E2D", "content": "中urgent"}
+{"id": "urgent::letter-suffix-U+4E2D", "seed": "urgent", "mutation": "letter-suffix-U+4E2D", "content": "urgent中"}
+{"id": "urgent::format-prefix-U+0301", "seed": "urgent", "mutation": "format-prefix-U+0301", "content": "́urgent"}
+{"id": "urgent::format-suffix-U+0301", "seed": "urgent", "mutation": "format-suffix-U+0301", "content": "urgent́"}
+{"id": "urgent::format-prefix-U+200B", "seed": "urgent", "mutation": "format-prefix-U+200B", "content": "​urgent"}
+{"id": "urgent::format-suffix-U+200B", "seed": "urgent", "mutation": "format-suffix-U+200B", "content": "urgent​"}
+{"id": "urgent::format-prefix-U+200C", "seed": "urgent", "mutation": "format-prefix-U+200C", "content": "‌urgent"}
+{"id": "urgent::format-suffix-U+200C", "seed": "urgent", "mutation": "format-suffix-U+200C", "content": "urgent‌"}
+{"id": "urgent::format-prefix-U+200D", "seed": "urgent", "mutation": "format-prefix-U+200D", "content": "‍urgent"}
+{"id": "urgent::format-suffix-U+200D", "seed": "urgent", "mutation": "format-suffix-U+200D", "content": "urgent‍"}
+{"id": "urgent::format-prefix-U+202E", "seed": "urgent", "mutation": "format-prefix-U+202E", "content": "‮urgent"}
+{"id": "urgent::format-suffix-U+202E", "seed": "urgent", "mutation": "format-suffix-U+202E", "content": "urgent‮"}
+{"id": "urgent::format-prefix-U+FEFF", "seed": "urgent", "mutation": "format-prefix-U+FEFF", "content": "﻿urgent"}
+{"id": "urgent::format-suffix-U+FEFF", "seed": "urgent", "mutation": "format-suffix-U+FEFF", "content": "urgent﻿"}
+{"id": "exploit::baseline", "seed": "exploit", "mutation": "baseline", "content": "exploit"}
+{"id": "exploit::nfc", "seed": "exploit", "mutation": "nfc", "content": "exploit"}
+{"id": "exploit::nfd", "seed": "exploit", "mutation": "nfd", "content": "exploit"}
+{"id": "exploit::letter-prefix-U+00E9", "seed": "exploit", "mutation": "letter-prefix-U+00E9", "content": "éexploit"}
+{"id": "exploit::letter-suffix-U+00E9", "seed": "exploit", "mutation": "letter-suffix-U+00E9", "content": "exploité"}
+{"id": "exploit::letter-prefix-U+00FC", "seed": "exploit", "mutation": "letter-prefix-U+00FC", "content": "üexploit"}
+{"id": "exploit::letter-suffix-U+00FC", "seed": "exploit", "mutation": "letter-suffix-U+00FC", "content": "exploitü"}
+{"id": "exploit::letter-prefix-U+03B1", "seed": "exploit", "mutation": "letter-prefix-U+03B1", "content": "αexploit"}
+{"id": "exploit::letter-suffix-U+03B1", "seed": "exploit", "mutation": "letter-suffix-U+03B1", "content": "exploitα"}
+{"id": "exploit::letter-prefix-U+0416", "seed": "exploit", "mutation": "letter-prefix-U+0416", "content": "Жexploit"}
+{"id": "exploit::letter-suffix-U+0416", "seed": "exploit", "mutation": "letter-suffix-U+0416", "content": "exploitЖ"}
+{"id": "exploit::letter-prefix-U+05D0", "seed": "exploit", "mutation": "letter-prefix-U+05D0", "content": "אexploit"}
+{"id": "exploit::letter-suffix-U+05D0", "seed": "exploit", "mutation": "letter-suffix-U+05D0", "content": "exploitא"}
+{"id": "exploit::letter-prefix-U+0645", "seed": "exploit", "mutation": "letter-prefix-U+0645", "content": "مexploit"}
+{"id": "exploit::letter-suffix-U+0645", "seed": "exploit", "mutation": "letter-suffix-U+0645", "content": "exploitم"}
+{"id": "exploit::letter-prefix-U+0915", "seed": "exploit", "mutation": "letter-prefix-U+0915", "content": "कexploit"}
+{"id": "exploit::letter-suffix-U+0915", "seed": "exploit", "mutation": "letter-suffix-U+0915", "content": "exploitक"}
+{"id": "exploit::letter-prefix-U+4E2D", "seed": "exploit", "mutation": "letter-prefix-U+4E2D", "content": "中exploit"}
+{"id": "exploit::letter-suffix-U+4E2D", "seed": "exploit", "mutation": "letter-suffix-U+4E2D", "content": "exploit中"}
+{"id": "exploit::format-prefix-U+0301", "seed": "exploit", "mutation": "format-prefix-U+0301", "content": "́exploit"}
+{"id": "exploit::format-suffix-U+0301", "seed": "exploit", "mutation": "format-suffix-U+0301", "content": "exploit́"}
+{"id": "exploit::format-prefix-U+200B", "seed": "exploit", "mutation": "format-prefix-U+200B", "content": "​exploit"}
+{"id": "exploit::format-suffix-U+200B", "seed": "exploit", "mutation": "format-suffix-U+200B", "content": "exploit​"}
+{"id": "exploit::format-prefix-U+200C", "seed": "exploit", "mutation": "format-prefix-U+200C", "content": "‌exploit"}
+{"id": "exploit::format-suffix-U+200C", "seed": "exploit", "mutation": "format-suffix-U+200C", "content": "exploit‌"}
+{"id": "exploit::format-prefix-U+200D", "seed": "exploit", "mutation": "format-prefix-U+200D", "content": "‍exploit"}
+{"id": "exploit::format-suffix-U+200D", "seed": "exploit", "mutation": "format-suffix-U+200D", "content": "exploit‍"}
+{"id": "exploit::format-prefix-U+202E", "seed": "exploit", "mutation": "format-prefix-U+202E", "content": "‮exploit"}
+{"id": "exploit::format-suffix-U+202E", "seed": "exploit", "mutation": "format-suffix-U+202E", "content": "exploit‮"}
+{"id": "exploit::format-prefix-U+FEFF", "seed": "exploit", "mutation": "format-prefix-U+FEFF", "content": "﻿exploit"}
+{"id": "exploit::format-suffix-U+FEFF", "seed": "exploit", "mutation": "format-suffix-U+FEFF", "content": "exploit﻿"}
+{"id": "breach::baseline", "seed": "breach", "mutation": "baseline", "content": "breach"}
+{"id": "breach::nfc", "seed": "breach", "mutation": "nfc", "content": "breach"}
+{"id": "breach::nfd", "seed": "breach", "mutation": "nfd", "content": "breach"}
+{"id": "breach::letter-prefix-U+00E9", "seed": "breach", "mutation": "letter-prefix-U+00E9", "content": "ébreach"}
+{"id": "breach::letter-suffix-U+00E9", "seed": "breach", "mutation": "letter-suffix-U+00E9", "content": "breaché"}
+{"id": "breach::letter-prefix-U+00FC", "seed": "breach", "mutation": "letter-prefix-U+00FC", "content": "übreach"}
+{"id": "breach::letter-suffix-U+00FC", "seed": "breach", "mutation": "letter-suffix-U+00FC", "content": "breachü"}
+{"id": "breach::letter-prefix-U+03B1", "seed": "breach", "mutation": "letter-prefix-U+03B1", "content": "αbreach"}
+{"id": "breach::letter-suffix-U+03B1", "seed": "breach", "mutation": "letter-suffix-U+03B1", "content": "breachα"}
+{"id": "breach::letter-prefix-U+0416", "seed": "breach", "mutation": "letter-prefix-U+0416", "content": "Жbreach"}
+{"id": "breach::letter-suffix-U+0416", "seed": "breach", "mutation": "letter-suffix-U+0416", "content": "breachЖ"}
+{"id": "breach::letter-prefix-U+05D0", "seed": "breach", "mutation": "letter-prefix-U+05D0", "content": "אbreach"}
+{"id": "breach::letter-suffix-U+05D0", "seed": "breach", "mutation": "letter-suffix-U+05D0", "content": "breachא"}
+{"id": "breach::letter-prefix-U+0645", "seed": "breach", "mutation": "letter-prefix-U+0645", "content": "مbreach"}
+{"id": "breach::letter-suffix-U+0645", "seed": "breach", "mutation": "letter-suffix-U+0645", "content": "breachم"}
+{"id": "breach::letter-prefix-U+0915", "seed": "breach", "mutation": "letter-prefix-U+0915", "content": "कbreach"}
+{"id": "breach::letter-suffix-U+0915", "seed": "breach", "mutation": "letter-suffix-U+0915", "content": "breachक"}
+{"id": "breach::letter-prefix-U+4E2D", "seed": "breach", "mutation": "letter-prefix-U+4E2D", "content": "中breach"}
+{"id": "breach::letter-suffix-U+4E2D", "seed": "breach", "mutation": "letter-suffix-U+4E2D", "content": "breach中"}
+{"id": "breach::format-prefix-U+0301", "seed": "breach", "mutation": "format-prefix-U+0301", "content": "́breach"}
+{"id": "breach::format-suffix-U+0301", "seed": "breach", "mutation": "format-suffix-U+0301", "content": "breach́"}
+{"id": "breach::format-prefix-U+200B", "seed": "breach", "mutation": "format-prefix-U+200B", "content": "​breach"}
+{"id": "breach::format-suffix-U+200B", "seed": "breach", "mutation": "format-suffix-U+200B", "content": "breach​"}
+{"id": "breach::format-prefix-U+200C", "seed": "breach", "mutation": "format-prefix-U+200C", "content": "‌breach"}
+{"id": "breach::format-suffix-U+200C", "seed": "breach", "mutation": "format-suffix-U+200C", "content": "breach‌"}
+{"id": "breach::format-prefix-U+200D", "seed": "breach", "mutation": "format-prefix-U+200D", "content": "‍breach"}
+{"id": "breach::format-suffix-U+200D", "seed": "breach", "mutation": "format-suffix-U+200D", "content": "breach‍"}
+{"id": "breach::format-prefix-U+202E", "seed": "breach", "mutation": "format-prefix-U+202E", "content": "‮breach"}
+{"id": "breach::format-suffix-U+202E", "seed": "breach", "mutation": "format-suffix-U+202E", "content": "breach‮"}
+{"id": "breach::format-prefix-U+FEFF", "seed": "breach", "mutation": "format-prefix-U+FEFF", "content": "﻿breach"}
+{"id": "breach::format-suffix-U+FEFF", "seed": "breach", "mutation": "format-suffix-U+FEFF", "content": "breach﻿"}
+{"id": "CVE-2024-9999::baseline", "seed": "CVE-2024-9999", "mutation": "baseline", "content": "CVE-2024-9999"}
+{"id": "CVE-2024-9999::nfc", "seed": "CVE-2024-9999", "mutation": "nfc", "content": "CVE-2024-9999"}
+{"id": "CVE-2024-9999::nfd", "seed": "CVE-2024-9999", "mutation": "nfd", "content": "CVE-2024-9999"}
+{"id": "CVE-2024-9999::letter-prefix-U+00E9", "seed": "CVE-2024-9999", "mutation": "letter-prefix-U+00E9", "content": "éCVE-2024-9999"}
+{"id": "CVE-2024-9999::letter-suffix-U+00E9", "seed": "CVE-2024-9999", "mutation": "letter-suffix-U+00E9", "content": "CVE-2024-9999é"}
+{"id": "CVE-2024-9999::letter-prefix-U+00FC", "seed": "CVE-2024-9999", "mutation": "letter-prefix-U+00FC", "content": "üCVE-2024-9999"}
+{"id": "CVE-2024-9999::letter-suffix-U+00FC", "seed": "CVE-2024-9999", "mutation": "letter-suffix-U+00FC", "content": "CVE-2024-9999ü"}
+{"id": "CVE-2024-9999::letter-prefix-U+03B1", "seed": "CVE-2024-9999", "mutation": "letter-prefix-U+03B1", "content": "αCVE-2024-9999"}
+{"id": "CVE-2024-9999::letter-suffix-U+03B1", "seed": "CVE-2024-9999", "mutation": "letter-suffix-U+03B1", "content": "CVE-2024-9999α"}
+{"id": "CVE-2024-9999::letter-prefix-U+0416", "seed": "CVE-2024-9999", "mutation": "letter-prefix-U+0416", "content": "ЖCVE-2024-9999"}
+{"id": "CVE-2024-9999::letter-suffix-U+0416", "seed": "CVE-2024-9999", "mutation": "letter-suffix-U+0416", "content": "CVE-2024-9999Ж"}
+{"id": "CVE-2024-9999::letter-prefix-U+05D0", "seed": "CVE-2024-9999", "mutation": "letter-prefix-U+05D0", "content": "אCVE-2024-9999"}
+{"id": "CVE-2024-9999::letter-suffix-U+05D0", "seed": "CVE-2024-9999", "mutation": "letter-suffix-U+05D0", "content": "CVE-2024-9999א"}
+{"id": "CVE-2024-9999::letter-prefix-U+0645", "seed": "CVE-2024-9999", "mutation": "letter-prefix-U+0645", "content": "مCVE-2024-9999"}
+{"id": "CVE-2024-9999::letter-suffix-U+0645", "seed": "CVE-2024-9999", "mutation": "letter-suffix-U+0645", "content": "CVE-2024-9999م"}
+{"id": "CVE-2024-9999::letter-prefix-U+0915", "seed": "CVE-2024-9999", "mutation": "letter-prefix-U+0915", "content": "कCVE-2024-9999"}
+{"id": "CVE-2024-9999::letter-suffix-U+0915", "seed": "CVE-2024-9999", "mutation": "letter-suffix-U+0915", "content": "CVE-2024-9999क"}
+{"id": "CVE-2024-9999::letter-prefix-U+4E2D", "seed": "CVE-2024-9999", "mutation": "letter-prefix-U+4E2D", "content": "中CVE-2024-9999"}
+{"id": "CVE-2024-9999::letter-suffix-U+4E2D", "seed": "CVE-2024-9999", "mutation": "letter-suffix-U+4E2D", "content": "CVE-2024-9999中"}
+{"id": "CVE-2024-9999::format-prefix-U+0301", "seed": "CVE-2024-9999", "mutation": "format-prefix-U+0301", "content": "́CVE-2024-9999"}
+{"id": "CVE-2024-9999::format-suffix-U+0301", "seed": "CVE-2024-9999", "mutation": "format-suffix-U+0301", "content": "CVE-2024-9999́"}
+{"id": "CVE-2024-9999::format-prefix-U+200B", "seed": "CVE-2024-9999", "mutation": "format-prefix-U+200B", "content": "​CVE-2024-9999"}
+{"id": "CVE-2024-9999::format-suffix-U+200B", "seed": "CVE-2024-9999", "mutation": "format-suffix-U+200B", "content": "CVE-2024-9999​"}
+{"id": "CVE-2024-9999::format-prefix-U+200C", "seed": "CVE-2024-9999", "mutation": "format-prefix-U+200C", "content": "‌CVE-2024-9999"}
+{"id": "CVE-2024-9999::format-suffix-U+200C", "seed": "CVE-2024-9999", "mutation": "format-suffix-U+200C", "content": "CVE-2024-9999‌"}
+{"id": "CVE-2024-9999::format-prefix-U+200D", "seed": "CVE-2024-9999", "mutation": "format-prefix-U+200D", "content": "‍CVE-2024-9999"}
+{"id": "CVE-2024-9999::format-suffix-U+200D", "seed": "CVE-2024-9999", "mutation": "format-suffix-U+200D", "content": "CVE-2024-9999‍"}
+{"id": "CVE-2024-9999::format-prefix-U+202E", "seed": "CVE-2024-9999", "mutation": "format-prefix-U+202E", "content": "‮CVE-2024-9999"}
+{"id": "CVE-2024-9999::format-suffix-U+202E", "seed": "CVE-2024-9999", "mutation": "format-suffix-U+202E", "content": "CVE-2024-9999‮"}
+{"id": "CVE-2024-9999::format-prefix-U+FEFF", "seed": "CVE-2024-9999", "mutation": "format-prefix-U+FEFF", "content": "﻿CVE-2024-9999"}
+{"id": "CVE-2024-9999::format-suffix-U+FEFF", "seed": "CVE-2024-9999", "mutation": "format-suffix-U+FEFF", "content": "CVE-2024-9999﻿"}
+{"id": "immediately::baseline", "seed": "immediately", "mutation": "baseline", "content": "immediately"}
+{"id": "immediately::nfc", "seed": "immediately", "mutation": "nfc", "content": "immediately"}
+{"id": "immediately::nfd", "seed": "immediately", "mutation": "nfd", "content": "immediately"}
+{"id": "immediately::letter-prefix-U+00E9", "seed": "immediately", "mutation": "letter-prefix-U+00E9", "content": "éimmediately"}
+{"id": "immediately::letter-suffix-U+00E9", "seed": "immediately", "mutation": "letter-suffix-U+00E9", "content": "immediatelyé"}
+{"id": "immediately::letter-prefix-U+00FC", "seed": "immediately", "mutation": "letter-prefix-U+00FC", "content": "üimmediately"}
+{"id": "immediately::letter-suffix-U+00FC", "seed": "immediately", "mutation": "letter-suffix-U+00FC", "content": "immediatelyü"}
+{"id": "immediately::letter-prefix-U+03B1", "seed": "immediately", "mutation": "letter-prefix-U+03B1", "content": "αimmediately"}
+{"id": "immediately::letter-suffix-U+03B1", "seed": "immediately", "mutation": "letter-suffix-U+03B1", "content": "immediatelyα"}
+{"id": "immediately::letter-prefix-U+0416", "seed": "immediately", "mutation": "letter-prefix-U+0416", "content": "Жimmediately"}
+{"id": "immediately::letter-suffix-U+0416", "seed": "immediately", "mutation": "letter-suffix-U+0416", "content": "immediatelyЖ"}
+{"id": "immediately::letter-prefix-U+05D0", "seed": "immediately", "mutation": "letter-prefix-U+05D0", "content": "אimmediately"}
+{"id": "immediately::letter-suffix-U+05D0", "seed": "immediately", "mutation": "letter-suffix-U+05D0", "content": "immediatelyא"}
+{"id": "immediately::letter-prefix-U+0645", "seed": "immediately", "mutation": "letter-prefix-U+0645", "content": "مimmediately"}
+{"id": "immediately::letter-suffix-U+0645", "seed": "immediately", "mutation": "letter-suffix-U+0645", "content": "immediatelyم"}
+{"id": "immediately::letter-prefix-U+0915", "seed": "immediately", "mutation": "letter-prefix-U+0915", "content": "कimmediately"}
+{"id": "immediately::letter-suffix-U+0915", "seed": "immediately", "mutation": "letter-suffix-U+0915", "content": "immediatelyक"}
+{"id": "immediately::letter-prefix-U+4E2D", "seed": "immediately", "mutation": "letter-prefix-U+4E2D", "content": "中immediately"}
+{"id": "immediately::letter-suffix-U+4E2D", "seed": "immediately", "mutation": "letter-suffix-U+4E2D", "content": "immediately中"}
+{"id": "immediately::format-prefix-U+0301", "seed": "immediately", "mutation": "format-prefix-U+0301", "content": "́immediately"}
+{"id": "immediately::format-suffix-U+0301", "seed": "immediately", "mutation": "format-suffix-U+0301", "content": "immediatelý"}
+{"id": "immediately::format-prefix-U+200B", "seed": "immediately", "mutation": "format-prefix-U+200B", "content": "​immediately"}
+{"id": "immediately::format-suffix-U+200B", "seed": "immediately", "mutation": "format-suffix-U+200B", "content": "immediately​"}
+{"id": "immediately::format-prefix-U+200C", "seed": "immediately", "mutation": "format-prefix-U+200C", "content": "‌immediately"}
+{"id": "immediately::format-suffix-U+200C", "seed": "immediately", "mutation": "format-suffix-U+200C", "content": "immediately‌"}
+{"id": "immediately::format-prefix-U+200D", "seed": "immediately", "mutation": "format-prefix-U+200D", "content": "‍immediately"}
+{"id": "immediately::format-suffix-U+200D", "seed": "immediately", "mutation": "format-suffix-U+200D", "content": "immediately‍"}
+{"id": "immediately::format-prefix-U+202E", "seed": "immediately", "mutation": "format-prefix-U+202E", "content": "‮immediately"}
+{"id": "immediately::format-suffix-U+202E", "seed": "immediately", "mutation": "format-suffix-U+202E", "content": "immediately‮"}
+{"id": "immediately::format-prefix-U+FEFF", "seed": "immediately", "mutation": "format-prefix-U+FEFF", "content": "﻿immediately"}
+{"id": "immediately::format-suffix-U+FEFF", "seed": "immediately", "mutation": "format-suffix-U+FEFF", "content": "immediately﻿"}
+{"id": "must upgrade::baseline", "seed": "must upgrade", "mutation": "baseline", "content": "must upgrade"}
+{"id": "must upgrade::nfc", "seed": "must upgrade", "mutation": "nfc", "content": "must upgrade"}
+{"id": "must upgrade::nfd", "seed": "must upgrade", "mutation": "nfd", "content": "must upgrade"}
+{"id": "must upgrade::letter-prefix-U+00E9", "seed": "must upgrade", "mutation": "letter-prefix-U+00E9", "content": "émust upgrade"}
+{"id": "must upgrade::letter-suffix-U+00E9", "seed": "must upgrade", "mutation": "letter-suffix-U+00E9", "content": "must upgradeé"}
+{"id": "must upgrade::letter-prefix-U+00FC", "seed": "must upgrade", "mutation": "letter-prefix-U+00FC", "content": "ümust upgrade"}
+{"id": "must upgrade::letter-suffix-U+00FC", "seed": "must upgrade", "mutation": "letter-suffix-U+00FC", "content": "must upgradeü"}
+{"id": "must upgrade::letter-prefix-U+03B1", "seed": "must upgrade", "mutation": "letter-prefix-U+03B1", "content": "αmust upgrade"}
+{"id": "must upgrade::letter-suffix-U+03B1", "seed": "must upgrade", "mutation": "letter-suffix-U+03B1", "content": "must upgradeα"}
+{"id": "must upgrade::letter-prefix-U+0416", "seed": "must upgrade", "mutation": "letter-prefix-U+0416", "content": "Жmust upgrade"}
+{"id": "must upgrade::letter-suffix-U+0416", "seed": "must upgrade", "mutation": "letter-suffix-U+0416", "content": "must upgradeЖ"}
+{"id": "must upgrade::letter-prefix-U+05D0", "seed": "must upgrade", "mutation": "letter-prefix-U+05D0", "content": "אmust upgrade"}
+{"id": "must upgrade::letter-suffix-U+05D0", "seed": "must upgrade", "mutation": "letter-suffix-U+05D0", "content": "must upgradeא"}
+{"id": "must upgrade::letter-prefix-U+0645", "seed": "must upgrade", "mutation": "letter-prefix-U+0645", "content": "مmust upgrade"}
+{"id": "must upgrade::letter-suffix-U+0645", "seed": "must upgrade", "mutation": "letter-suffix-U+0645", "content": "must upgradeم"}
+{"id": "must upgrade::letter-prefix-U+0915", "seed": "must upgrade", "mutation": "letter-prefix-U+0915", "content": "कmust upgrade"}
+{"id": "must upgrade::letter-suffix-U+0915", "seed": "must upgrade", "mutation": "letter-suffix-U+0915", "content": "must upgradeक"}
+{"id": "must upgrade::letter-prefix-U+4E2D", "seed": "must upgrade", "mutation": "letter-prefix-U+4E2D", "content": "中must upgrade"}
+{"id": "must upgrade::letter-suffix-U+4E2D", "seed": "must upgrade", "mutation": "letter-suffix-U+4E2D", "content": "must upgrade中"}
+{"id": "must upgrade::format-prefix-U+0301", "seed": "must upgrade", "mutation": "format-prefix-U+0301", "content": "́must upgrade"}
+{"id": "must upgrade::format-suffix-U+0301", "seed": "must upgrade", "mutation": "format-suffix-U+0301", "content": "must upgradé"}
+{"id": "must upgrade::format-prefix-U+200B", "seed": "must upgrade", "mutation": "format-prefix-U+200B", "content": "​must upgrade"}
+{"id": "must upgrade::format-suffix-U+200B", "seed": "must upgrade", "mutation": "format-suffix-U+200B", "content": "must upgrade​"}
+{"id": "must upgrade::format-prefix-U+200C", "seed": "must upgrade", "mutation": "format-prefix-U+200C", "content": "‌must upgrade"}
+{"id": "must upgrade::format-suffix-U+200C", "seed": "must upgrade", "mutation": "format-suffix-U+200C", "content": "must upgrade‌"}
+{"id": "must upgrade::format-prefix-U+200D", "seed": "must upgrade", "mutation": "format-prefix-U+200D", "content": "‍must upgrade"}
+{"id": "must upgrade::format-suffix-U+200D", "seed": "must upgrade", "mutation": "format-suffix-U+200D", "content": "must upgrade‍"}
+{"id": "must upgrade::format-prefix-U+202E", "seed": "must upgrade", "mutation": "format-prefix-U+202E", "content": "‮must upgrade"}
+{"id": "must upgrade::format-suffix-U+202E", "seed": "must upgrade", "mutation": "format-suffix-U+202E", "content": "must upgrade‮"}
+{"id": "must upgrade::format-prefix-U+FEFF", "seed": "must upgrade", "mutation": "format-prefix-U+FEFF", "content": "﻿must upgrade"}
+{"id": "must upgrade::format-suffix-U+FEFF", "seed": "must upgrade", "mutation": "format-suffix-U+FEFF", "content": "must upgrade﻿"}
+{"id": "security advisory::baseline", "seed": "security advisory", "mutation": "baseline", "content": "security advisory"}
+{"id": "security advisory::nfc", "seed": "security advisory", "mutation": "nfc", "content": "security advisory"}
+{"id": "security advisory::nfd", "seed": "security advisory", "mutation": "nfd", "content": "security advisory"}
+{"id": "security advisory::letter-prefix-U+00E9", "seed": "security advisory", "mutation": "letter-prefix-U+00E9", "content": "ésecurity advisory"}
+{"id": "security advisory::letter-suffix-U+00E9", "seed": "security advisory", "mutation": "letter-suffix-U+00E9", "content": "security advisoryé"}
+{"id": "security advisory::letter-prefix-U+00FC", "seed": "security advisory", "mutation": "letter-prefix-U+00FC", "content": "üsecurity advisory"}
+{"id": "security advisory::letter-suffix-U+00FC", "seed": "security advisory", "mutation": "letter-suffix-U+00FC", "content": "security advisoryü"}
+{"id": "security advisory::letter-prefix-U+03B1", "seed": "security advisory", "mutation": "letter-prefix-U+03B1", "content": "αsecurity advisory"}
+{"id": "security advisory::letter-suffix-U+03B1", "seed": "security advisory", "mutation": "letter-suffix-U+03B1", "content": "security advisoryα"}
+{"id": "security advisory::letter-prefix-U+0416", "seed": "security advisory", "mutation": "letter-prefix-U+0416", "content": "Жsecurity advisory"}
+{"id": "security advisory::letter-suffix-U+0416", "seed": "security advisory", "mutation": "letter-suffix-U+0416", "content": "security advisoryЖ"}
+{"id": "security advisory::letter-prefix-U+05D0", "seed": "security advisory", "mutation": "letter-prefix-U+05D0", "content": "אsecurity advisory"}
+{"id": "security advisory::letter-suffix-U+05D0", "seed": "security advisory", "mutation": "letter-suffix-U+05D0", "content": "security advisoryא"}
+{"id": "security advisory::letter-prefix-U+0645", "seed": "security advisory", "mutation": "letter-prefix-U+0645", "content": "مsecurity advisory"}
+{"id": "security advisory::letter-suffix-U+0645", "seed": "security advisory", "mutation": "letter-suffix-U+0645", "content": "security advisoryم"}
+{"id": "security advisory::letter-prefix-U+0915", "seed": "security advisory", "mutation": "letter-prefix-U+0915", "content": "कsecurity advisory"}
+{"id": "security advisory::letter-suffix-U+0915", "seed": "security advisory", "mutation": "letter-suffix-U+0915", "content": "security advisoryक"}
+{"id": "security advisory::letter-prefix-U+4E2D", "seed": "security advisory", "mutation": "letter-prefix-U+4E2D", "content": "中security advisory"}
+{"id": "security advisory::letter-suffix-U+4E2D", "seed": "security advisory", "mutation": "letter-suffix-U+4E2D", "content": "security advisory中"}
+{"id": "security advisory::format-prefix-U+0301", "seed": "security advisory", "mutation": "format-prefix-U+0301", "content": "́security advisory"}
+{"id": "security advisory::format-suffix-U+0301", "seed": "security advisory", "mutation": "format-suffix-U+0301", "content": "security advisorý"}
+{"id": "security advisory::format-prefix-U+200B", "seed": "security advisory", "mutation": "format-prefix-U+200B", "content": "​security advisory"}
+{"id": "security advisory::format-suffix-U+200B", "seed": "security advisory", "mutation": "format-suffix-U+200B", "content": "security advisory​"}
+{"id": "security advisory::format-prefix-U+200C", "seed": "security advisory", "mutation": "format-prefix-U+200C", "content": "‌security advisory"}
+{"id": "security advisory::format-suffix-U+200C", "seed": "security advisory", "mutation": "format-suffix-U+200C", "content": "security advisory‌"}
+{"id": "security advisory::format-prefix-U+200D", "seed": "security advisory", "mutation": "format-prefix-U+200D", "content": "‍security advisory"}
+{"id": "security advisory::format-suffix-U+200D", "seed": "security advisory", "mutation": "format-suffix-U+200D", "content": "security advisory‍"}
+{"id": "security advisory::format-prefix-U+202E", "seed": "security advisory", "mutation": "format-prefix-U+202E", "content": "‮security advisory"}
+{"id": "security advisory::format-suffix-U+202E", "seed": "security advisory", "mutation": "format-suffix-U+202E", "content": "security advisory‮"}
+{"id": "security advisory::format-prefix-U+FEFF", "seed": "security advisory", "mutation": "format-prefix-U+FEFF", "content": "﻿security advisory"}
+{"id": "security advisory::format-suffix-U+FEFF", "seed": "security advisory", "mutation": "format-suffix-U+FEFF", "content": "security advisory﻿"}
+{"id": "You should upgrade::baseline", "seed": "You should upgrade", "mutation": "baseline", "content": "You should upgrade"}
+{"id": "You should upgrade::nfc", "seed": "You should upgrade", "mutation": "nfc", "content": "You should upgrade"}
+{"id": "You should upgrade::nfd", "seed": "You should upgrade", "mutation": "nfd", "content": "You should upgrade"}
+{"id": "You should upgrade::letter-prefix-U+00E9", "seed": "You should upgrade", "mutation": "letter-prefix-U+00E9", "content": "éYou should upgrade"}
+{"id": "You should upgrade::letter-suffix-U+00E9", "seed": "You should upgrade", "mutation": "letter-suffix-U+00E9", "content": "You should upgradeé"}
+{"id": "You should upgrade::letter-prefix-U+00FC", "seed": "You should upgrade", "mutation": "letter-prefix-U+00FC", "content": "üYou should upgrade"}
+{"id": "You should upgrade::letter-suffix-U+00FC", "seed": "You should upgrade", "mutation": "letter-suffix-U+00FC", "content": "You should upgradeü"}
+{"id": "You should upgrade::letter-prefix-U+03B1", "seed": "You should upgrade", "mutation": "letter-prefix-U+03B1", "content": "αYou should upgrade"}
+{"id": "You should upgrade::letter-suffix-U+03B1", "seed": "You should upgrade", "mutation": "letter-suffix-U+03B1", "content": "You should upgradeα"}
+{"id": "You should upgrade::letter-prefix-U+0416", "seed": "You should upgrade", "mutation": "letter-prefix-U+0416", "content": "ЖYou should upgrade"}
+{"id": "You should upgrade::letter-suffix-U+0416", "seed": "You should upgrade", "mutation": "letter-suffix-U+0416", "content": "You should upgradeЖ"}
+{"id": "You should upgrade::letter-prefix-U+05D0", "seed": "You should upgrade", "mutation": "letter-prefix-U+05D0", "content": "אYou should upgrade"}
+{"id": "You should upgrade::letter-suffix-U+05D0", "seed": "You should upgrade", "mutation": "letter-suffix-U+05D0", "content": "You should upgradeא"}
+{"id": "You should upgrade::letter-prefix-U+0645", "seed": "You should upgrade", "mutation": "letter-prefix-U+0645", "content": "مYou should upgrade"}
+{"id": "You should upgrade::letter-suffix-U+0645", "seed": "You should upgrade", "mutation": "letter-suffix-U+0645", "content": "You should upgradeم"}
+{"id": "You should upgrade::letter-prefix-U+0915", "seed": "You should upgrade", "mutation": "letter-prefix-U+0915", "content": "कYou should upgrade"}
+{"id": "You should upgrade::letter-suffix-U+0915", "seed": "You should upgrade", "mutation": "letter-suffix-U+0915", "content": "You should upgradeक"}
+{"id": "You should upgrade::letter-prefix-U+4E2D", "seed": "You should upgrade", "mutation": "letter-prefix-U+4E2D", "content": "中You should upgrade"}
+{"id": "You should upgrade::letter-suffix-U+4E2D", "seed": "You should upgrade", "mutation": "letter-suffix-U+4E2D", "content": "You should upgrade中"}
+{"id": "You should upgrade::format-prefix-U+0301", "seed": "You should upgrade", "mutation": "format-prefix-U+0301", "content": "́You should upgrade"}
+{"id": "You should upgrade::format-suffix-U+0301", "seed": "You should upgrade", "mutation": "format-suffix-U+0301", "content": "You should upgradé"}
+{"id": "You should upgrade::format-prefix-U+200B", "seed": "You should upgrade", "mutation": "format-prefix-U+200B", "content": "​You should upgrade"}
+{"id": "You should upgrade::format-suffix-U+200B", "seed": "You should upgrade", "mutation": "format-suffix-U+200B", "content": "You should upgrade​"}
+{"id": "You should upgrade::format-prefix-U+200C", "seed": "You should upgrade", "mutation": "format-prefix-U+200C", "content": "‌You should upgrade"}
+{"id": "You should upgrade::format-suffix-U+200C", "seed": "You should upgrade", "mutation": "format-suffix-U+200C", "content": "You should upgrade‌"}
+{"id": "You should upgrade::format-prefix-U+200D", "seed": "You should upgrade", "mutation": "format-prefix-U+200D", "content": "‍You should upgrade"}
+{"id": "You should upgrade::format-suffix-U+200D", "seed": "You should upgrade", "mutation": "format-suffix-U+200D", "content": "You should upgrade‍"}
+{"id": "You should upgrade::format-prefix-U+202E", "seed": "You should upgrade", "mutation": "format-prefix-U+202E", "content": "‮You should upgrade"}
+{"id": "You should upgrade::format-suffix-U+202E", "seed": "You should upgrade", "mutation": "format-suffix-U+202E", "content": "You should upgrade‮"}
+{"id": "You should upgrade::format-prefix-U+FEFF", "seed": "You should upgrade", "mutation": "format-prefix-U+FEFF", "content": "﻿You should upgrade"}
+{"id": "You should upgrade::format-suffix-U+FEFF", "seed": "You should upgrade", "mutation": "format-suffix-U+FEFF", "content": "You should upgrade﻿"}
+{"id": "Run the following command::baseline", "seed": "Run the following command", "mutation": "baseline", "content": "Run the following command"}
+{"id": "Run the following command::nfc", "seed": "Run the following command", "mutation": "nfc", "content": "Run the following command"}
+{"id": "Run the following command::nfd", "seed": "Run the following command", "mutation": "nfd", "content": "Run the following command"}
+{"id": "Run the following command::letter-prefix-U+00E9", "seed": "Run the following command", "mutation": "letter-prefix-U+00E9", "content": "éRun the following command"}
+{"id": "Run the following command::letter-suffix-U+00E9", "seed": "Run the following command", "mutation": "letter-suffix-U+00E9", "content": "Run the following commandé"}
+{"id": "Run the following command::letter-prefix-U+00FC", "seed": "Run the following command", "mutation": "letter-prefix-U+00FC", "content": "üRun the following command"}
+{"id": "Run the following command::letter-suffix-U+00FC", "seed": "Run the following command", "mutation": "letter-suffix-U+00FC", "content": "Run the following commandü"}
+{"id": "Run the following command::letter-prefix-U+03B1", "seed": "Run the following command", "mutation": "letter-prefix-U+03B1", "content": "αRun the following command"}
+{"id": "Run the following command::letter-suffix-U+03B1", "seed": "Run the following command", "mutation": "letter-suffix-U+03B1", "content": "Run the following commandα"}
+{"id": "Run the following command::letter-prefix-U+0416", "seed": "Run the following command", "mutation": "letter-prefix-U+0416", "content": "ЖRun the following command"}
+{"id": "Run the following command::letter-suffix-U+0416", "seed": "Run the following command", "mutation": "letter-suffix-U+0416", "content": "Run the following commandЖ"}
+{"id": "Run the following command::letter-prefix-U+05D0", "seed": "Run the following command", "mutation": "letter-prefix-U+05D0", "content": "אRun the following command"}
+{"id": "Run the following command::letter-suffix-U+05D0", "seed": "Run the following command", "mutation": "letter-suffix-U+05D0", "content": "Run the following commandא"}
+{"id": "Run the following command::letter-prefix-U+0645", "seed": "Run the following command", "mutation": "letter-prefix-U+0645", "content": "مRun the following command"}
+{"id": "Run the following command::letter-suffix-U+0645", "seed": "Run the following command", "mutation": "letter-suffix-U+0645", "content": "Run the following commandم"}
+{"id": "Run the following command::letter-prefix-U+0915", "seed": "Run the following command", "mutation": "letter-prefix-U+0915", "content": "कRun the following command"}
+{"id": "Run the following command::letter-suffix-U+0915", "seed": "Run the following command", "mutation": "letter-suffix-U+0915", "content": "Run the following commandक"}
+{"id": "Run the following command::letter-prefix-U+4E2D", "seed": "Run the following command", "mutation": "letter-prefix-U+4E2D", "content": "中Run the following command"}
+{"id": "Run the following command::letter-suffix-U+4E2D", "seed": "Run the following command", "mutation": "letter-suffix-U+4E2D", "content": "Run the following command中"}
+{"id": "Run the following command::format-prefix-U+0301", "seed": "Run the following command", "mutation": "format-prefix-U+0301", "content": "́Run the following command"}
+{"id": "Run the following command::format-suffix-U+0301", "seed": "Run the following command", "mutation": "format-suffix-U+0301", "content": "Run the following command́"}
+{"id": "Run the following command::format-prefix-U+200B", "seed": "Run the following command", "mutation": "format-prefix-U+200B", "content": "​Run the following command"}
+{"id": "Run the following command::format-suffix-U+200B", "seed": "Run the following command", "mutation": "format-suffix-U+200B", "content": "Run the following command​"}
+{"id": "Run the following command::format-prefix-U+200C", "seed": "Run the following command", "mutation": "format-prefix-U+200C", "content": "‌Run the following command"}
+{"id": "Run the following command::format-suffix-U+200C", "seed": "Run the following command", "mutation": "format-suffix-U+200C", "content": "Run the following command‌"}
+{"id": "Run the following command::format-prefix-U+200D", "seed": "Run the following command", "mutation": "format-prefix-U+200D", "content": "‍Run the following command"}
+{"id": "Run the following command::format-suffix-U+200D", "seed": "Run the following command", "mutation": "format-suffix-U+200D", "content": "Run the following command‍"}
+{"id": "Run the following command::format-prefix-U+202E", "seed": "Run the following command", "mutation": "format-prefix-U+202E", "content": "‮Run the following command"}
+{"id": "Run the following command::format-suffix-U+202E", "seed": "Run the following command", "mutation": "format-suffix-U+202E", "content": "Run the following command‮"}
+{"id": "Run the following command::format-prefix-U+FEFF", "seed": "Run the following command", "mutation": "format-prefix-U+FEFF", "content": "﻿Run the following command"}
+{"id": "Run the following command::format-suffix-U+FEFF", "seed": "Run the following command", "mutation": "format-suffix-U+FEFF", "content": "Run the following command﻿"}
+{"id": "use this version::baseline", "seed": "use this version", "mutation": "baseline", "content": "use this version"}
+{"id": "use this version::nfc", "seed": "use this version", "mutation": "nfc", "content": "use this version"}
+{"id": "use this version::nfd", "seed": "use this version", "mutation": "nfd", "content": "use this version"}
+{"id": "use this version::letter-prefix-U+00E9", "seed": "use this version", "mutation": "letter-prefix-U+00E9", "content": "éuse this version"}
+{"id": "use this version::letter-suffix-U+00E9", "seed": "use this version", "mutation": "letter-suffix-U+00E9", "content": "use this versioné"}
+{"id": "use this version::letter-prefix-U+00FC", "seed": "use this version", "mutation": "letter-prefix-U+00FC", "content": "üuse this version"}
+{"id": "use this version::letter-suffix-U+00FC", "seed": "use this version", "mutation": "letter-suffix-U+00FC", "content": "use this versionü"}
+{"id": "use this version::letter-prefix-U+03B1", "seed": "use this version", "mutation": "letter-prefix-U+03B1", "content": "αuse this version"}
+{"id": "use this version::letter-suffix-U+03B1", "seed": "use this version", "mutation": "letter-suffix-U+03B1", "content": "use this versionα"}
+{"id": "use this version::letter-prefix-U+0416", "seed": "use this version", "mutation": "letter-prefix-U+0416", "content": "Жuse this version"}
+{"id": "use this version::letter-suffix-U+0416", "seed": "use this version", "mutation": "letter-suffix-U+0416", "content": "use this versionЖ"}
+{"id": "use this version::letter-prefix-U+05D0", "seed": "use this version", "mutation": "letter-prefix-U+05D0", "content": "אuse this version"}
+{"id": "use this version::letter-suffix-U+05D0", "seed": "use this version", "mutation": "letter-suffix-U+05D0", "content": "use this versionא"}
+{"id": "use this version::letter-prefix-U+0645", "seed": "use this version", "mutation": "letter-prefix-U+0645", "content": "مuse this version"}
+{"id": "use this version::letter-suffix-U+0645", "seed": "use this version", "mutation": "letter-suffix-U+0645", "content": "use this versionم"}
+{"id": "use this version::letter-prefix-U+0915", "seed": "use this version", "mutation": "letter-prefix-U+0915", "content": "कuse this version"}
+{"id": "use this version::letter-suffix-U+0915", "seed": "use this version", "mutation": "letter-suffix-U+0915", "content": "use this versionक"}
+{"id": "use this version::letter-prefix-U+4E2D", "seed": "use this version", "mutation": "letter-prefix-U+4E2D", "content": "中use this version"}
+{"id": "use this version::letter-suffix-U+4E2D", "seed": "use this version", "mutation": "letter-suffix-U+4E2D", "content": "use this version中"}
+{"id": "use this version::format-prefix-U+0301", "seed": "use this version", "mutation": "format-prefix-U+0301", "content": "́use this version"}
+{"id": "use this version::format-suffix-U+0301", "seed": "use this version", "mutation": "format-suffix-U+0301", "content": "use this versioń"}
+{"id": "use this version::format-prefix-U+200B", "seed": "use this version", "mutation": "format-prefix-U+200B", "content": "​use this version"}
+{"id": "use this version::format-suffix-U+200B", "seed": "use this version", "mutation": "format-suffix-U+200B", "content": "use this version​"}
+{"id": "use this version::format-prefix-U+200C", "seed": "use this version", "mutation": "format-prefix-U+200C", "content": "‌use this version"}
+{"id": "use this version::format-suffix-U+200C", "seed": "use this version", "mutation": "format-suffix-U+200C", "content": "use this version‌"}
+{"id": "use this version::format-prefix-U+200D", "seed": "use this version", "mutation": "format-prefix-U+200D", "content": "‍use this version"}
+{"id": "use this version::format-suffix-U+200D", "seed": "use this version", "mutation": "format-suffix-U+200D", "content": "use this version‍"}
+{"id": "use this version::format-prefix-U+202E", "seed": "use this version", "mutation": "format-prefix-U+202E", "content": "‮use this version"}
+{"id": "use this version::format-suffix-U+202E", "seed": "use this version", "mutation": "format-suffix-U+202E", "content": "use this version‮"}
+{"id": "use this version::format-prefix-U+FEFF", "seed": "use this version", "mutation": "format-prefix-U+FEFF", "content": "﻿use this version"}
+{"id": "use this version::format-suffix-U+FEFF", "seed": "use this version", "mutation": "format-suffix-U+FEFF", "content": "use this version﻿"}
+{"id": "According to the official documentation::baseline", "seed": "According to the official documentation", "mutation": "baseline", "content": "According to the official documentation"}
+{"id": "According to the official documentation::nfc", "seed": "According to the official documentation", "mutation": "nfc", "content": "According to the official documentation"}
+{"id": "According to the official documentation::nfd", "seed": "According to the official documentation", "mutation": "nfd", "content": "According to the official documentation"}
+{"id": "According to the official documentation::letter-prefix-U+00E9", "seed": "According to the official documentation", "mutation": "letter-prefix-U+00E9", "content": "éAccording to the official documentation"}
+{"id": "According to the official documentation::letter-suffix-U+00E9", "seed": "According to the official documentation", "mutation": "letter-suffix-U+00E9", "content": "According to the official documentationé"}
+{"id": "According to the official documentation::letter-prefix-U+00FC", "seed": "According to the official documentation", "mutation": "letter-prefix-U+00FC", "content": "üAccording to the official documentation"}
+{"id": "According to the official documentation::letter-suffix-U+00FC", "seed": "According to the official documentation", "mutation": "letter-suffix-U+00FC", "content": "According to the official documentationü"}
+{"id": "According to the official documentation::letter-prefix-U+03B1", "seed": "According to the official documentation", "mutation": "letter-prefix-U+03B1", "content": "αAccording to the official documentation"}
+{"id": "According to the official documentation::letter-suffix-U+03B1", "seed": "According to the official documentation", "mutation": "letter-suffix-U+03B1", "content": "According to the official documentationα"}
+{"id": "According to the official documentation::letter-prefix-U+0416", "seed": "According to the official documentation", "mutation": "letter-prefix-U+0416", "content": "ЖAccording to the official documentation"}
+{"id": "According to the official documentation::letter-suffix-U+0416", "seed": "According to the official documentation", "mutation": "letter-suffix-U+0416", "content": "According to the official documentationЖ"}
+{"id": "According to the official documentation::letter-prefix-U+05D0", "seed": "According to the official documentation", "mutation": "letter-prefix-U+05D0", "content": "אAccording to the official documentation"}
+{"id": "According to the official documentation::letter-suffix-U+05D0", "seed": "According to the official documentation", "mutation": "letter-suffix-U+05D0", "content": "According to the official documentationא"}
+{"id": "According to the official documentation::letter-prefix-U+0645", "seed": "According to the official documentation", "mutation": "letter-prefix-U+0645", "content": "مAccording to the official documentation"}
+{"id": "According to the official documentation::letter-suffix-U+0645", "seed": "According to the official documentation", "mutation": "letter-suffix-U+0645", "content": "According to the official documentationم"}
+{"id": "According to the official documentation::letter-prefix-U+0915", "seed": "According to the official documentation", "mutation": "letter-prefix-U+0915", "content": "कAccording to the official documentation"}
+{"id": "According to the official documentation::letter-suffix-U+0915", "seed": "According to the official documentation", "mutation": "letter-suffix-U+0915", "content": "According to the official documentationक"}
+{"id": "According to the official documentation::letter-prefix-U+4E2D", "seed": "According to the official documentation", "mutation": "letter-prefix-U+4E2D", "content": "中According to the official documentation"}
+{"id": "According to the official documentation::letter-suffix-U+4E2D", "seed": "According to the official documentation", "mutation": "letter-suffix-U+4E2D", "content": "According to the official documentation中"}
+{"id": "According to the official documentation::format-prefix-U+0301", "seed": "According to the official documentation", "mutation": "format-prefix-U+0301", "content": "́According to the official documentation"}
+{"id": "According to the official documentation::format-suffix-U+0301", "seed": "According to the official documentation", "mutation": "format-suffix-U+0301", "content": "According to the official documentatioń"}
+{"id": "According to the official documentation::format-prefix-U+200B", "seed": "According to the official documentation", "mutation": "format-prefix-U+200B", "content": "​According to the official documentation"}
+{"id": "According to the official documentation::format-suffix-U+200B", "seed": "According to the official documentation", "mutation": "format-suffix-U+200B", "content": "According to the official documentation​"}
+{"id": "According to the official documentation::format-prefix-U+200C", "seed": "According to the official documentation", "mutation": "format-prefix-U+200C", "content": "‌According to the official documentation"}
+{"id": "According to the official documentation::format-suffix-U+200C", "seed": "According to the official documentation", "mutation": "format-suffix-U+200C", "content": "According to the official documentation‌"}
+{"id": "According to the official documentation::format-prefix-U+200D", "seed": "According to the official documentation", "mutation": "format-prefix-U+200D", "content": "‍According to the official documentation"}
+{"id": "According to the official documentation::format-suffix-U+200D", "seed": "According to the official documentation", "mutation": "format-suffix-U+200D", "content": "According to the official documentation‍"}
+{"id": "According to the official documentation::format-prefix-U+202E", "seed": "According to the official documentation", "mutation": "format-prefix-U+202E", "content": "‮According to the official documentation"}
+{"id": "According to the official documentation::format-suffix-U+202E", "seed": "According to the official documentation", "mutation": "format-suffix-U+202E", "content": "According to the official documentation‮"}
+{"id": "According to the official documentation::format-prefix-U+FEFF", "seed": "According to the official documentation", "mutation": "format-prefix-U+FEFF", "content": "﻿According to the official documentation"}
+{"id": "According to the official documentation::format-suffix-U+FEFF", "seed": "According to the official documentation", "mutation": "format-suffix-U+FEFF", "content": "According to the official documentation﻿"}
+{"id": "officially recommended::baseline", "seed": "officially recommended", "mutation": "baseline", "content": "officially recommended"}
+{"id": "officially recommended::nfc", "seed": "officially recommended", "mutation": "nfc", "content": "officially recommended"}
+{"id": "officially recommended::nfd", "seed": "officially recommended", "mutation": "nfd", "content": "officially recommended"}
+{"id": "officially recommended::letter-prefix-U+00E9", "seed": "officially recommended", "mutation": "letter-prefix-U+00E9", "content": "éofficially recommended"}
+{"id": "officially recommended::letter-suffix-U+00E9", "seed": "officially recommended", "mutation": "letter-suffix-U+00E9", "content": "officially recommendedé"}
+{"id": "officially recommended::letter-prefix-U+00FC", "seed": "officially recommended", "mutation": "letter-prefix-U+00FC", "content": "üofficially recommended"}
+{"id": "officially recommended::letter-suffix-U+00FC", "seed": "officially recommended", "mutation": "letter-suffix-U+00FC", "content": "officially recommendedü"}
+{"id": "officially recommended::letter-prefix-U+03B1", "seed": "officially recommended", "mutation": "letter-prefix-U+03B1", "content": "αofficially recommended"}
+{"id": "officially recommended::letter-suffix-U+03B1", "seed": "officially recommended", "mutation": "letter-suffix-U+03B1", "content": "officially recommendedα"}
+{"id": "officially recommended::letter-prefix-U+0416", "seed": "officially recommended", "mutation": "letter-prefix-U+0416", "content": "Жofficially recommended"}
+{"id": "officially recommended::letter-suffix-U+0416", "seed": "officially recommended", "mutation": "letter-suffix-U+0416", "content": "officially recommendedЖ"}
+{"id": "officially recommended::letter-prefix-U+05D0", "seed": "officially recommended", "mutation": "letter-prefix-U+05D0", "content": "אofficially recommended"}
+{"id": "officially recommended::letter-suffix-U+05D0", "seed": "officially recommended", "mutation": "letter-suffix-U+05D0", "content": "officially recommendedא"}
+{"id": "officially recommended::letter-prefix-U+0645", "seed": "officially recommended", "mutation": "letter-prefix-U+0645", "content": "مofficially recommended"}
+{"id": "officially recommended::letter-suffix-U+0645", "seed": "officially recommended", "mutation": "letter-suffix-U+0645", "content": "officially recommendedم"}
+{"id": "officially recommended::letter-prefix-U+0915", "seed": "officially recommended", "mutation": "letter-prefix-U+0915", "content": "कofficially recommended"}
+{"id": "officially recommended::letter-suffix-U+0915", "seed": "officially recommended", "mutation": "letter-suffix-U+0915", "content": "officially recommendedक"}
+{"id": "officially recommended::letter-prefix-U+4E2D", "seed": "officially recommended", "mutation": "letter-prefix-U+4E2D", "content": "中officially recommended"}
+{"id": "officially recommended::letter-suffix-U+4E2D", "seed": "officially recommended", "mutation": "letter-suffix-U+4E2D", "content": "officially recommended中"}
+{"id": "officially recommended::format-prefix-U+0301", "seed": "officially recommended", "mutation": "format-prefix-U+0301", "content": "́officially recommended"}
+{"id": "officially recommended::format-suffix-U+0301", "seed": "officially recommended", "mutation": "format-suffix-U+0301", "content": "officially recommended́"}
+{"id": "officially recommended::format-prefix-U+200B", "seed": "officially recommended", "mutation": "format-prefix-U+200B", "content": "​officially recommended"}
+{"id": "officially recommended::format-suffix-U+200B", "seed": "officially recommended", "mutation": "format-suffix-U+200B", "content": "officially recommended​"}
+{"id": "officially recommended::format-prefix-U+200C", "seed": "officially recommended", "mutation": "format-prefix-U+200C", "content": "‌officially recommended"}
+{"id": "officially recommended::format-suffix-U+200C", "seed": "officially recommended", "mutation": "format-suffix-U+200C", "content": "officially recommended‌"}
+{"id": "officially recommended::format-prefix-U+200D", "seed": "officially recommended", "mutation": "format-prefix-U+200D", "content": "‍officially recommended"}
+{"id": "officially recommended::format-suffix-U+200D", "seed": "officially recommended", "mutation": "format-suffix-U+200D", "content": "officially recommended‍"}
+{"id": "officially recommended::format-prefix-U+202E", "seed": "officially recommended", "mutation": "format-prefix-U+202E", "content": "‮officially recommended"}
+{"id": "officially recommended::format-suffix-U+202E", "seed": "officially recommended", "mutation": "format-suffix-U+202E", "content": "officially recommended‮"}
+{"id": "officially recommended::format-prefix-U+FEFF", "seed": "officially recommended", "mutation": "format-prefix-U+FEFF", "content": "﻿officially recommended"}
+{"id": "officially recommended::format-suffix-U+FEFF", "seed": "officially recommended", "mutation": "format-suffix-U+FEFF", "content": "officially recommended﻿"}
+{"id": "the documentation states::baseline", "seed": "the documentation states", "mutation": "baseline", "content": "the documentation states"}
+{"id": "the documentation states::nfc", "seed": "the documentation states", "mutation": "nfc", "content": "the documentation states"}
+{"id": "the documentation states::nfd", "seed": "the documentation states", "mutation": "nfd", "content": "the documentation states"}
+{"id": "the documentation states::letter-prefix-U+00E9", "seed": "the documentation states", "mutation": "letter-prefix-U+00E9", "content": "éthe documentation states"}
+{"id": "the documentation states::letter-suffix-U+00E9", "seed": "the documentation states", "mutation": "letter-suffix-U+00E9", "content": "the documentation statesé"}
+{"id": "the documentation states::letter-prefix-U+00FC", "seed": "the documentation states", "mutation": "letter-prefix-U+00FC", "content": "üthe documentation states"}
+{"id": "the documentation states::letter-suffix-U+00FC", "seed": "the documentation states", "mutation": "letter-suffix-U+00FC", "content": "the documentation statesü"}
+{"id": "the documentation states::letter-prefix-U+03B1", "seed": "the documentation states", "mutation": "letter-prefix-U+03B1", "content": "αthe documentation states"}
+{"id": "the documentation states::letter-suffix-U+03B1", "seed": "the documentation states", "mutation": "letter-suffix-U+03B1", "content": "the documentation statesα"}
+{"id": "the documentation states::letter-prefix-U+0416", "seed": "the documentation states", "mutation": "letter-prefix-U+0416", "content": "Жthe documentation states"}
+{"id": "the documentation states::letter-suffix-U+0416", "seed": "the documentation states", "mutation": "letter-suffix-U+0416", "content": "the documentation statesЖ"}
+{"id": "the documentation states::letter-prefix-U+05D0", "seed": "the documentation states", "mutation": "letter-prefix-U+05D0", "content": "אthe documentation states"}
+{"id": "the documentation states::letter-suffix-U+05D0", "seed": "the documentation states", "mutation": "letter-suffix-U+05D0", "content": "the documentation statesא"}
+{"id": "the documentation states::letter-prefix-U+0645", "seed": "the documentation states", "mutation": "letter-prefix-U+0645", "content": "مthe documentation states"}
+{"id": "the documentation states::letter-suffix-U+0645", "seed": "the documentation states", "mutation": "letter-suffix-U+0645", "content": "the documentation statesم"}
+{"id": "the documentation states::letter-prefix-U+0915", "seed": "the documentation states", "mutation": "letter-prefix-U+0915", "content": "कthe documentation states"}
+{"id": "the documentation states::letter-suffix-U+0915", "seed": "the documentation states", "mutation": "letter-suffix-U+0915", "content": "the documentation statesक"}
+{"id": "the documentation states::letter-prefix-U+4E2D", "seed": "the documentation states", "mutation": "letter-prefix-U+4E2D", "content": "中the documentation states"}
+{"id": "the documentation states::letter-suffix-U+4E2D", "seed": "the documentation states", "mutation": "letter-suffix-U+4E2D", "content": "the documentation states中"}
+{"id": "the documentation states::format-prefix-U+0301", "seed": "the documentation states", "mutation": "format-prefix-U+0301", "content": "́the documentation states"}
+{"id": "the documentation states::format-suffix-U+0301", "seed": "the documentation states", "mutation": "format-suffix-U+0301", "content": "the documentation stateś"}
+{"id": "the documentation states::format-prefix-U+200B", "seed": "the documentation states", "mutation": "format-prefix-U+200B", "content": "​the documentation states"}
+{"id": "the documentation states::format-suffix-U+200B", "seed": "the documentation states", "mutation": "format-suffix-U+200B", "content": "the documentation states​"}
+{"id": "the documentation states::format-prefix-U+200C", "seed": "the documentation states", "mutation": "format-prefix-U+200C", "content": "‌the documentation states"}
+{"id": "the documentation states::format-suffix-U+200C", "seed": "the documentation states", "mutation": "format-suffix-U+200C", "content": "the documentation states‌"}
+{"id": "the documentation states::format-prefix-U+200D", "seed": "the documentation states", "mutation": "format-prefix-U+200D", "content": "‍the documentation states"}
+{"id": "the documentation states::format-suffix-U+200D", "seed": "the documentation states", "mutation": "format-suffix-U+200D", "content": "the documentation states‍"}
+{"id": "the documentation states::format-prefix-U+202E", "seed": "the documentation states", "mutation": "format-prefix-U+202E", "content": "‮the documentation states"}
+{"id": "the documentation states::format-suffix-U+202E", "seed": "the documentation states", "mutation": "format-suffix-U+202E", "content": "the documentation states‮"}
+{"id": "the documentation states::format-prefix-U+FEFF", "seed": "the documentation states", "mutation": "format-prefix-U+FEFF", "content": "﻿the documentation states"}
+{"id": "the documentation states::format-suffix-U+FEFF", "seed": "the documentation states", "mutation": "format-suffix-U+FEFF", "content": "the documentation states﻿"}
+{"id": "Fetch the complete documentation index::baseline", "seed": "Fetch the complete documentation index", "mutation": "baseline", "content": "Fetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::nfc", "seed": "Fetch the complete documentation index", "mutation": "nfc", "content": "Fetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::nfd", "seed": "Fetch the complete documentation index", "mutation": "nfd", "content": "Fetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::letter-prefix-U+00E9", "seed": "Fetch the complete documentation index", "mutation": "letter-prefix-U+00E9", "content": "éFetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::letter-suffix-U+00E9", "seed": "Fetch the complete documentation index", "mutation": "letter-suffix-U+00E9", "content": "Fetch the complete documentation indexé"}
+{"id": "Fetch the complete documentation index::letter-prefix-U+00FC", "seed": "Fetch the complete documentation index", "mutation": "letter-prefix-U+00FC", "content": "üFetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::letter-suffix-U+00FC", "seed": "Fetch the complete documentation index", "mutation": "letter-suffix-U+00FC", "content": "Fetch the complete documentation indexü"}
+{"id": "Fetch the complete documentation index::letter-prefix-U+03B1", "seed": "Fetch the complete documentation index", "mutation": "letter-prefix-U+03B1", "content": "αFetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::letter-suffix-U+03B1", "seed": "Fetch the complete documentation index", "mutation": "letter-suffix-U+03B1", "content": "Fetch the complete documentation indexα"}
+{"id": "Fetch the complete documentation index::letter-prefix-U+0416", "seed": "Fetch the complete documentation index", "mutation": "letter-prefix-U+0416", "content": "ЖFetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::letter-suffix-U+0416", "seed": "Fetch the complete documentation index", "mutation": "letter-suffix-U+0416", "content": "Fetch the complete documentation indexЖ"}
+{"id": "Fetch the complete documentation index::letter-prefix-U+05D0", "seed": "Fetch the complete documentation index", "mutation": "letter-prefix-U+05D0", "content": "אFetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::letter-suffix-U+05D0", "seed": "Fetch the complete documentation index", "mutation": "letter-suffix-U+05D0", "content": "Fetch the complete documentation indexא"}
+{"id": "Fetch the complete documentation index::letter-prefix-U+0645", "seed": "Fetch the complete documentation index", "mutation": "letter-prefix-U+0645", "content": "مFetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::letter-suffix-U+0645", "seed": "Fetch the complete documentation index", "mutation": "letter-suffix-U+0645", "content": "Fetch the complete documentation indexم"}
+{"id": "Fetch the complete documentation index::letter-prefix-U+0915", "seed": "Fetch the complete documentation index", "mutation": "letter-prefix-U+0915", "content": "कFetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::letter-suffix-U+0915", "seed": "Fetch the complete documentation index", "mutation": "letter-suffix-U+0915", "content": "Fetch the complete documentation indexक"}
+{"id": "Fetch the complete documentation index::letter-prefix-U+4E2D", "seed": "Fetch the complete documentation index", "mutation": "letter-prefix-U+4E2D", "content": "中Fetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::letter-suffix-U+4E2D", "seed": "Fetch the complete documentation index", "mutation": "letter-suffix-U+4E2D", "content": "Fetch the complete documentation index中"}
+{"id": "Fetch the complete documentation index::format-prefix-U+0301", "seed": "Fetch the complete documentation index", "mutation": "format-prefix-U+0301", "content": "́Fetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::format-suffix-U+0301", "seed": "Fetch the complete documentation index", "mutation": "format-suffix-U+0301", "content": "Fetch the complete documentation index́"}
+{"id": "Fetch the complete documentation index::format-prefix-U+200B", "seed": "Fetch the complete documentation index", "mutation": "format-prefix-U+200B", "content": "​Fetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::format-suffix-U+200B", "seed": "Fetch the complete documentation index", "mutation": "format-suffix-U+200B", "content": "Fetch the complete documentation index​"}
+{"id": "Fetch the complete documentation index::format-prefix-U+200C", "seed": "Fetch the complete documentation index", "mutation": "format-prefix-U+200C", "content": "‌Fetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::format-suffix-U+200C", "seed": "Fetch the complete documentation index", "mutation": "format-suffix-U+200C", "content": "Fetch the complete documentation index‌"}
+{"id": "Fetch the complete documentation index::format-prefix-U+200D", "seed": "Fetch the complete documentation index", "mutation": "format-prefix-U+200D", "content": "‍Fetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::format-suffix-U+200D", "seed": "Fetch the complete documentation index", "mutation": "format-suffix-U+200D", "content": "Fetch the complete documentation index‍"}
+{"id": "Fetch the complete documentation index::format-prefix-U+202E", "seed": "Fetch the complete documentation index", "mutation": "format-prefix-U+202E", "content": "‮Fetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::format-suffix-U+202E", "seed": "Fetch the complete documentation index", "mutation": "format-suffix-U+202E", "content": "Fetch the complete documentation index‮"}
+{"id": "Fetch the complete documentation index::format-prefix-U+FEFF", "seed": "Fetch the complete documentation index", "mutation": "format-prefix-U+FEFF", "content": "﻿Fetch the complete documentation index"}
+{"id": "Fetch the complete documentation index::format-suffix-U+FEFF", "seed": "Fetch the complete documentation index", "mutation": "format-suffix-U+FEFF", "content": "Fetch the complete documentation index﻿"}
+{"id": "1.2.3::baseline", "seed": "1.2.3", "mutation": "baseline", "content": "1.2.3"}
+{"id": "1.2.3::nfc", "seed": "1.2.3", "mutation": "nfc", "content": "1.2.3"}
+{"id": "1.2.3::nfd", "seed": "1.2.3", "mutation": "nfd", "content": "1.2.3"}
+{"id": "1.2.3::letter-prefix-U+00E9", "seed": "1.2.3", "mutation": "letter-prefix-U+00E9", "content": "é1.2.3"}
+{"id": "1.2.3::letter-suffix-U+00E9", "seed": "1.2.3", "mutation": "letter-suffix-U+00E9", "content": "1.2.3é"}
+{"id": "1.2.3::letter-prefix-U+00FC", "seed": "1.2.3", "mutation": "letter-prefix-U+00FC", "content": "ü1.2.3"}
+{"id": "1.2.3::letter-suffix-U+00FC", "seed": "1.2.3", "mutation": "letter-suffix-U+00FC", "content": "1.2.3ü"}
+{"id": "1.2.3::letter-prefix-U+03B1", "seed": "1.2.3", "mutation": "letter-prefix-U+03B1", "content": "α1.2.3"}
+{"id": "1.2.3::letter-suffix-U+03B1", "seed": "1.2.3", "mutation": "letter-suffix-U+03B1", "content": "1.2.3α"}
+{"id": "1.2.3::letter-prefix-U+0416", "seed": "1.2.3", "mutation": "letter-prefix-U+0416", "content": "Ж1.2.3"}
+{"id": "1.2.3::letter-suffix-U+0416", "seed": "1.2.3", "mutation": "letter-suffix-U+0416", "content": "1.2.3Ж"}
+{"id": "1.2.3::letter-prefix-U+05D0", "seed": "1.2.3", "mutation": "letter-prefix-U+05D0", "content": "א1.2.3"}
+{"id": "1.2.3::letter-suffix-U+05D0", "seed": "1.2.3", "mutation": "letter-suffix-U+05D0", "content": "1.2.3א"}
+{"id": "1.2.3::letter-prefix-U+0645", "seed": "1.2.3", "mutation": "letter-prefix-U+0645", "content": "م1.2.3"}
+{"id": "1.2.3::letter-suffix-U+0645", "seed": "1.2.3", "mutation": "letter-suffix-U+0645", "content": "1.2.3م"}
+{"id": "1.2.3::letter-prefix-U+0915", "seed": "1.2.3", "mutation": "letter-prefix-U+0915", "content": "क1.2.3"}
+{"id": "1.2.3::letter-suffix-U+0915", "seed": "1.2.3", "mutation": "letter-suffix-U+0915", "content": "1.2.3क"}
+{"id": "1.2.3::letter-prefix-U+4E2D", "seed": "1.2.3", "mutation": "letter-prefix-U+4E2D", "content": "中1.2.3"}
+{"id": "1.2.3::letter-suffix-U+4E2D", "seed": "1.2.3", "mutation": "letter-suffix-U+4E2D", "content": "1.2.3中"}
+{"id": "1.2.3::format-prefix-U+0301", "seed": "1.2.3", "mutation": "format-prefix-U+0301", "content": "́1.2.3"}
+{"id": "1.2.3::format-suffix-U+0301", "seed": "1.2.3", "mutation": "format-suffix-U+0301", "content": "1.2.3́"}
+{"id": "1.2.3::format-prefix-U+200B", "seed": "1.2.3", "mutation": "format-prefix-U+200B", "content": "​1.2.3"}
+{"id": "1.2.3::format-suffix-U+200B", "seed": "1.2.3", "mutation": "format-suffix-U+200B", "content": "1.2.3​"}
+{"id": "1.2.3::format-prefix-U+200C", "seed": "1.2.3", "mutation": "format-prefix-U+200C", "content": "‌1.2.3"}
+{"id": "1.2.3::format-suffix-U+200C", "seed": "1.2.3", "mutation": "format-suffix-U+200C", "content": "1.2.3‌"}
+{"id": "1.2.3::format-prefix-U+200D", "seed": "1.2.3", "mutation": "format-prefix-U+200D", "content": "‍1.2.3"}
+{"id": "1.2.3::format-suffix-U+200D", "seed": "1.2.3", "mutation": "format-suffix-U+200D", "content": "1.2.3‍"}
+{"id": "1.2.3::format-prefix-U+202E", "seed": "1.2.3", "mutation": "format-prefix-U+202E", "content": "‮1.2.3"}
+{"id": "1.2.3::format-suffix-U+202E", "seed": "1.2.3", "mutation": "format-suffix-U+202E", "content": "1.2.3‮"}
+{"id": "1.2.3::format-prefix-U+FEFF", "seed": "1.2.3", "mutation": "format-prefix-U+FEFF", "content": "﻿1.2.3"}
+{"id": "1.2.3::format-suffix-U+FEFF", "seed": "1.2.3", "mutation": "format-suffix-U+FEFF", "content": "1.2.3﻿"}
+{"id": "foo@1.2.3::baseline", "seed": "foo@1.2.3", "mutation": "baseline", "content": "foo@1.2.3"}
+{"id": "foo@1.2.3::nfc", "seed": "foo@1.2.3", "mutation": "nfc", "content": "foo@1.2.3"}
+{"id": "foo@1.2.3::nfd", "seed": "foo@1.2.3", "mutation": "nfd", "content": "foo@1.2.3"}
+{"id": "foo@1.2.3::letter-prefix-U+00E9", "seed": "foo@1.2.3", "mutation": "letter-prefix-U+00E9", "content": "éfoo@1.2.3"}
+{"id": "foo@1.2.3::letter-suffix-U+00E9", "seed": "foo@1.2.3", "mutation": "letter-suffix-U+00E9", "content": "foo@1.2.3é"}
+{"id": "foo@1.2.3::letter-prefix-U+00FC", "seed": "foo@1.2.3", "mutation": "letter-prefix-U+00FC", "content": "üfoo@1.2.3"}
+{"id": "foo@1.2.3::letter-suffix-U+00FC", "seed": "foo@1.2.3", "mutation": "letter-suffix-U+00FC", "content": "foo@1.2.3ü"}
+{"id": "foo@1.2.3::letter-prefix-U+03B1", "seed": "foo@1.2.3", "mutation": "letter-prefix-U+03B1", "content": "αfoo@1.2.3"}
+{"id": "foo@1.2.3::letter-suffix-U+03B1", "seed": "foo@1.2.3", "mutation": "letter-suffix-U+03B1", "content": "foo@1.2.3α"}
+{"id": "foo@1.2.3::letter-prefix-U+0416", "seed": "foo@1.2.3", "mutation": "letter-prefix-U+0416", "content": "Жfoo@1.2.3"}
+{"id": "foo@1.2.3::letter-suffix-U+0416", "seed": "foo@1.2.3", "mutation": "letter-suffix-U+0416", "content": "foo@1.2.3Ж"}
+{"id": "foo@1.2.3::letter-prefix-U+05D0", "seed": "foo@1.2.3", "mutation": "letter-prefix-U+05D0", "content": "אfoo@1.2.3"}
+{"id": "foo@1.2.3::letter-suffix-U+05D0", "seed": "foo@1.2.3", "mutation": "letter-suffix-U+05D0", "content": "foo@1.2.3א"}
+{"id": "foo@1.2.3::letter-prefix-U+0645", "seed": "foo@1.2.3", "mutation": "letter-prefix-U+0645", "content": "مfoo@1.2.3"}
+{"id": "foo@1.2.3::letter-suffix-U+0645", "seed": "foo@1.2.3", "mutation": "letter-suffix-U+0645", "content": "foo@1.2.3م"}
+{"id": "foo@1.2.3::letter-prefix-U+0915", "seed": "foo@1.2.3", "mutation": "letter-prefix-U+0915", "content": "कfoo@1.2.3"}
+{"id": "foo@1.2.3::letter-suffix-U+0915", "seed": "foo@1.2.3", "mutation": "letter-suffix-U+0915", "content": "foo@1.2.3क"}
+{"id": "foo@1.2.3::letter-prefix-U+4E2D", "seed": "foo@1.2.3", "mutation": "letter-prefix-U+4E2D", "content": "中foo@1.2.3"}
+{"id": "foo@1.2.3::letter-suffix-U+4E2D", "seed": "foo@1.2.3", "mutation": "letter-suffix-U+4E2D", "content": "foo@1.2.3中"}
+{"id": "foo@1.2.3::format-prefix-U+0301", "seed": "foo@1.2.3", "mutation": "format-prefix-U+0301", "content": "́foo@1.2.3"}
+{"id": "foo@1.2.3::format-suffix-U+0301", "seed": "foo@1.2.3", "mutation": "format-suffix-U+0301", "content": "foo@1.2.3́"}
+{"id": "foo@1.2.3::format-prefix-U+200B", "seed": "foo@1.2.3", "mutation": "format-prefix-U+200B", "content": "​foo@1.2.3"}
+{"id": "foo@1.2.3::format-suffix-U+200B", "seed": "foo@1.2.3", "mutation": "format-suffix-U+200B", "content": "foo@1.2.3​"}
+{"id": "foo@1.2.3::format-prefix-U+200C", "seed": "foo@1.2.3", "mutation": "format-prefix-U+200C", "content": "‌foo@1.2.3"}
+{"id": "foo@1.2.3::format-suffix-U+200C", "seed": "foo@1.2.3", "mutation": "format-suffix-U+200C", "content": "foo@1.2.3‌"}
+{"id": "foo@1.2.3::format-prefix-U+200D", "seed": "foo@1.2.3", "mutation": "format-prefix-U+200D", "content": "‍foo@1.2.3"}
+{"id": "foo@1.2.3::format-suffix-U+200D", "seed": "foo@1.2.3", "mutation": "format-suffix-U+200D", "content": "foo@1.2.3‍"}
+{"id": "foo@1.2.3::format-prefix-U+202E", "seed": "foo@1.2.3", "mutation": "format-prefix-U+202E", "content": "‮foo@1.2.3"}
+{"id": "foo@1.2.3::format-suffix-U+202E", "seed": "foo@1.2.3", "mutation": "format-suffix-U+202E", "content": "foo@1.2.3‮"}
+{"id": "foo@1.2.3::format-prefix-U+FEFF", "seed": "foo@1.2.3", "mutation": "format-prefix-U+FEFF", "content": "﻿foo@1.2.3"}
+{"id": "foo@1.2.3::format-suffix-U+FEFF", "seed": "foo@1.2.3", "mutation": "format-suffix-U+FEFF", "content": "foo@1.2.3﻿"}
+{"id": "port: 3000::baseline", "seed": "port: 3000", "mutation": "baseline", "content": "port: 3000"}
+{"id": "port: 3000::nfc", "seed": "port: 3000", "mutation": "nfc", "content": "port: 3000"}
+{"id": "port: 3000::nfd", "seed": "port: 3000", "mutation": "nfd", "content": "port: 3000"}
+{"id": "port: 3000::letter-prefix-U+00E9", "seed": "port: 3000", "mutation": "letter-prefix-U+00E9", "content": "éport: 3000"}
+{"id": "port: 3000::letter-suffix-U+00E9", "seed": "port: 3000", "mutation": "letter-suffix-U+00E9", "content": "port: 3000é"}
+{"id": "port: 3000::letter-prefix-U+00FC", "seed": "port: 3000", "mutation": "letter-prefix-U+00FC", "content": "üport: 3000"}
+{"id": "port: 3000::letter-suffix-U+00FC", "seed": "port: 3000", "mutation": "letter-suffix-U+00FC", "content": "port: 3000ü"}
+{"id": "port: 3000::letter-prefix-U+03B1", "seed": "port: 3000", "mutation": "letter-prefix-U+03B1", "content": "αport: 3000"}
+{"id": "port: 3000::letter-suffix-U+03B1", "seed": "port: 3000", "mutation": "letter-suffix-U+03B1", "content": "port: 3000α"}
+{"id": "port: 3000::letter-prefix-U+0416", "seed": "port: 3000", "mutation": "letter-prefix-U+0416", "content": "Жport: 3000"}
+{"id": "port: 3000::letter-suffix-U+0416", "seed": "port: 3000", "mutation": "letter-suffix-U+0416", "content": "port: 3000Ж"}
+{"id": "port: 3000::letter-prefix-U+05D0", "seed": "port: 3000", "mutation": "letter-prefix-U+05D0", "content": "אport: 3000"}
+{"id": "port: 3000::letter-suffix-U+05D0", "seed": "port: 3000", "mutation": "letter-suffix-U+05D0", "content": "port: 3000א"}
+{"id": "port: 3000::letter-prefix-U+0645", "seed": "port: 3000", "mutation": "letter-prefix-U+0645", "content": "مport: 3000"}
+{"id": "port: 3000::letter-suffix-U+0645", "seed": "port: 3000", "mutation": "letter-suffix-U+0645", "content": "port: 3000م"}
+{"id": "port: 3000::letter-prefix-U+0915", "seed": "port: 3000", "mutation": "letter-prefix-U+0915", "content": "कport: 3000"}
+{"id": "port: 3000::letter-suffix-U+0915", "seed": "port: 3000", "mutation": "letter-suffix-U+0915", "content": "port: 3000क"}
+{"id": "port: 3000::letter-prefix-U+4E2D", "seed": "port: 3000", "mutation": "letter-prefix-U+4E2D", "content": "中port: 3000"}
+{"id": "port: 3000::letter-suffix-U+4E2D", "seed": "port: 3000", "mutation": "letter-suffix-U+4E2D", "content": "port: 3000中"}
+{"id": "port: 3000::format-prefix-U+0301", "seed": "port: 3000", "mutation": "format-prefix-U+0301", "content": "́port: 3000"}
+{"id": "port: 3000::format-suffix-U+0301", "seed": "port: 3000", "mutation": "format-suffix-U+0301", "content": "port: 3000́"}
+{"id": "port: 3000::format-prefix-U+200B", "seed": "port: 3000", "mutation": "format-prefix-U+200B", "content": "​port: 3000"}
+{"id": "port: 3000::format-suffix-U+200B", "seed": "port: 3000", "mutation": "format-suffix-U+200B", "content": "port: 3000​"}
+{"id": "port: 3000::format-prefix-U+200C", "seed": "port: 3000", "mutation": "format-prefix-U+200C", "content": "‌port: 3000"}
+{"id": "port: 3000::format-suffix-U+200C", "seed": "port: 3000", "mutation": "format-suffix-U+200C", "content": "port: 3000‌"}
+{"id": "port: 3000::format-prefix-U+200D", "seed": "port: 3000", "mutation": "format-prefix-U+200D", "content": "‍port: 3000"}
+{"id": "port: 3000::format-suffix-U+200D", "seed": "port: 3000", "mutation": "format-suffix-U+200D", "content": "port: 3000‍"}
+{"id": "port: 3000::format-prefix-U+202E", "seed": "port: 3000", "mutation": "format-prefix-U+202E", "content": "‮port: 3000"}
+{"id": "port: 3000::format-suffix-U+202E", "seed": "port: 3000", "mutation": "format-suffix-U+202E", "content": "port: 3000‮"}
+{"id": "port: 3000::format-prefix-U+FEFF", "seed": "port: 3000", "mutation": "format-prefix-U+FEFF", "content": "﻿port: 3000"}
+{"id": "port: 3000::format-suffix-U+FEFF", "seed": "port: 3000", "mutation": "format-suffix-U+FEFF", "content": "port: 3000﻿"}
+{"id": "npm install foo::baseline", "seed": "npm install foo", "mutation": "baseline", "content": "npm install foo"}
+{"id": "npm install foo::nfc", "seed": "npm install foo", "mutation": "nfc", "content": "npm install foo"}
+{"id": "npm install foo::nfd", "seed": "npm install foo", "mutation": "nfd", "content": "npm install foo"}
+{"id": "npm install foo::letter-prefix-U+00E9", "seed": "npm install foo", "mutation": "letter-prefix-U+00E9", "content": "énpm install foo"}
+{"id": "npm install foo::letter-suffix-U+00E9", "seed": "npm install foo", "mutation": "letter-suffix-U+00E9", "content": "npm install fooé"}
+{"id": "npm install foo::letter-prefix-U+00FC", "seed": "npm install foo", "mutation": "letter-prefix-U+00FC", "content": "ünpm install foo"}
+{"id": "npm install foo::letter-suffix-U+00FC", "seed": "npm install foo", "mutation": "letter-suffix-U+00FC", "content": "npm install fooü"}
+{"id": "npm install foo::letter-prefix-U+03B1", "seed": "npm install foo", "mutation": "letter-prefix-U+03B1", "content": "αnpm install foo"}
+{"id": "npm install foo::letter-suffix-U+03B1", "seed": "npm install foo", "mutation": "letter-suffix-U+03B1", "content": "npm install fooα"}
+{"id": "npm install foo::letter-prefix-U+0416", "seed": "npm install foo", "mutation": "letter-prefix-U+0416", "content": "Жnpm install foo"}
+{"id": "npm install foo::letter-suffix-U+0416", "seed": "npm install foo", "mutation": "letter-suffix-U+0416", "content": "npm install fooЖ"}
+{"id": "npm install foo::letter-prefix-U+05D0", "seed": "npm install foo", "mutation": "letter-prefix-U+05D0", "content": "אnpm install foo"}
+{"id": "npm install foo::letter-suffix-U+05D0", "seed": "npm install foo", "mutation": "letter-suffix-U+05D0", "content": "npm install fooא"}
+{"id": "npm install foo::letter-prefix-U+0645", "seed": "npm install foo", "mutation": "letter-prefix-U+0645", "content": "مnpm install foo"}
+{"id": "npm install foo::letter-suffix-U+0645", "seed": "npm install foo", "mutation": "letter-suffix-U+0645", "content": "npm install fooم"}
+{"id": "npm install foo::letter-prefix-U+0915", "seed": "npm install foo", "mutation": "letter-prefix-U+0915", "content": "कnpm install foo"}
+{"id": "npm install foo::letter-suffix-U+0915", "seed": "npm install foo", "mutation": "letter-suffix-U+0915", "content": "npm install fooक"}
+{"id": "npm install foo::letter-prefix-U+4E2D", "seed": "npm install foo", "mutation": "letter-prefix-U+4E2D", "content": "中npm install foo"}
+{"id": "npm install foo::letter-suffix-U+4E2D", "seed": "npm install foo", "mutation": "letter-suffix-U+4E2D", "content": "npm install foo中"}
+{"id": "npm install foo::format-prefix-U+0301", "seed": "npm install foo", "mutation": "format-prefix-U+0301", "content": "́npm install foo"}
+{"id": "npm install foo::format-suffix-U+0301", "seed": "npm install foo", "mutation": "format-suffix-U+0301", "content": "npm install foó"}
+{"id": "npm install foo::format-prefix-U+200B", "seed": "npm install foo", "mutation": "format-prefix-U+200B", "content": "​npm install foo"}
+{"id": "npm install foo::format-suffix-U+200B", "seed": "npm install foo", "mutation": "format-suffix-U+200B", "content": "npm install foo​"}
+{"id": "npm install foo::format-prefix-U+200C", "seed": "npm install foo", "mutation": "format-prefix-U+200C", "content": "‌npm install foo"}
+{"id": "npm install foo::format-suffix-U+200C", "seed": "npm install foo", "mutation": "format-suffix-U+200C", "content": "npm install foo‌"}
+{"id": "npm install foo::format-prefix-U+200D", "seed": "npm install foo", "mutation": "format-prefix-U+200D", "content": "‍npm install foo"}
+{"id": "npm install foo::format-suffix-U+200D", "seed": "npm install foo", "mutation": "format-suffix-U+200D", "content": "npm install foo‍"}
+{"id": "npm install foo::format-prefix-U+202E", "seed": "npm install foo", "mutation": "format-prefix-U+202E", "content": "‮npm install foo"}
+{"id": "npm install foo::format-suffix-U+202E", "seed": "npm install foo", "mutation": "format-suffix-U+202E", "content": "npm install foo‮"}
+{"id": "npm install foo::format-prefix-U+FEFF", "seed": "npm install foo", "mutation": "format-prefix-U+FEFF", "content": "﻿npm install foo"}
+{"id": "npm install foo::format-suffix-U+FEFF", "seed": "npm install foo", "mutation": "format-suffix-U+FEFF", "content": "npm install foo﻿"}
+{"id": "export API_KEY=xyz::baseline", "seed": "export API_KEY=xyz", "mutation": "baseline", "content": "export API_KEY=xyz"}
+{"id": "export API_KEY=xyz::nfc", "seed": "export API_KEY=xyz", "mutation": "nfc", "content": "export API_KEY=xyz"}
+{"id": "export API_KEY=xyz::nfd", "seed": "export API_KEY=xyz", "mutation": "nfd", "content": "export API_KEY=xyz"}
+{"id": "export API_KEY=xyz::letter-prefix-U+00E9", "seed": "export API_KEY=xyz", "mutation": "letter-prefix-U+00E9", "content": "éexport API_KEY=xyz"}
+{"id": "export API_KEY=xyz::letter-suffix-U+00E9", "seed": "export API_KEY=xyz", "mutation": "letter-suffix-U+00E9", "content": "export API_KEY=xyzé"}
+{"id": "export API_KEY=xyz::letter-prefix-U+00FC", "seed": "export API_KEY=xyz", "mutation": "letter-prefix-U+00FC", "content": "üexport API_KEY=xyz"}
+{"id": "export API_KEY=xyz::letter-suffix-U+00FC", "seed": "export API_KEY=xyz", "mutation": "letter-suffix-U+00FC", "content": "export API_KEY=xyzü"}
+{"id": "export API_KEY=xyz::letter-prefix-U+03B1", "seed": "export API_KEY=xyz", "mutation": "letter-prefix-U+03B1", "content": "αexport API_KEY=xyz"}
+{"id": "export API_KEY=xyz::letter-suffix-U+03B1", "seed": "export API_KEY=xyz", "mutation": "letter-suffix-U+03B1", "content": "export API_KEY=xyzα"}
+{"id": "export API_KEY=xyz::letter-prefix-U+0416", "seed": "export API_KEY=xyz", "mutation": "letter-prefix-U+0416", "content": "Жexport API_KEY=xyz"}
+{"id": "export API_KEY=xyz::letter-suffix-U+0416", "seed": "export API_KEY=xyz", "mutation": "letter-suffix-U+0416", "content": "export API_KEY=xyzЖ"}
+{"id": "export API_KEY=xyz::letter-prefix-U+05D0", "seed": "export API_KEY=xyz", "mutation": "letter-prefix-U+05D0", "content": "אexport API_KEY=xyz"}
+{"id": "export API_KEY=xyz::letter-suffix-U+05D0", "seed": "export API_KEY=xyz", "mutation": "letter-suffix-U+05D0", "content": "export API_KEY=xyzא"}
+{"id": "export API_KEY=xyz::letter-prefix-U+0645", "seed": "export API_KEY=xyz", "mutation": "letter-prefix-U+0645", "content": "مexport API_KEY=xyz"}
+{"id": "export API_KEY=xyz::letter-suffix-U+0645", "seed": "export API_KEY=xyz", "mutation": "letter-suffix-U+0645", "content": "export API_KEY=xyzم"}
+{"id": "export API_KEY=xyz::letter-prefix-U+0915", "seed": "export API_KEY=xyz", "mutation": "letter-prefix-U+0915", "content": "कexport API_KEY=xyz"}
+{"id": "export API_KEY=xyz::letter-suffix-U+0915", "seed": "export API_KEY=xyz", "mutation": "letter-suffix-U+0915", "content": "export API_KEY=xyzक"}
+{"id": "export API_KEY=xyz::letter-prefix-U+4E2D", "seed": "export API_KEY=xyz", "mutation": "letter-prefix-U+4E2D", "content": "中export API_KEY=xyz"}
+{"id": "export API_KEY=xyz::letter-suffix-U+4E2D", "seed": "export API_KEY=xyz", "mutation": "letter-suffix-U+4E2D", "content": "export API_KEY=xyz中"}
+{"id": "export API_KEY=xyz::format-prefix-U+0301", "seed": "export API_KEY=xyz", "mutation": "format-prefix-U+0301", "content": "́export API_KEY=xyz"}
+{"id": "export API_KEY=xyz::format-suffix-U+0301", "seed": "export API_KEY=xyz", "mutation": "format-suffix-U+0301", "content": "export API_KEY=xyź"}
+{"id": "export API_KEY=xyz::format-prefix-U+200B", "seed": "export API_KEY=xyz", "mutation": "format-prefix-U+200B", "content": "​export API_KEY=xyz"}
+{"id": "export API_KEY=xyz::format-suffix-U+200B", "seed": "export API_KEY=xyz", "mutation": "format-suffix-U+200B", "content": "export API_KEY=xyz​"}
+{"id": "export API_KEY=xyz::format-prefix-U+200C", "seed": "export API_KEY=xyz", "mutation": "format-prefix-U+200C", "content": "‌export API_KEY=xyz"}
+{"id": "export API_KEY=xyz::format-suffix-U+200C", "seed": "export API_KEY=xyz", "mutation": "format-suffix-U+200C", "content": "export API_KEY=xyz‌"}
+{"id": "export API_KEY=xyz::format-prefix-U+200D", "seed": "export API_KEY=xyz", "mutation": "format-prefix-U+200D", "content": "‍export API_KEY=xyz"}
+{"id": "export API_KEY=xyz::format-suffix-U+200D", "seed": "export API_KEY=xyz", "mutation": "format-suffix-U+200D", "content": "export API_KEY=xyz‍"}
+{"id": "export API_KEY=xyz::format-prefix-U+202E", "seed": "export API_KEY=xyz", "mutation": "format-prefix-U+202E", "content": "‮export API_KEY=xyz"}
+{"id": "export API_KEY=xyz::format-suffix-U+202E", "seed": "export API_KEY=xyz", "mutation": "format-suffix-U+202E", "content": "export API_KEY=xyz‮"}
+{"id": "export API_KEY=xyz::format-prefix-U+FEFF", "seed": "export API_KEY=xyz", "mutation": "format-prefix-U+FEFF", "content": "﻿export API_KEY=xyz"}
+{"id": "export API_KEY=xyz::format-suffix-U+FEFF", "seed": "export API_KEY=xyz", "mutation": "format-suffix-U+FEFF", "content": "export API_KEY=xyz﻿"}
+{"id": "upgrade to version 2.0::baseline", "seed": "upgrade to version 2.0", "mutation": "baseline", "content": "upgrade to version 2.0"}
+{"id": "upgrade to version 2.0::nfc", "seed": "upgrade to version 2.0", "mutation": "nfc", "content": "upgrade to version 2.0"}
+{"id": "upgrade to version 2.0::nfd", "seed": "upgrade to version 2.0", "mutation": "nfd", "content": "upgrade to version 2.0"}
+{"id": "upgrade to version 2.0::letter-prefix-U+00E9", "seed": "upgrade to version 2.0", "mutation": "letter-prefix-U+00E9", "content": "éupgrade to version 2.0"}
+{"id": "upgrade to version 2.0::letter-suffix-U+00E9", "seed": "upgrade to version 2.0", "mutation": "letter-suffix-U+00E9", "content": "upgrade to version 2.0é"}
+{"id": "upgrade to version 2.0::letter-prefix-U+00FC", "seed": "upgrade to version 2.0", "mutation": "letter-prefix-U+00FC", "content": "üupgrade to version 2.0"}
+{"id": "upgrade to version 2.0::letter-suffix-U+00FC", "seed": "upgrade to version 2.0", "mutation": "letter-suffix-U+00FC", "content": "upgrade to version 2.0ü"}
+{"id": "upgrade to version 2.0::letter-prefix-U+03B1", "seed": "upgrade to version 2.0", "mutation": "letter-prefix-U+03B1", "content": "αupgrade to version 2.0"}
+{"id": "upgrade to version 2.0::letter-suffix-U+03B1", "seed": "upgrade to version 2.0", "mutation": "letter-suffix-U+03B1", "content": "upgrade to version 2.0α"}
+{"id": "upgrade to version 2.0::letter-prefix-U+0416", "seed": "upgrade to version 2.0", "mutation": "letter-prefix-U+0416", "content": "Жupgrade to version 2.0"}
+{"id": "upgrade to version 2.0::letter-suffix-U+0416", "seed": "upgrade to version 2.0", "mutation": "letter-suffix-U+0416", "content": "upgrade to version 2.0Ж"}
+{"id": "upgrade to version 2.0::letter-prefix-U+05D0", "seed": "upgrade to version 2.0", "mutation": "letter-prefix-U+05D0", "content": "אupgrade to version 2.0"}
+{"id": "upgrade to version 2.0::letter-suffix-U+05D0", "seed": "upgrade to version 2.0", "mutation": "letter-suffix-U+05D0", "content": "upgrade to version 2.0א"}
+{"id": "upgrade to version 2.0::letter-prefix-U+0645", "seed": "upgrade to version 2.0", "mutation": "letter-prefix-U+0645", "content": "مupgrade to version 2.0"}
+{"id": "upgrade to version 2.0::letter-suffix-U+0645", "seed": "upgrade to version 2.0", "mutation": "letter-suffix-U+0645", "content": "upgrade to version 2.0م"}
+{"id": "upgrade to version 2.0::letter-prefix-U+0915", "seed": "upgrade to version 2.0", "mutation": "letter-prefix-U+0915", "content": "कupgrade to version 2.0"}
+{"id": "upgrade to version 2.0::letter-suffix-U+0915", "seed": "upgrade to version 2.0", "mutation": "letter-suffix-U+0915", "content": "upgrade to version 2.0क"}
+{"id": "upgrade to version 2.0::letter-prefix-U+4E2D", "seed": "upgrade to version 2.0", "mutation": "letter-prefix-U+4E2D", "content": "中upgrade to version 2.0"}
+{"id": "upgrade to version 2.0::letter-suffix-U+4E2D", "seed": "upgrade to version 2.0", "mutation": "letter-suffix-U+4E2D", "content": "upgrade to version 2.0中"}
+{"id": "upgrade to version 2.0::format-prefix-U+0301", "seed": "upgrade to version 2.0", "mutation": "format-prefix-U+0301", "content": "́upgrade to version 2.0"}
+{"id": "upgrade to version 2.0::format-suffix-U+0301", "seed": "upgrade to version 2.0", "mutation": "format-suffix-U+0301", "content": "upgrade to version 2.0́"}
+{"id": "upgrade to version 2.0::format-prefix-U+200B", "seed": "upgrade to version 2.0", "mutation": "format-prefix-U+200B", "content": "​upgrade to version 2.0"}
+{"id": "upgrade to version 2.0::format-suffix-U+200B", "seed": "upgrade to version 2.0", "mutation": "format-suffix-U+200B", "content": "upgrade to version 2.0​"}
+{"id": "upgrade to version 2.0::format-prefix-U+200C", "seed": "upgrade to version 2.0", "mutation": "format-prefix-U+200C", "content": "‌upgrade to version 2.0"}
+{"id": "upgrade to version 2.0::format-suffix-U+200C", "seed": "upgrade to version 2.0", "mutation": "format-suffix-U+200C", "content": "upgrade to version 2.0‌"}
+{"id": "upgrade to version 2.0::format-prefix-U+200D", "seed": "upgrade to version 2.0", "mutation": "format-prefix-U+200D", "content": "‍upgrade to version 2.0"}
+{"id": "upgrade to version 2.0::format-suffix-U+200D", "seed": "upgrade to version 2.0", "mutation": "format-suffix-U+200D", "content": "upgrade to version 2.0‍"}
+{"id": "upgrade to version 2.0::format-prefix-U+202E", "seed": "upgrade to version 2.0", "mutation": "format-prefix-U+202E", "content": "‮upgrade to version 2.0"}
+{"id": "upgrade to version 2.0::format-suffix-U+202E", "seed": "upgrade to version 2.0", "mutation": "format-suffix-U+202E", "content": "upgrade to version 2.0‮"}
+{"id": "upgrade to version 2.0::format-prefix-U+FEFF", "seed": "upgrade to version 2.0", "mutation": "format-prefix-U+FEFF", "content": "﻿upgrade to version 2.0"}
+{"id": "upgrade to version 2.0::format-suffix-U+FEFF", "seed": "upgrade to version 2.0", "mutation": "format-suffix-U+FEFF", "content": "upgrade to version 2.0﻿"}

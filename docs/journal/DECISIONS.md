@@ -116,3 +116,58 @@ the reasoning would otherwise be lost.
 
   *Reverse:* `rm -rf .jj` leaves the git repo untouched and complete —
   colocation adds, it does not convert.
+
+- **2026-08-16 · Replaced `\b` with an explicit boundary policy in both
+  implementations, rather than patching the eleven fixtures that exposed it.**
+  Issue #3 was not a regex bug; it was security semantics resting on a dialect
+  default. `boundary.py` / `boundary.ts` now state the rule — *match a keyword
+  unless it is embedded in a larger ASCII identifier; adjacent Unicode letters
+  do not suppress it* — and all 27 patterns are built on it.
+
+  Chose an ASCII-identifier rule over a Unicode-aware word-boundary helper such
+  as `(?<![^\W\d_])`. The ASCII form says what the detector means, ports
+  cleanly, and avoids implementing an ASCII-identifier rule by way of Python's
+  Unicode behaviour. Verified it discriminates rather than merely matching more:
+  `criticalé` matches, `hypercritical` and `critical_path` still do not, so the
+  false-negative class closed without opening a false-positive one — which
+  matters, because false positives are what forced shadow mode.
+  *Reverse:* the patterns are one `bounded()` call each; unwrapping restores
+  `\b` semantics and reopens #3.
+
+- **2026-08-16 · Generalised the fix into an invariant, because fixing fixtures
+  fixes fixtures.** `tests/test_boundary_mutations.py` asserts that **no
+  Unicode-only mutation of a detection atom may lower the assessed risk**, over
+  651 generated cases: 21 atoms × letters from eight scripts × combining marks,
+  ZWSP/ZWNJ/ZWJ, RLO and BOM, at both boundaries. The format characters are kept
+  as *negative controls* — they did not diverge originally, and a control that
+  starts failing is information.
+
+  Also proved the tests would have failed before the fix rather than assuming
+  it: the old `\b` patterns are blind to `criticalé`, `écritical`, `criticalЖ`
+  and `critical中`; the new ones are not. A detector never made to fail is not
+  verified.
+
+- **2026-08-16 · Aligned Python's `\S` to ECMAScript's over U+FEFF.** The
+  mutation corpus found a second dialect split the 69 hand-written vectors had
+  missed: ECMAScript's WhiteSpace production includes U+FEFF, Python's `\s` does
+  not, so `npm install foo` captured a trailing BOM in the oracle and not in the
+  port. Same detection, different *extent*. Followed the oracle rule — change
+  the oracle, regenerate, then make the port agree — even though here the port's
+  reading was the better one, because `governing_parameters` is what a human
+  verifies at a registry and an invisible trailing character makes that check
+  fail silently. *Reverse:* `NOT_SPACE` in `boundary.py`.
+
+- **2026-08-16 · Made the class un-reopenable, not merely closed.**
+  `tests/test_boundary_inventory.py` fails the build if `\b` or `\B` returns to
+  either assessor, and requires any `\w` to carry an allowlist entry naming the
+  port's equivalent. Without it the next pattern written with `\b` would reopen
+  the family silently, and parity would only catch it if someone happened to add
+  a vector for that exact token.
+
+- **2026-08-16 · Declined, for now, to add raw input and match spans to the
+  audit log.** It would make a future evasion far more explainable, and it would
+  turn the audit into a plaintext archive of everything the agent read —
+  directly against the MAX-posture reason the log stores hashes. Left on the
+  pre-enforcement checklist in `SECURITY.md` as an open tension rather than
+  decided quietly in either direction. Mazze's call: the trade is a policy
+  question, not an engineering one.

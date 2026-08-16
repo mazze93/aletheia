@@ -52,6 +52,53 @@ Corollary, stated as a rule: **never block dependency remediation on
 advisory-like text alone.** Validate a version at its registry, not at its
 vocabulary.
 
+## Lexical boundaries are policy, not defaults
+
+`\b` is not a security boundary. It means "a transition between `\w` and `\W`",
+and Python and JavaScript disagree about `\w` — Python's is Unicode-aware for
+`str` patterns, JavaScript's is ASCII-only. Security semantics were resting on
+that difference.
+
+Two evasions followed, in opposite directions, and both are closed:
+
+| | oracle | port |
+|---|---|---|
+| `café@1.2.3` | governing parameter | **invisible** |
+| `criticalé` | **score 0.0** | matched |
+
+`src/aletheia/boundary.py` and `typescript/src/boundary.ts` now state the rule
+explicitly instead of inheriting a default:
+
+> Match a security keyword unless it is embedded inside a larger ASCII
+> identifier. Unicode letters adjacent to it do not suppress a detection.
+
+So `criticalé`, `écritical`, `criticalЖ` and `critical中` all match, while
+`hypercritical` and `critical_path` do not — the false-negative class closes
+without opening a false-positive one.
+
+A second, narrower dialect split surfaced the same way: ECMAScript counts
+U+FEFF as whitespace and Python does not, so `\S+` captured a different
+*extent*. `NOT_SPACE` pins it. Extent matters because `governing_parameters` is
+the list a human is told to verify at a registry, and a trailing invisible
+character makes that verification fail silently.
+
+**This is enforced, not remembered.** `tests/test_boundary_inventory.py` fails
+the build if `\b` or `\B` reappears in either assessor, and `\w` requires an
+allowlist entry naming the port's equivalent. `parity/` runs 651 mutation cases
+— every detection atom decorated at both boundaries with letters from eight
+scripts plus combining marks, zero-width joiners and bidi controls — across both
+runtimes. `tests/test_boundary_mutations.py` asserts the invariant that
+generalises the fix: **no Unicode-only mutation may make a payload look safer.**
+
+## Normalization
+
+`assess()` does **not** normalize before matching, deliberately. Normalizing
+would mean the string reported in `governing_parameters` is not the string that
+was present, and silently rewriting evidence is a worse failure than missing a
+decomposed match. The cost — NFD and NFC forms can score differently — is
+recorded, held to cross-runtime equality, and tested in
+`tests/test_thresholds.py` rather than left to chance.
+
 ## Known gaps
 
 - **Quiet structural injection is missed.** `evals/malicious/incident-devserver.txt`
@@ -62,10 +109,29 @@ vocabulary.
   quietly start passing without someone noticing.
 - **Lexical detection is evadable.** Patterns are regexes. Paraphrase defeats
   them. She raises the cost of a naive attack; she does not raise it to
-  infinity.
-- **Python and TypeScript can drift.** `typescript/` still carries the
-  pre-refactor design and has no policy layer. Until it is ported, treat the
-  Python package as authoritative.
+  infinity. Visual homoglyph deception and model-level paraphrase are separate
+  classes with separate mitigations, untouched by the boundary work above.
+- **Python and TypeScript still differ above the assessor.** The port has no
+  policy, provenance or audit layer (issue #2). Parity covers `assess()` only;
+  claiming more would be false advertising. Treat the Python package as
+  authoritative.
+- **Audit records hashes, not spans.** A future evasion is currently
+  explainable only down to which factors fired, not where they matched. Storing
+  raw input and match offsets would make forensics much better and would also
+  turn the audit log into a plaintext archive of everything the agent read —
+  an unresolved tension, not an oversight. See the journal.
+
+## Before enabling enforce mode
+
+- [x] issue #3 quarantined vectors promoted to normal parity fixtures
+- [x] boundary mutation corpus runs in CI against Python and TypeScript
+- [x] NFC/NFD policy specified and tested rather than accidental
+- [x] every `\b` / `\B` / `\w` inventoried, replaced, or allowlisted with a reason
+- [x] the six must-not-block fixtures pass **under enforcement**
+- [x] threshold-edge behaviour asserted at 0.2999 / 0.3 / 0.5999 / 0.6
+- [x] factor-, score-, band- and action-level parity all mandatory
+- [ ] audit output carries match spans so an evasion is explainable after the fact
+- [ ] issue #1 (quiet structural injection) closed or accepted in writing
 
 ## Audit log
 

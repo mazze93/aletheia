@@ -39,6 +39,8 @@ import re
 from dataclasses import asdict, dataclass
 from typing import List, Optional
 
+from .boundary import NOT_SPACE, RIGHT, bounded, bounded_left
+
 # Trust assigned to each content source. The user is the principal (1.0); the
 # further a source is from the user, the less it may be allowed to govern action.
 SOURCE_TRUST = {
@@ -51,51 +53,61 @@ SOURCE_TRUST = {
     "unknown": 0.3,
 }
 
+# Every pattern below is wrapped in the boundary policy from `boundary.py`
+# rather than anchored with `\b`. `\b` is dialect-dependent — see that module —
+# and the divergence it caused is issue #3. `bounded()` states the rule the
+# detector actually means: this token must not be a fragment of a longer ASCII
+# identifier, and a Unicode letter beside it does not hide it.
+
 # Specific values that become action-governing parameters when injected:
 # version numbers, paths, install commands, port numbers, env assignments.
 GOVERNING_PARAM_PATTERNS = [
-    re.compile(r"\b\d+\.\d+\.\d+(?:-[a-zA-Z0-9.+]+)?\b"),         # semver: 0.28.1
-    re.compile(r"\b[a-z][\w-]*@\d+[\d.]*\b"),                     # pkg@version
+    re.compile(bounded(r"\d+\.\d+\.\d+(?:-[a-zA-Z0-9.+]+)?")),    # semver: 0.28.1
+    # The inner run stays Unicode-aware in both languages (Python `\w`,
+    # TS `\p{L}\p{N}_`) so that `café@1.2.3` is one package token, not two.
+    re.compile(bounded(r"[a-z][\w-]*@\d+[\d.]*")),                # pkg@version
     re.compile(r"(?:^|[\s\x22\x27`])(?:/[a-zA-Z0-9_.~-]+){2,}", re.M),  # unix paths
-    re.compile(r"\b(?:port|PORT)\s*[=:]\s*\d{2,5}\b"),           # port: 3000
-    re.compile(r"\b(?:npm|pip|pip3|yarn|pnpm)\s+(?:install|i|add)\s+\S+"),
-    re.compile(r"\b(?:export|set)\s+[A-Z_]{2,}=[^\s]+"),
+    re.compile(bounded(r"(?:port|PORT)\s*[=:]\s*\d{2,5}")),       # port: 3000
+    # Open-ended tail: the match already runs to whitespace, so a right edge
+    # would be meaningless.
+    re.compile(bounded_left(r"(?:npm|pip|pip3|yarn|pnpm)\s+(?:install|i|add)\s+" + NOT_SPACE + "+")),
+    re.compile(bounded_left(r"(?:export|set)\s+[A-Z_]{2,}=" + NOT_SPACE + "+")),
 ]
 
 # Signals that lower the verification threshold by manufacturing urgency.
 URGENCY_PATTERNS = [
-    re.compile(r"\bCVE-\d{4}-\d+\b"),
-    re.compile(r"\b(?:critical|high[\s-]severity|urgent|exploit(?:ed|able)?|zero[\s-]day|breach)\b", re.I),
-    re.compile(r"\b(?:must|required?|mandatory)\s+(?:fix|update|patch|upgrade)\b", re.I),
-    re.compile(r"\bsecurity\s+(?:flaw|hole|alert|advisory|vulnerability)\b", re.I),
-    re.compile(r"\b(?:immediately|right\s+now|as\s+soon\s+as\s+possible)\b", re.I),
+    re.compile(bounded(r"CVE-\d{4}-\d+")),
+    re.compile(bounded(r"(?:critical|high[\s-]severity|urgent|exploit(?:ed|able)?|zero[\s-]day|breach)"), re.I),
+    re.compile(bounded(r"(?:must|required?|mandatory)\s+(?:fix|update|patch|upgrade)"), re.I),
+    re.compile(bounded(r"security\s+(?:flaw|hole|alert|advisory|vulnerability)"), re.I),
+    re.compile(bounded(r"(?:immediately|right\s+now|as\s+soon\s+as\s+possible)"), re.I),
 ]
 
 # Content that tells Claude what to do — prescriptive instructions at the agent.
 PRESCRIPTIVE_PATTERNS = [
-    re.compile(r"\byou\s+(?:should|must|need\s+to|have\s+to)\s+(?:install|upgrade|update|run|execute|apply)\b", re.I),
-    re.compile(r"\b(?:upgrade|update|downgrade)\s+(?:to\s+)?(?:version\s+)?\d+\.\d+", re.I),
-    re.compile(r"\b(?:run|execute|apply)\s+(?:the\s+)?(?:following|this)\s+command\b", re.I),
-    re.compile(r"\buse\s+(?:this\s+)?(?:version|fix|patch|override|command)\b", re.I),
-    re.compile(r"\bcall\s+(?:the\s+)?[a-zA-Z_]+\s*(?:function|method|tool|API)\b", re.I),
-    re.compile(r"\boverrides?\s*:\s*\{"),
+    re.compile(bounded(r"you\s+(?:should|must|need\s+to|have\s+to)\s+(?:install|upgrade|update|run|execute|apply)"), re.I),
+    re.compile(bounded(r"(?:upgrade|update|downgrade)\s+(?:to\s+)?(?:version\s+)?\d+\.\d+"), re.I),
+    re.compile(bounded(r"(?:run|execute|apply)\s+(?:the\s+)?(?:following|this)\s+command"), re.I),
+    re.compile(bounded(r"use\s+(?:this\s+)?(?:version|fix|patch|override|command)"), re.I),
+    re.compile(bounded(r"call\s+(?:the\s+)?[a-zA-Z_]+\s*(?:function|method|tool|API)"), re.I),
+    re.compile(bounded_left(r"overrides?\s*:\s*\{")),
 ]
 
 # Claims of authority to lend false credibility to injected instructions.
 AUTHORITY_PATTERNS = [
-    re.compile(r"\baccording\s+to\s+(?:the\s+)?(?:official|documentation|advisory|guide|release\s+notes)\b", re.I),
-    re.compile(r"\bthe\s+(?:official\s+)?(?:fix|patch|solution)\s+(?:is|was)\s+(?:released|published|available)\s+in\b", re.I),
-    re.compile(r"\bofficially\s+(?:recommended|supported|confirmed|patched)\b", re.I),
-    re.compile(r"\bthe\s+(?:documentation|advisory|announcement)\s+(?:says?|states?|confirms?|shows?)\b", re.I),
-    re.compile(r"\bas\s+(?:per|documented\s+in)\s+the\s+(?:official|release|advisory)\b", re.I),
+    re.compile(bounded(r"according\s+to\s+(?:the\s+)?(?:official|documentation|advisory|guide|release\s+notes)"), re.I),
+    re.compile(bounded(r"the\s+(?:official\s+)?(?:fix|patch|solution)\s+(?:is|was)\s+(?:released|published|available)\s+in"), re.I),
+    re.compile(bounded(r"officially\s+(?:recommended|supported|confirmed|patched)"), re.I),
+    re.compile(bounded(r"the\s+(?:documentation|advisory|announcement)\s+(?:says?|states?|confirms?|shows?)"), re.I),
+    re.compile(bounded(r"as\s+(?:per|documented\s+in)\s+the\s+(?:official|release|advisory)"), re.I),
 ]
 
 # Content structured to look like a system prompt, config file, or step list.
 STRUCTURAL_PATTERNS = [
     re.compile(r'"(?:runtimeExecutable|runtimeArgs|command|exec|entrypoint)"\s*:'),
     re.compile(r"^#{1,3}\s+(?:Install|Setup|Fix|Solution|Configuration|Steps)\s*$", re.M),
-    re.compile(r"^\d+\.\s+(?:Run|Install|Execute|Update|Upgrade|Apply|Call)\b", re.M),
-    re.compile(r"\b(?:Fetch|read)\s+the\s+(?:complete|full)\s+documentation\s+(?:index|at)\b", re.I),
+    re.compile(r"^\d+\.\s+(?:Run|Install|Execute|Update|Upgrade|Apply|Call)" + RIGHT, re.M),
+    re.compile(bounded(r"(?:Fetch|read)\s+the\s+(?:complete|full)\s+documentation\s+(?:index|at)"), re.I),
     re.compile(r"^>\s*#{1,3}\s+Documentation", re.M),
 ]
 

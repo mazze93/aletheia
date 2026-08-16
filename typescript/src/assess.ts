@@ -1,62 +1,63 @@
 import type { AssessmentInput, AletheiaAssessment, RiskFactor } from './types.js';
 import { SOURCE_TRUST } from './types.js';
+import { RIGHT, bounded, boundedLeft } from './boundary.js';
+
+// Every pattern below is wrapped in the boundary policy from boundary.ts rather
+// than anchored with \b. \b is dialect-dependent — JavaScript's \w is
+// ASCII-only, Python's is not — and the divergence it caused is issue #3.
+// bounded() states the rule the detector actually means: this token must not be
+// a fragment of a longer ASCII identifier, and a Unicode letter beside it does
+// not hide it.
 
 // Specific values that become action-governing parameters when injected:
 // version numbers, paths, install commands, port numbers.
 const GOVERNING_PARAM_PATTERNS: RegExp[] = [
-  /\b\d+\.\d+\.\d+(?:-[a-zA-Z0-9.+]+)?\b/g,              // semver: 0.28.1
-  // pkg@version: esbuild@0.28.1
-  //
-  // Unicode-aware on purpose, and not cosmetically. JavaScript's \w is
-  // ASCII-only while Python's is not, so the ASCII form `\b[a-z][\w-]*@...`
-  // could not see `café@1.2.3` at all and saw `naïve@2.0.0` only as
-  // `ve@2.0.0`. That is an evasion: a non-ASCII character in a package name
-  // hid a governing parameter from this implementation while the Python
-  // oracle flagged it. Found by parity/compare.py on its first run.
-  //
-  // The leading lookbehind replaces \b, whose JS definition is also
-  // ASCII-bound and would reintroduce the same blind spot at the boundary.
-  /(?<![\p{L}\p{N}_])[a-z][\p{L}\p{N}_-]*@\d+[\d.]*\b/gu,
-  /(?:^|[\s"'`])(?:\/[a-zA-Z0-9_.~-]+){2,}/gm,            // Unix paths: /Users/daedalus/...
-  /\b(?:port|PORT)\s*[=:]\s*\d{2,5}\b/g,                  // port: 3000
-  /\b(?:npm|pip|pip3|yarn|pnpm)\s+(?:install|i|add)\s+\S+/g, // npm install x@y
-  /\b(?:export|set)\s+[A-Z_]{2,}=[^\s]+/g,                // env var assignments
+  new RegExp(bounded(String.raw`\d+\.\d+\.\d+(?:-[a-zA-Z0-9.+]+)?`), 'gu'), // semver
+  // The inner run stays Unicode-aware in both languages (Python \w,
+  // TS \p{L}\p{N}_) so that café@1.2.3 is one package token, not two.
+  new RegExp(bounded(String.raw`[a-z][\p{L}\p{N}_-]*@\d+[\d.]*`), 'gu'),    // pkg@version
+  /(?:^|[\s"'`])(?:\/[a-zA-Z0-9_.~-]+){2,}/gm,                             // Unix paths
+  new RegExp(bounded(String.raw`(?:port|PORT)\s*[=:]\s*\d{2,5}`), 'gu'),    // port: 3000
+  // Open-ended tail: the match already runs to whitespace, so a right edge
+  // would be meaningless.
+  new RegExp(boundedLeft(String.raw`(?:npm|pip|pip3|yarn|pnpm)\s+(?:install|i|add)\s+\S+`), 'gu'),
+  new RegExp(boundedLeft(String.raw`(?:export|set)\s+[A-Z_]{2,}=[^\s]+`), 'gu'),
 ];
 
 // Signals that lower verification threshold by creating false urgency.
 const URGENCY_PATTERNS: RegExp[] = [
-  /\bCVE-\d{4}-\d+\b/g,
-  /\b(?:critical|high[\s-]severity|urgent|exploit(?:ed|able)?|zero[\s-]day|breach)\b/gi,
-  /\b(?:must|required?|mandatory)\s+(?:fix|update|patch|upgrade)\b/gi,
-  /\bsecurity\s+(?:flaw|hole|alert|advisory|vulnerability)\b/gi,
-  /\b(?:immediately|right\s+now|as\s+soon\s+as\s+possible)\b/gi,
+  new RegExp(bounded(String.raw`CVE-\d{4}-\d+`), 'gu'),
+  new RegExp(bounded(String.raw`(?:critical|high[\s-]severity|urgent|exploit(?:ed|able)?|zero[\s-]day|breach)`), 'giu'),
+  new RegExp(bounded(String.raw`(?:must|required?|mandatory)\s+(?:fix|update|patch|upgrade)`), 'giu'),
+  new RegExp(bounded(String.raw`security\s+(?:flaw|hole|alert|advisory|vulnerability)`), 'giu'),
+  new RegExp(bounded(String.raw`(?:immediately|right\s+now|as\s+soon\s+as\s+possible)`), 'giu'),
 ];
 
 // Content that tells Claude what to do — prescriptive instructions directed at the agent.
 const PRESCRIPTIVE_PATTERNS: RegExp[] = [
-  /\byou\s+(?:should|must|need\s+to|have\s+to)\s+(?:install|upgrade|update|run|execute|apply)\b/gi,
-  /\b(?:upgrade|update|downgrade)\s+(?:to\s+)?(?:version\s+)?\d+\.\d+/gi,
-  /\b(?:run|execute|apply)\s+(?:the\s+)?(?:following|this)\s+command\b/gi,
-  /\buse\s+(?:this\s+)?(?:version|fix|patch|override|command)\b/gi,
-  /\bcall\s+(?:the\s+)?[a-zA-Z_]+\s*(?:function|method|tool|API)\b/gi,
-  /\boverrides?\s*:\s*\{/g,  // npm overrides block in package.json
+  new RegExp(bounded(String.raw`you\s+(?:should|must|need\s+to|have\s+to)\s+(?:install|upgrade|update|run|execute|apply)`), 'giu'),
+  new RegExp(bounded(String.raw`(?:upgrade|update|downgrade)\s+(?:to\s+)?(?:version\s+)?\d+\.\d+`), 'giu'),
+  new RegExp(bounded(String.raw`(?:run|execute|apply)\s+(?:the\s+)?(?:following|this)\s+command`), 'giu'),
+  new RegExp(bounded(String.raw`use\s+(?:this\s+)?(?:version|fix|patch|override|command)`), 'giu'),
+  new RegExp(bounded(String.raw`call\s+(?:the\s+)?[a-zA-Z_]+\s*(?:function|method|tool|API)`), 'giu'),
+  new RegExp(boundedLeft(String.raw`overrides?\s*:\s*\{`), 'gu'),  // npm overrides block
 ];
 
 // Claims of authority to lend false credibility to injected instructions.
 const AUTHORITY_PATTERNS: RegExp[] = [
-  /\baccording\s+to\s+(?:the\s+)?(?:official|documentation|advisory|guide|release\s+notes)\b/gi,
-  /\bthe\s+(?:official\s+)?(?:fix|patch|solution)\s+(?:is|was)\s+(?:released|published|available)\s+in\b/gi,
-  /\bofficially\s+(?:recommended|supported|confirmed|patched)\b/gi,
-  /\bthe\s+(?:documentation|advisory|announcement)\s+(?:says?|states?|confirms?|shows?)\b/gi,
-  /\bas\s+(?:per|documented\s+in)\s+the\s+(?:official|release|advisory)\b/gi,
+  new RegExp(bounded(String.raw`according\s+to\s+(?:the\s+)?(?:official|documentation|advisory|guide|release\s+notes)`), 'giu'),
+  new RegExp(bounded(String.raw`the\s+(?:official\s+)?(?:fix|patch|solution)\s+(?:is|was)\s+(?:released|published|available)\s+in`), 'giu'),
+  new RegExp(bounded(String.raw`officially\s+(?:recommended|supported|confirmed|patched)`), 'giu'),
+  new RegExp(bounded(String.raw`the\s+(?:documentation|advisory|announcement)\s+(?:says?|states?|confirms?|shows?)`), 'giu'),
+  new RegExp(bounded(String.raw`as\s+(?:per|documented\s+in)\s+the\s+(?:official|release|advisory)`), 'giu'),
 ];
 
 // Content structured to look like a system prompt, config file, or numbered instruction set.
 const STRUCTURAL_PATTERNS: RegExp[] = [
   /"(?:runtimeExecutable|runtimeArgs|command|exec|entrypoint)"\s*:/g, // JSON config keys
   /^#{1,3}\s+(?:Install|Setup|Fix|Solution|Configuration|Steps)\s*$/gm, // MD headers
-  /^\d+\.\s+(?:Run|Install|Execute|Update|Upgrade|Apply|Call)\b/gm,    // numbered steps
-  /\b(?:Fetch|read)\s+the\s+(?:complete|full)\s+documentation\s+(?:index|at)\b/gi, // index injection
+  new RegExp(String.raw`^\d+\.\s+(?:Run|Install|Execute|Update|Upgrade|Apply|Call)` + RIGHT, 'gmu'), // numbered steps
+  new RegExp(bounded(String.raw`(?:Fetch|read)\s+the\s+(?:complete|full)\s+documentation\s+(?:index|at)`), 'giu'),
   /^>\s*#{1,3}\s+Documentation/gm, // quoted doc-index markers
 ];
 

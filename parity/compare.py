@@ -104,8 +104,12 @@ def main(argv: list[str]) -> int:
     oracle = json.loads(open(argv[1], encoding="utf-8").read())
     port = json.loads(open(argv[2], encoding="utf-8").read())
 
-    vectors = pathlib.Path(argv[1]).resolve().parent / "vectors.jsonl"
-    diffs.known = known_divergences(vectors) if vectors.is_file() else {}
+    # Which corpus produced this golden. Stated by the emitter rather than
+    # assumed, so a second corpus cannot silently inherit the first one's
+    # quarantine flags.
+    corpus_name = oracle.get("_corpus", "vectors.jsonl")
+    corpus = pathlib.Path(argv[1]).resolve().parent / corpus_name
+    diffs.known = known_divergences(corpus) if corpus.is_file() else {}
 
     found = diffs(oracle, port)
     if not found:
