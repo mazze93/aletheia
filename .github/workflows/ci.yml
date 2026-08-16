@@ -68,7 +68,7 @@ jobs:
       # A hand-edited corpus is a corpus someone can quietly shrink.
       - name: mutation corpus is current
         run: |
-          cd parity && PYTHONPATH=. python3 unicode_boundary_mutations.py > /tmp/mutations.expected
+          (cd parity && PYTHONPATH=. python3 unicode_boundary_mutations.py) > /tmp/mutations.expected
           diff -u parity/mutations.jsonl /tmp/mutations.expected \
             || { echo "::error::parity/mutations.jsonl is stale — regenerate with 'cd parity && PYTHONPATH=. python3 unicode_boundary_mutations.py > mutations.jsonl'"; exit 1; }
 
