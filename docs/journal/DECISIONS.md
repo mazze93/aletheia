@@ -171,3 +171,48 @@ the reasoning would otherwise be lost.
   pre-enforcement checklist in `SECURITY.md` as an open tension rather than
   decided quietly in either direction. Mazze's call: the trade is a policy
   question, not an engineering one.
+
+- **2026-08-16 · REVERSAL of the 2026-08-15 "Python assessor is the oracle"
+  entry.** That entry said the asymmetry made divergences *decidable*: change
+  the oracle, regenerate, make the port agree. The U+FEFF incident the same day
+  showed the flaw, and I described that incident in the oracle's own vocabulary
+  rather than noticing the contradiction — I wrote "followed the oracle rule to
+  fix it… even though here the port's reading was the better one," which is a
+  sentence that refutes itself.
+
+  If the port can be right, the reference is not an authority. Parity is a
+  **drift detector**: it proves the implementations disagree and says nothing
+  about which is correct. Resolution is a policy decision, recorded before
+  either side is changed. Python keeps a narrower, mechanical role — the source
+  the goldens are generated from, so regeneration is unambiguous.
+
+  Corrected in `parity/compare.py`'s failure output (which was instructing
+  readers to conform to the reference), `parity/README.md`, `parity/emit.py`,
+  and `assess.py`'s docstring. The compare.py text mattered most: it is what a
+  future reader sees at the moment they are deciding how to resolve a
+  divergence.
+  *Reverse:* restore "the oracle is authoritative" and accept that a correct
+  port must be broken to match an incorrect reference.
+
+- **2026-08-16 · Added a hook-level enforce-mode regression, because every
+  other test calls functions.** `tests/test_hook_enforce.py` runs the actual
+  shell adapter with a real payload on stdin and reads the audit log it writes.
+  Shadow mode proves *detection*; it does not prove that a detected payload
+  stops a tool call, which is the only property that matters once
+  `ALETHEIA_MODE=enforce` is set.
+
+  Its fixture is the issue-3 evasion rather than a plain injection: every
+  keyword decorated with a non-ASCII letter at its boundary. Under the pre-fix
+  patterns exactly one family matched (`high-severity`) and it scored below the
+  verify threshold; under the boundary policy it scores 0.88 and stops. So the
+  test fails if the boundary policy is ever unwound, regardless of what the unit
+  tests report. Also covers the adapter failing *open* when the install is
+  missing — a security hook that breaks the agent when its own path is wrong is
+  worse than no hook.
+
+- **2026-08-16 · Issue #1 confirmed as an active pre-enforcement blocker, not
+  a background gap.** Measured rather than assumed: `incident-devserver.txt`
+  scores 0.26 from `web_fetch` and 0.21 from `mcp_tool`, and both resolve to
+  **`proceed`** under `ENFORCE`. So a labelled incident would pass a live gate.
+  Promoted in `SECURITY.md` from "known gap" to a checklist item that blocks
+  turning enforcement on.

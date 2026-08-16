@@ -122,15 +122,22 @@ def main(argv: list[str]) -> int:
         return 0
 
     print(f"PARITY BROKEN — {len(found)} divergence(s)\n")
-    print("The Python oracle (src/aletheia/assess.py) is authoritative.")
-    print("Where they disagree, the TypeScript port is wrong.\n")
+    print("A parity difference proves the implementations disagree. It does NOT")
+    print("establish which one is correct — resolving that is a policy decision.\n")
     for d in found:
         print(f"  {d}")
     print(
-        "\nIf you changed a weight, a threshold, or a pattern in one language, "
-        "change it in the other.\nIf the change is intentional and the port is "
-        "now correct, change the oracle first,\nthen regenerate: "
-        "python3 parity/emit.py > parity/assess.golden.json"
+        "\nTo resolve:\n"
+        "  1. Decide what the behaviour SHOULD be, and write it down "
+        "(SECURITY.md / the journal).\n"
+        "     Do not assume the Python side is right because it is the "
+        "reference — it has\n"
+        "     been the wrong one before (U+FEFF, see docs/journal/DECISIONS.md).\n"
+        "  2. Make both implementations conform to that decision.\n"
+        "  3. Regenerate: python3 parity/emit.py > parity/assess.golden.json\n"
+        "     (and parity/emit_mutations.py > parity/mutations.golden.json)\n"
+        "\nThe Python side is the *reference for regenerating fixtures*, which is\n"
+        "a mechanical role. It is not the authority on semantics."
     )
     return 1
 

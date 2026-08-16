@@ -1,11 +1,14 @@
-"""The oracle. Projects every parity vector through the Python assessor.
+"""The parity reference. Projects every vector through the Python assessor.
 
     python3 parity/emit.py > parity/assess.golden.json
 
-`src/aletheia/assess.py` is authoritative. Where the TypeScript port and this
-file disagree, this file is right and the port is wrong — the same relationship
-`cognitive/stratum` uses between its Python reference and its TS core, and for
-the same reason: two peers can argue forever, an oracle cannot.
+`src/aletheia/assess.py` is the reference the fixtures are generated from —
+the same relationship `cognitive/stratum` uses between its Python reference and
+its TS core, so that regeneration has one unambiguous source.
+
+Being the reference is not being right. A divergence is a signal to decide what
+the behaviour should be and write that decision down; then both sides conform to
+it. The reference has lost that argument before (U+FEFF).
 
 The projection is deliberately narrower than the full `Assessment`. It carries
 the things that must be identical across implementations and omits the things

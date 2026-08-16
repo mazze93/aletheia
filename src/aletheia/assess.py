@@ -13,10 +13,14 @@ describing a CVE remediation is indistinguishable from the injection it fixes �
 both name versions, both carry urgency, both tell you to run something. Letting
 the score decide made ordinary security work unperformable.
 
-**This file is the oracle.** `typescript/src/assess.ts` mirrors it
-weight-for-weight, and where the two disagree, this one is right and the port is
-wrong. That is not a matter of seniority: two peers can argue forever, and an
-asymmetry is what makes a divergence decidable.
+**This file is the parity reference.** `typescript/src/assess.ts` mirrors it
+weight-for-weight, and the golden fixtures are regenerated from here.
+
+That is a *mechanical* role, not an authority on semantics. A parity difference
+proves the two implementations disagree; it does not say which is correct.
+Resolving that is a policy decision, written down before either side is
+changed — and the reference has been the wrong one before (U+FEFF; see
+`docs/journal/DECISIONS.md`).
 
 The mirroring used to be a request — *"if you change a weight, a threshold, or a
 pattern here, change it there too"* — which is a promise no build can keep. It is

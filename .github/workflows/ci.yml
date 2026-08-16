@@ -27,8 +27,9 @@ jobs:
         run: PYTHONPATH=src python3 -m unittest tests.test_evals -v
 
   # Two implementations of the same contract drift silently unless something
-  # makes them argue. The Python assessor is the oracle; the TypeScript port
-  # must agree with it, and the golden file is the sworn statement.
+  # makes them argue. The golden file is the sworn statement; a difference
+  # fails the build. Which side is *correct* is a policy decision, recorded
+  # before either is changed — see parity/README.md.
   #
   # Modelled on cognitive/stratum's reference-oracle + golden-projection gate,
   # which solved this exact problem for its own dual implementation.

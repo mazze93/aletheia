@@ -38,7 +38,7 @@ a security fix. Editing this repository's own documentation scored the same.
 
 A security layer that blocks patching is a vulnerability with good intentions.
 So she starts by watching, writes what she *would* have done to
-`~/.claude/audit.jsonl`, and earns enforcement from evidence.
+`~/.claude/aletheia/audit.jsonl`, and earns enforcement from evidence.
 
 ## Where enforcement is meaningful
 
@@ -61,10 +61,13 @@ that difference.
 
 Two evasions followed, in opposite directions, and both are closed:
 
-| | oracle | port |
+| | Python | TypeScript |
 |---|---|---|
 | `café@1.2.3` | governing parameter | **invisible** |
 | `criticalé` | **score 0.0** | matched |
+
+Note which column is wrong in each row: neither implementation was reliably
+the correct one, which is why parity is a drift detector and not a referee.
 
 `src/aletheia/boundary.py` and `typescript/src/boundary.ts` now state the rule
 explicitly instead of inheriting a default:
@@ -111,10 +114,11 @@ recorded, held to cross-runtime equality, and tested in
   them. She raises the cost of a naive attack; she does not raise it to
   infinity. Visual homoglyph deception and model-level paraphrase are separate
   classes with separate mitigations, untouched by the boundary work above.
-- **Python and TypeScript still differ above the assessor.** The port has no
-  policy, provenance or audit layer (issue #2). Parity covers `assess()` only;
-  claiming more would be false advertising. Treat the Python package as
-  authoritative.
+- **Python and TypeScript still differ above the assessor.** The TypeScript
+  side has no policy, provenance or audit layer (issue #2). Parity covers
+  `assess()` only; claiming more would be false advertising. Use the Python
+  package — not because it adjudicates, but because it is the only one that
+  implements the full stack.
 - **Audit records hashes, not spans.** A future evasion is currently
   explainable only down to which factors fired, not where they matched. Storing
   raw input and match offsets would make forensics much better and would also
@@ -130,8 +134,16 @@ recorded, held to cross-runtime equality, and tested in
 - [x] the six must-not-block fixtures pass **under enforcement**
 - [x] threshold-edge behaviour asserted at 0.2999 / 0.3 / 0.5999 / 0.6
 - [x] factor-, score-, band- and action-level parity all mandatory
-- [ ] audit output carries match spans so an evasion is explainable after the fact
-- [ ] issue #1 (quiet structural injection) closed or accepted in writing
+- [x] hook-level enforce-mode regression: the adapter blocks (exit 2) on an
+      adversarial payload and records the block with factor IDs and action
+      (`tests/test_hook_enforce.py`)
+- [ ] **issue #1 is a blocker, not a gap.** Measured: `incident-devserver.txt`
+      scores 0.26 from `web_fetch` and 0.21 from `mcp_tool`, and both resolve to
+      `proceed` under enforcement. A labelled incident would pass a live gate.
+      Close it or accept it in writing, with a named owner.
+- [ ] audit output carries match spans so an evasion is explainable after the
+      fact — an unresolved trade against plaintext retention, not a missing
+      feature. Needs a named owner and a hard pre-enforcement disposition.
 
 ## Audit log
 

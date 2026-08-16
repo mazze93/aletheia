@@ -19,16 +19,24 @@ npx tsx parity/emit.ts > /tmp/ts.json                # from typescript/ deps
 python3 parity/compare.py parity/assess.golden.json /tmp/ts.json
 ```
 
-## The Python side is the oracle
+## The Python side is the reference, not the authority
 
-`src/aletheia/assess.py` is authoritative. Where it and the TypeScript port
-disagree, the port is wrong. The asymmetry is the design: two peers can argue
-forever, and only an oracle makes a divergence decidable. Borrowed wholesale
-from `cognitive/stratum`, which pairs a Python semantics reference with a
-TypeScript core and settles disputes the same way.
+`src/aletheia/assess.py` is where the golden fixtures are generated from, so
+that regeneration has one unambiguous source. Borrowed from
+`cognitive/stratum`, which pairs a Python semantics reference with a TypeScript
+core for the same reason.
 
-To change behaviour deliberately: change the oracle, regenerate the golden, then
-make the port agree.
+**Being the reference is not being right.** A parity difference proves the two
+implementations disagree and nothing more; deciding which behaviour is correct
+is a policy question, and the answer is written down before either side moves.
+The reference has been the wrong one: on U+FEFF the port's reading was better,
+and Python was corrected to conform.
+
+To change behaviour deliberately:
+
+1. Decide what it should be and record why.
+2. Make both implementations conform.
+3. Regenerate the goldens.
 
 ## What the projection compares, and what it does not
 
