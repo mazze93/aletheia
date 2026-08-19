@@ -2,6 +2,17 @@ import type { AssessmentInput, AletheiaAssessment, RiskFactor } from './types.js
 import { SOURCE_TRUST } from './types.js';
 import { RIGHT, bounded, boundedLeft } from './boundary.js';
 
+// Keys whose value becomes the thing that runs. Mirrors EXEC_KEYS / ARGS_KEYS
+// in src/aletheia/assess.py — add a name in one, add it in the other, and
+// parity/compare.py will say so if you forget.
+const EXEC_KEYS = 'runtimeExecutable|command|cmd|exec|entrypoint|program|shell|interpreter';
+const ARGS_KEYS = 'runtimeArgs|args|argv';
+
+/** `"runtimeExecutable": "npm"` — a JSON key whose value is an executable. */
+const EXEC_KEY_JSON = String.raw`"(?:${EXEC_KEYS})"\s*:\s*"[^"]{1,200}"`;
+/** `"runtimeArgs": ["run", "dev"]` — the argument vector that goes with it. */
+const ARGS_KEY_JSON = String.raw`"(?:${ARGS_KEYS})"\s*:\s*\[`;
+
 // Every pattern below is wrapped in the boundary policy from boundary.ts rather
 // than anchored with \b. \b is dialect-dependent — JavaScript's \w is
 // ASCII-only, Python's is not — and the divergence it caused is issue #3.
@@ -22,6 +33,17 @@ const GOVERNING_PARAM_PATTERNS: RegExp[] = [
   // would be meaningless.
   new RegExp(boundedLeft(String.raw`(?:npm|pip|pip3|yarn|pnpm)\s+(?:install|i|add)\s+\S+`), 'gu'),
   new RegExp(boundedLeft(String.raw`(?:export|set)\s+[A-Z_]{2,}=[^\s]+`), 'gu'),
+
+  // --- structured form ---------------------------------------------------
+  // The same governing parameters expressed as JSON rather than prose. This is
+  // issue #1: the detector recognised `port: 3000` and missed `"port": 3000`,
+  // and treated `"runtimeExecutable": "npm"` as mere structural mimicry. Shape
+  // is a style signal; a key whose value becomes the thing that executes is a
+  // governing parameter, and the structured form is the more dangerous one
+  // because it is machine-consumed and needs no persuasive language around it.
+  new RegExp(EXEC_KEY_JSON, 'gu'),
+  new RegExp(ARGS_KEY_JSON, 'gu'),
+  /"(?:port|PORT)"\s*:\s*\d{2,5}/gu,
 ];
 
 // Signals that lower verification threshold by creating false urgency.
@@ -135,6 +157,16 @@ export function assess(input: AssessmentInput): AletheiaAssessment {
 
   // Combo: governing params + prescriptive commands is the canonical injection pattern.
   if (govParams.length > 0 && prescriptiveMatches.length > 0) {
+    contentRisk += 0.25;
+  }
+
+  // Combo: governing params inside structured content is the *quiet* pattern,
+  // and the reason issue #1 stayed open. The loud injection argues — urgency,
+  // authority, an imperative. This one hands over a value in well-formed JSON
+  // and waits to be trusted, which is also how a compromised MCP tool behaves.
+  // Same weight as the prescriptive combo: it is the same claim in a different
+  // register. Narrow by construction — it needs both signals.
+  if (govParams.length > 0 && structuralMatches.length > 0) {
     contentRisk += 0.25;
   }
 
