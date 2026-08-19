@@ -769,8 +769,17 @@
       "verification_step_count": 0
     },
     {
-      "band": "low",
+      "band": "high",
       "factors": [
+        {
+          "category": "governing_parameter",
+          "matches": [
+            "\"runtimeExecutable\": \"node\"",
+            "\"command\": \"start\"",
+            "\"runtimeArgs\": ["
+          ],
+          "weight": 0.3
+        },
         {
           "category": "structural",
           "matches": [
@@ -781,11 +790,15 @@
           "weight": 0.3
         }
       ],
-      "governing_parameters": [],
+      "governing_parameters": [
+        "\"runtimeExecutable\": \"node\"",
+        "\"command\": \"start\"",
+        "\"runtimeArgs\": ["
+      ],
       "id": "family-structural-runtime",
-      "score": 0.264,
+      "score": 0.748,
       "source": "web_fetch",
-      "verification_step_count": 0
+      "verification_step_count": 2
     },
     {
       "band": "low",
@@ -1038,7 +1051,9 @@
         "/etc/evil/config/main",
         "port: 9999",
         "npm install evil@2.0.0.",
-        "export SECRET_TOKEN=abc."
+        "export SECRET_TOKEN=abc.",
+        "\"runtimeExecutable\": \"sh\"",
+        "\"command\": \"x\""
       ],
       "id": "saturation-all-families",
       "score": 0.94,
@@ -1262,8 +1277,15 @@
       "verification_step_count": 4
     },
     {
-      "band": "low",
+      "band": "high",
       "factors": [
+        {
+          "category": "governing_parameter",
+          "matches": [
+            "\"command\": \"npm audit fix\""
+          ],
+          "weight": 0.3
+        },
         {
           "category": "structural",
           "matches": [
@@ -1272,11 +1294,13 @@
           "weight": 0.3
         }
       ],
-      "governing_parameters": [],
+      "governing_parameters": [
+        "\"command\": \"npm audit fix\""
+      ],
       "id": "regression-plain-command",
-      "score": 0.246,
+      "score": 0.697,
       "source": "unknown",
-      "verification_step_count": 0
+      "verification_step_count": 2
     },
     {
       "band": "low",
