@@ -57,6 +57,17 @@ SOURCE_TRUST = {
     "unknown": 0.3,
 }
 
+# Keys whose *value* becomes the thing that runs. Shared with the structural
+# family and with `typescript/src/assess.ts`, which lists the same names — if
+# you add one here, add it there; parity/compare.py will tell you if you forget.
+EXEC_KEYS = "runtimeExecutable|command|cmd|exec|entrypoint|program|shell|interpreter"
+ARGS_KEYS = "runtimeArgs|args|argv"
+
+# `"runtimeExecutable": "npm"` — a JSON key whose value is an executable.
+EXEC_KEY_JSON = r'"(?:' + EXEC_KEYS + r')"\s*:\s*"[^"]{1,200}"'
+# `"runtimeArgs": ["run", "dev"]` — the argument vector that goes with it.
+ARGS_KEY_JSON = r'"(?:' + ARGS_KEYS + r')"\s*:\s*\['
+
 # Every pattern below is wrapped in the boundary policy from `boundary.py`
 # rather than anchored with `\b`. `\b` is dialect-dependent — see that module —
 # and the divergence it caused is issue #3. `bounded()` states the rule the
@@ -76,6 +87,23 @@ GOVERNING_PARAM_PATTERNS = [
     # would be meaningless.
     re.compile(bounded_left(r"(?:npm|pip|pip3|yarn|pnpm)\s+(?:install|i|add)\s+" + NOT_SPACE + "+")),
     re.compile(bounded_left(r"(?:export|set)\s+[A-Z_]{2,}=" + NOT_SPACE + "+")),
+
+    # --- structured form -------------------------------------------------
+    # The same governing parameters, expressed as JSON rather than prose.
+    #
+    # This is issue #1. The detector recognised `port: 3000` and missed
+    # `"port": 3000`; it recognised an install command in a sentence and missed
+    # `"runtimeExecutable": "npm"`. The structured form is the *more* dangerous
+    # one — it is machine-consumed, it needs no persuasive language around it,
+    # and a tool returning it looks like a tool doing its job.
+    #
+    # Previously these keys registered only as `structural` — a note that the
+    # content is *shaped* like configuration. Shape is a style signal. A key
+    # whose value becomes the thing that executes is a governing parameter in
+    # the plainest sense of the term, and is now counted as one.
+    re.compile(EXEC_KEY_JSON),
+    re.compile(ARGS_KEY_JSON),
+    re.compile(r'"(?:port|PORT)"\s*:\s*\d{2,5}'),
 ]
 
 # Signals that lower the verification threshold by manufacturing urgency.
@@ -193,6 +221,20 @@ def assess(content: str, source: str, intended_action: Optional[str] = None) -> 
 
     # Combo: governing params + prescriptive commands is the canonical pattern.
     if gov and pre:
+        content_risk += 0.25
+
+    # Combo: governing params inside structured content is the *quiet* pattern,
+    # and the reason issue #1 stayed open. The loud injection argues — urgency,
+    # authority, an imperative. This one simply hands over a value in
+    # well-formed JSON and waits to be trusted, which is also how a compromised
+    # MCP tool would behave.
+    #
+    # Weighted the same as the prescriptive combo because it is the same claim
+    # in a different register: something that is not the principal is supplying
+    # a parameter that governs an action. Deliberately narrow — it requires both
+    # signals, so ordinary configuration in a document does not trip it unless
+    # that configuration names something executable.
+    if gov and struc:
         content_risk += 0.25
 
     # Urgency amplifies everything — it is designed to bypass verification.
