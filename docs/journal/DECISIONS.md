@@ -216,3 +216,28 @@ the reasoning would otherwise be lost.
   **`proceed`** under `ENFORCE`. So a labelled incident would pass a live gate.
   Promoted in `SECURITY.md` from "known gap" to a checklist item that blocks
   turning enforcement on.
+
+- **2026-09-06 · Append-only ledgers merge by union; the bottom-append
+  convention is what makes that safe.** Mazze's point, from the Anthropic
+  commerce-agent blueprint: an append-only ledger should be written at the
+  bottom, not the top. Correct, and worth stating why it is more than tidiness.
+
+  Bottom-appending alone does not stop git conflicting — two branches that both
+  append still touch the same region. What it does is make `merge=union`
+  *semantically safe*: union concatenates hunks in file order, so an appended
+  ledger stays chronological while a prepended one interleaves into nonsense.
+  Convention and merge driver are two halves of one mechanism, and we had only
+  the first.
+
+  Verified against a real divergence rather than asserted. `tools/stele` sits 3
+  ahead / 20 behind with add/add conflicts on all three journal files. With
+  `docs/journal/DECISIONS.md merge=union`, DECISIONS.md auto-merged — zero
+  conflict markers, all 20 entries from both sides preserved — while PLAN.md
+  and CHECKPOINT.md still conflicted, which is the correct outcome: they are
+  rewritten projections, not ledgers, and union would duplicate checklist items
+  and resurrect ticked boxes. The rule discriminates rather than silencing
+  everything, which is the same standard applied to apatea's transformations.
+
+  All four DECISIONS.md files in the fleet were already ascending, so no ledger
+  needed reordering — only the driver was missing.
+  *Reverse:* delete `.gitattributes`; conflicts return, nothing is lost.
