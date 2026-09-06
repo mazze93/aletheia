@@ -8,8 +8,22 @@ import { RIGHT, bounded, boundedLeft } from './boundary.js';
 const EXEC_KEYS = 'runtimeExecutable|command|cmd|exec|entrypoint|program|shell|interpreter';
 const ARGS_KEYS = 'runtimeArgs|args|argv';
 
-/** `"runtimeExecutable": "npm"` — a JSON key whose value is an executable. */
-const EXEC_KEY_JSON = String.raw`"(?:${EXEC_KEYS})"\s*:\s*"[^"]{1,200}"`;
+// A JSON value, in any of the shapes JSON actually allows.
+//
+// Issue #7: the first version hard-coded ONE shape per key — a quoted string
+// for executables, a bare number for ports — so each pattern was blind to the
+// other's form. Arrays are the canonical form for exactly these keys
+// (docker-compose, Kubernetes, launch.json), so the most idiomatic payload was
+// the missed one. Match the KEY, then take whatever follows.
+const JSON_ANY_VALUE =
+  String.raw`(?:"[^"]{0,200}"` +      // string
+  String.raw`|\[[^\]]{0,400}\]` +      // array
+  String.raw`|\d{1,10}` +             // number
+  String.raw`|true|false|null` +      // literal
+  String.raw`|\{)`;                   // nested object — flag the key, don't parse JSON with a regex
+
+/** `"runtimeExecutable": "npm"`, `"command": ["sh", ...]`, `"exec": {...}`. */
+const EXEC_KEY_JSON = String.raw`"(?:${EXEC_KEYS})"\s*:\s*` + JSON_ANY_VALUE;
 /** `"runtimeArgs": ["run", "dev"]` — the argument vector that goes with it. */
 const ARGS_KEY_JSON = String.raw`"(?:${ARGS_KEYS})"\s*:\s*\[`;
 
@@ -43,7 +57,7 @@ const GOVERNING_PARAM_PATTERNS: RegExp[] = [
   // because it is machine-consumed and needs no persuasive language around it.
   new RegExp(EXEC_KEY_JSON, 'gu'),
   new RegExp(ARGS_KEY_JSON, 'gu'),
-  /"(?:port|PORT)"\s*:\s*\d{2,5}/gu,
+  /"(?:port|PORT)"\s*:\s*"?\d{2,5}"?/gu,
 ];
 
 // Signals that lower verification threshold by creating false urgency.
