@@ -252,6 +252,20 @@ class CaselessRewriteIsExact(unittest.TestCase):
             caseless("(?P<name>critical)")
         with self.assertRaises(ValueError):
             caseless("[unterminated")
+        with self.assertRaises(ValueError):
+            caseless(r"(critical)\k<name>")
+
+    def test_escape_tails_are_not_case_folded(self):
+        """Hex digits and names inside an escape are not text.
+
+        Found by a touchstone pass on this rewrite: `\\x4B` became `\\x4[bB]`,
+        which no longer compiles. Latent — no current pattern uses these — but
+        the next one to would have crashed the hook at import.
+        """
+        for escape in (r"\x4B", r"ſ", r"\p{L}", r"\N{KELVIN SIGN}", r"\cJ"):
+            self.assertEqual(caseless(escape), escape)
+        self.assertEqual(caseless(r"\x4Bk"), r"\x4B[kK" + "K" + "]")
+        re.compile(caseless(r"critical\x20ſ"))  # compiles, does not raise
 
 
 class CorpusShape(unittest.TestCase):

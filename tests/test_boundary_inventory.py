@@ -16,6 +16,7 @@ intentionally scoped.*
 """
 from __future__ import annotations
 
+import ast
 import pathlib
 import re
 import unittest
@@ -62,6 +63,67 @@ def code_without_docstring(path: pathlib.Path) -> str:
     return "\n".join(lines)
 
 
+_BOUNDED_PY = {"bounded", "bounded_left"}
+_IGNORECASE_ATTRS = {"I", "IGNORECASE"}
+
+
+def case_insensitive_bounded_calls_py(source: str, name: str) -> list[str]:
+    """`re.compile(bounded(...), <flags with re.I>)`, found per call via `ast`.
+
+    Call-level, not line-level: a flag on the next line, a `flags=` keyword,
+    a `re.M | re.I` union and an inline `(?i)` all count.
+    """
+    found = []
+    for node in ast.walk(ast.parse(source)):
+        if not (isinstance(node, ast.Call) and getattr(node.func, "attr", None) == "compile"
+                and node.args and isinstance(node.args[0], ast.Call)
+                and getattr(node.args[0].func, "id", None) in _BOUNDED_PY):
+            continue
+        flag_nodes = list(node.args[1:]) + [k.value for k in node.keywords if k.arg == "flags"]
+        has_flag = any(
+            isinstance(sub, ast.Attribute) and sub.attr in _IGNORECASE_ATTRS
+            for flag in flag_nodes for sub in ast.walk(flag)
+        )
+        inner = node.args[0].args
+        has_inline = bool(inner) and isinstance(inner[0], ast.Constant) \
+            and isinstance(inner[0].value, str) and re.search(r"\(\?[a-zA-Z]*i", inner[0].value)
+        if has_flag or has_inline:
+            found.append(f"{name}:{node.lineno}: {ast.unparse(node)[:100]}")
+    return found
+
+
+def _call_extent(text: str, open_paren: int) -> int:
+    """Index just past the `)` matching `open_paren`, skipping string literals."""
+    depth, i = 0, open_paren
+    while i < len(text):
+        ch = text[i]
+        if ch in "'\"`":
+            i = text.index(ch, i + 1) + 1  # patterns here never escape their quote
+            continue
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth -= 1
+            if depth == 0:
+                return i + 1
+        i += 1
+    raise ValueError("unbalanced call")
+
+
+def case_insensitive_bounded_calls_ts(source: str, name: str) -> list[str]:
+    """`new RegExp(bounded(...), '<flags with i>')`, found per call, across lines."""
+    found = []
+    for m in re.finditer(r"new RegExp\(", source):
+        call = source[m.start():_call_extent(source, m.end() - 1)]
+        if not re.match(r"new RegExp\(\s*bounded(?:Left)?\(", call):
+            continue
+        flags = re.search(r"""['"]([a-z]*)['"]\s*,?\s*\)$""", call)
+        if flags and "i" in flags.group(1):
+            line = source.count("\n", 0, m.start()) + 1
+            found.append(f"{name}:{line}: {' '.join(call.split())[:100]}")
+    return found
+
+
 class NoDialectDependentBoundaries(unittest.TestCase):
     def test_python_assessor_has_no_word_boundary_escapes(self):
         self._assert_clean(PY_ASSESS)
@@ -87,19 +149,39 @@ class NoDialectDependentBoundaries(unittest.TestCase):
         insensitive keywords go through `bounded_caseless()` /
         `boundedCaseless()`, which fold the keyword and never the edge.
         """
-        py_flag = re.compile(r"re\.(?:I|IGNORECASE)\b|\(\?[a-zA-Z]*i[a-zA-Z]*\)")
-        ts_flag = re.compile(r"""['"][a-z]*i[a-z]*['"]\s*\)""")
-        found = []
-        for path, flag in ((PY_ASSESS, py_flag), (TS_ASSESS, ts_flag)):
-            for i, line in enumerate(code_without_docstring(path).splitlines(), 1):
-                if any(f in line for f in ("bounded(", "boundedLeft(", "bounded_left(")) \
-                        and flag.search(line):
-                    found.append(f"{path.name}:{i}: {line.strip()}")
+        found = (
+            case_insensitive_bounded_calls_py(PY_ASSESS.read_text(encoding="utf-8"), PY_ASSESS.name)
+            + case_insensitive_bounded_calls_ts(TS_ASSESS.read_text(encoding="utf-8"), TS_ASSESS.name)
+        )
         self.assertEqual(
             found, [],
             "Bounded pattern compiled case-insensitively — use bounded_caseless() / "
             "boundedCaseless() and drop the flag:\n" + "\n".join(found),
         )
+
+    def test_the_gate_sees_calls_not_lines(self):
+        """The gate itself, probed. A line scanner missed a flag on the next
+        line; these are the shapes a real edit would take."""
+        py_cases = {
+            're.compile(bounded(r"x"), re.I)': True,
+            're.compile(bounded(r"x"),\n           re.I)': True,
+            're.compile(bounded(r"x"), flags=re.IGNORECASE)': True,
+            're.compile(bounded_left(r"x"), re.M | re.I)': True,
+            're.compile(bounded(r"(?i)x"))': True,
+            're.compile(bounded_caseless(r"x"))': False,
+            're.compile(bounded(r"x"), re.M)': False,
+        }
+        for src, expected in py_cases.items():
+            self.assertEqual(bool(case_insensitive_bounded_calls_py(src, "t.py")), expected, src)
+        ts_cases = {
+            "new RegExp(bounded(String.raw`x`), 'giu')": True,
+            "new RegExp(\n  bounded(String.raw`(?:a|b)`),\n  'giu',\n)": True,
+            "new RegExp(boundedLeft(String.raw`x`), \"iu\")": True,
+            "new RegExp(boundedCaseless(String.raw`x`), 'gu')": False,
+            "new RegExp(bounded(String.raw`(?:i)`), 'gu')": False,
+        }
+        for src, expected in ts_cases.items():
+            self.assertEqual(bool(case_insensitive_bounded_calls_ts(src, "t.ts")), expected, src)
 
     def test_word_class_uses_are_all_allowlisted(self):
         """`\\w` may appear, but only where the pairing is written down."""

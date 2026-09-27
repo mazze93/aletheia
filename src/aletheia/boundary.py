@@ -112,8 +112,9 @@ def caseless(pattern: str) -> str:
     while i < n:
         ch = pattern[i]
         if ch == "\\":
-            out.append(pattern[i:i + 2])
-            i += 2
+            end = _escape_end(pattern, i)
+            out.append(pattern[i:end])
+            i = end
         elif ch == "[":
             end = _class_end(pattern, i)
             out.append(_fold_class(pattern[i:end]))
@@ -134,6 +135,33 @@ def caseless(pattern: str) -> str:
             out.append(ch)
             i += 1
     return "".join(out)
+
+
+def _escape_end(pattern: str, start: int) -> int:
+    """Index just past the escape that opens at `start` (a backslash).
+
+    Escapes whose tail contains letters that are *not* case-foldable text —
+    hex digits, property and character names — are copied whole: rewriting
+    `\\x4B` to `\\x4[bB]` would silently turn it into a different (or invalid)
+    pattern. A named backreference would carry a name the rewrite cannot
+    reason about, so it is refused.
+    """
+    kind = pattern[start + 1:start + 2]
+    if kind == "x":
+        return start + 4
+    if kind == "u":
+        if pattern.startswith("{", start + 2):
+            return pattern.index("}", start) + 1
+        return start + 6
+    if kind == "U":
+        return start + 10
+    if kind in ("N", "p", "P") and pattern.startswith("{", start + 2):
+        return pattern.index("}", start) + 1
+    if kind == "c":
+        return start + 3
+    if kind == "k":
+        raise ValueError(f"named backreference at {start} in {pattern!r}")
+    return start + 2
 
 
 def _class_end(pattern: str, start: int) -> int:

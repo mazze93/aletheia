@@ -63,8 +63,9 @@ export function caseless(pattern: string): string {
   while (i < pattern.length) {
     const ch = pattern[i];
     if (ch === '\\') {
-      out.push(pattern.slice(i, i + 2));
-      i += 2;
+      const end = escapeEnd(pattern, i);
+      out.push(pattern.slice(i, end));
+      i = end;
     } else if (ch === '[') {
       const end = classEnd(pattern, i);
       out.push(foldClass(pattern.slice(i, end)));
@@ -87,6 +88,27 @@ export function caseless(pattern: string): string {
     }
   }
   return out.join('');
+}
+
+/**
+ * Index just past the escape opening at `start`. Hex digits and property or
+ * character names are copied whole — rewriting `\x4B` to `\x4[bB]` would
+ * silently change the pattern. Named backreferences are refused. Mirrors
+ * `_escape_end` in boundary.py.
+ */
+function escapeEnd(pattern: string, start: number): number {
+  const kind = pattern[start + 1];
+  if (kind === 'x') return start + 4;
+  if (kind === 'u') {
+    return pattern.startsWith('{', start + 2) ? pattern.indexOf('}', start) + 1 : start + 6;
+  }
+  if (kind === 'U') return start + 10;
+  if ((kind === 'N' || kind === 'p' || kind === 'P') && pattern.startsWith('{', start + 2)) {
+    return pattern.indexOf('}', start) + 1;
+  }
+  if (kind === 'c') return start + 3;
+  if (kind === 'k') throw new Error(`named backreference at ${start} in ${JSON.stringify(pattern)}`);
+  return start + 2;
 }
 
 function classEnd(pattern: string, start: number): number {

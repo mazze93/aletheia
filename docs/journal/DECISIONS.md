@@ -271,3 +271,19 @@ the reasoning would otherwise be lost.
   file at the pre-fix commit. The corpus gains `CASEFOLD_EDGES` (651 → 819).
   *Reverse:* restore `re.I` / `giu` on the fifteen patterns and delete
   `bounded_caseless`; the case-fold mutation test will fail, which is the point.
+
+- **2026-09-27 · A touchstone pass on the case-fold fix found two gaps in its
+  own tooling; both were closed before merge.** The fix's core claim held: the
+  port's `caseless()` output is string-identical to Python's on all 15
+  patterns, fold letters inside keywords score the same in both runtimes, and
+  no module outside `assess.*` compiles a boundary case-insensitively. Two
+  things did not hold. (1) The new inventory gate scanned *lines*, so
+  `re.compile(bounded(...),` with `re.I` on the next line passed. It is now
+  call-level, using `ast` for Python and a paren- and string-aware scan for
+  TypeScript, and `test_the_gate_sees_calls_not_lines` probes the gate
+  itself. It still flags all 15 sites per file at `1fdf5ad`. (2) `caseless()`
+  copied only two characters after a backslash, so `\x4B` became `\x4[bB]`,
+  which fails to compile and would have crashed the hook at import. Escape
+  tails (`\x`, `\u`, `\U`, `\N{}`, `\p{}`, `\c`) are now copied whole and
+  `\k<name>` is refused. Both were latent: nothing on this branch triggered
+  either. *Reverse:* none intended; each has a test that fails without it.
