@@ -11,7 +11,7 @@ two answer different questions and mixing them would bury one in the other:
     mutations.jsonl  every detection atom, decorated at both boundaries with
                      every edge character — can Unicode change the answer?
 
-651 cases, all generated. Regenerate with:
+819 cases, all generated. Regenerate with:
 
     cd parity && PYTHONPATH=. python3 unicode_boundary_mutations.py > mutations.jsonl
 """

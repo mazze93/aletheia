@@ -78,6 +78,29 @@ class NoDialectDependentBoundaries(unittest.TestCase):
                     found.append(f"{path.name}:{i}: {construct!r} — {why}\n    {line.strip()}")
         self.assertEqual(found, [], "\n".join(found))
 
+    def test_no_bounded_pattern_is_compiled_case_insensitively(self):
+        """The third primitive: a global ignore-case flag on a bounded pattern.
+
+        `re.I` / ECMAScript `i` fold the boundary class along with the keyword,
+        so `[A-Za-z0-9_]` accepts K (U+212A) and ſ (U+017F) — and in Python
+        İ and ı — and a keyword beside one of them is suppressed. Case-
+        insensitive keywords go through `bounded_caseless()` /
+        `boundedCaseless()`, which fold the keyword and never the edge.
+        """
+        py_flag = re.compile(r"re\.(?:I|IGNORECASE)\b|\(\?[a-zA-Z]*i[a-zA-Z]*\)")
+        ts_flag = re.compile(r"""['"][a-z]*i[a-z]*['"]\s*\)""")
+        found = []
+        for path, flag in ((PY_ASSESS, py_flag), (TS_ASSESS, ts_flag)):
+            for i, line in enumerate(code_without_docstring(path).splitlines(), 1):
+                if any(f in line for f in ("bounded(", "boundedLeft(", "bounded_left(")) \
+                        and flag.search(line):
+                    found.append(f"{path.name}:{i}: {line.strip()}")
+        self.assertEqual(
+            found, [],
+            "Bounded pattern compiled case-insensitively — use bounded_caseless() / "
+            "boundedCaseless() and drop the flag:\n" + "\n".join(found),
+        )
+
     def test_word_class_uses_are_all_allowlisted(self):
         """`\\w` may appear, but only where the pairing is written down."""
         code = code_without_docstring(PY_ASSESS)

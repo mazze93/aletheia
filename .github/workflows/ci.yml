@@ -79,7 +79,7 @@ jobs:
           diff -u parity/mutations.golden.json /tmp/mutations.golden.expected \
             || { echo "::error::parity/mutations.golden.json is stale — regenerate with 'python3 parity/emit_mutations.py > parity/mutations.golden.json'"; exit 1; }
 
-      # Gate 4 — 651 cases: every detection atom, decorated at both boundaries
+      # Gate 4 — 819 cases: every detection atom, decorated at both boundaries
       # with every edge character. This is what closes the issue-3 family rather
       # than the eleven fixtures that happened to expose it. It found the U+FEFF
       # whitespace divergence that the 69 hand-written vectors missed.

@@ -61,9 +61,153 @@ RIGHT = f"(?!{ASCII_IDENTIFIER_CHAR})"
 NOT_SPACE = r"[^\s﻿]"
 
 
+# Case-insensitivity, stated as policy rather than inherited from a flag.
+#
+# The third dialect finding, and the first one inside the fix itself: compiling
+# a bounded pattern with `re.I` (or ECMAScript `i`) case-folds the boundary
+# class too. `[A-Za-z0-9_]` stops being ASCII — Python `re.I` lets U+0130,
+# U+0131, U+017F and U+212A satisfy it; ECMAScript `iu` lets U+017F and U+212A.
+# A keyword beside one of those letters then reads as part of a longer ASCII
+# identifier and is suppressed: `criticalK` (Kelvin sign) scored 0.0. There is
+# no way to phrase the class so that a global `i` leaves it alone, because
+# under `i` the engine cannot tell K from k at all.
+#
+# The policy, in English first:
+#
+#     A keyword matches in either ASCII case, and also where Unicode case
+#     folding maps a letter onto one of its ASCII letters (ſ for s, K for k,
+#     ı and İ for i). The boundary class is never folded.
+#
+# So the keyword side keeps every match `re.I` gave the deployed assessor —
+# `crıtical` and `ſecurity advisory` still detect — while the boundary stops
+# accepting those letters as ASCII. The four letters are exhaustive, not
+# sampled: they are every code point that satisfies `[A-Za-z0-9_]` under
+# Python `re.I`.
+#
+# Implemented by rewriting the pattern — each ASCII letter outside a character
+# class becomes an explicit class of its cases — so that no case-insensitive
+# flag is needed in either runtime. Node 20 has no scoped `(?i:...)`, so the
+# port cannot use the one-line fix Python could, and the policy must not depend
+# on which runtime happens to support it.
+CASE_FOLD_EXTRAS = {
+    "i": "İı",  # İ ı
+    "k": "K",        # K Kelvin sign
+    "s": "ſ",        # ſ long s
+}
+
+
+def caseless(pattern: str) -> str:
+    """Rewrite `pattern` so its ASCII letters match case-insensitively.
+
+    `critical` becomes `[cC][rR][iIİı][tT]...`. Escapes (`\\s`, `\\d`, `\\.`) and
+    `{m,n}` quantifiers are copied verbatim. A character class inside the
+    keyword keeps its cases as written and gains the fold letters of any
+    i/k/s it admits, so `[a-zA-Z_]` still accepts K exactly as `re.I` did —
+    the keyword side keeps every match the flag gave. Group syntax beyond
+    `(?:`, `(?=`, `(?!`, `(?<=`, `(?<!` is refused rather than guessed at: a
+    named group's name would otherwise be rewritten.
+    """
+    out: list[str] = []
+    i, n = 0, len(pattern)
+    while i < n:
+        ch = pattern[i]
+        if ch == "\\":
+            out.append(pattern[i:i + 2])
+            i += 2
+        elif ch == "[":
+            end = _class_end(pattern, i)
+            out.append(_fold_class(pattern[i:end]))
+            i = end
+        elif ch == "{":
+            end = pattern.index("}", i) + 1
+            out.append(pattern[i:end])
+            i = end
+        elif pattern.startswith("(?", i):
+            prefix = _group_prefix(pattern, i)
+            out.append(prefix)
+            i += len(prefix)
+        elif ch.isascii() and ch.isalpha():
+            low = ch.lower()
+            out.append(f"[{low}{low.upper()}{CASE_FOLD_EXTRAS.get(low, '')}]")
+            i += 1
+        else:
+            out.append(ch)
+            i += 1
+    return "".join(out)
+
+
+def _class_end(pattern: str, start: int) -> int:
+    """Index just past the `]` that closes the class opening at `start`."""
+    i = start + 1
+    if i < len(pattern) and pattern[i] == "^":
+        i += 1
+    if i < len(pattern) and pattern[i] == "]":
+        i += 1  # a leading `]` is a literal
+    while i < len(pattern):
+        if pattern[i] == "\\":
+            i += 2
+            continue
+        if pattern[i] == "]":
+            return i + 1
+        i += 1
+    raise ValueError(f"unterminated character class in {pattern!r}")
+
+
+def _fold_class(cls: str) -> str:
+    """Add the fold letters for every i/k/s that the class `cls` admits.
+
+    Inserted straight after `[` (or `[^`), never at the end, where a trailing
+    `-` would turn them into a range. In a negated class they are excluded
+    along with their ASCII letter, which is what `re.I` did too.
+    """
+    head = 2 if cls.startswith("[^") else 1
+    body = cls[head:-1]
+    admitted = _ascii_letters_in(body)
+    extras = "".join(CASE_FOLD_EXTRAS[c] for c in sorted(CASE_FOLD_EXTRAS) if c in admitted)
+    return cls[:head] + extras + cls[head:]
+
+
+def _ascii_letters_in(body: str) -> set[str]:
+    """Lowercase ASCII letters a class body admits, via literals or ranges."""
+    letters: set[str] = set()
+    i = 0
+    while i < len(body):
+        if body[i] == "\\":
+            i += 2  # `\s`, `\d`, `\.` — never a letter in these patterns
+            continue
+        if i + 2 < len(body) and body[i + 1] == "-" and body[i + 2] != "\\":
+            lo, hi = body[i], body[i + 2]
+            for code in range(ord(lo), ord(hi) + 1):
+                if chr(code).isascii() and chr(code).isalpha():
+                    letters.add(chr(code).lower())
+            i += 3
+            continue
+        if body[i].isascii() and body[i].isalpha():
+            letters.add(body[i].lower())
+        i += 1
+    return letters
+
+
+def _group_prefix(pattern: str, start: int) -> str:
+    """The group opener at `start`, or an error for syntax `caseless` refuses."""
+    for prefix in ("(?<=", "(?<!", "(?:", "(?=", "(?!"):
+        if pattern.startswith(prefix, start):
+            return prefix
+    raise ValueError(f"unsupported group syntax at {start} in {pattern!r}")
+
+
 def bounded(pattern: str) -> str:
     """Wrap `pattern` in the boundary policy on both sides."""
     return f"{LEFT}(?:{pattern}){RIGHT}"
+
+
+def bounded_caseless(pattern: str) -> str:
+    """`bounded()`, with the keyword case-insensitive and the edges not.
+
+    Compile the result WITHOUT `re.I`: that flag would fold the boundary class
+    too, which is the defect this function exists to prevent.
+    """
+    return bounded(caseless(pattern))
 
 
 def bounded_left(pattern: str) -> str:
