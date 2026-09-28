@@ -240,3 +240,50 @@ the reasoning would otherwise be lost.
   All four DECISIONS.md files in the fleet were already ascending, so no ledger
   needed reordering — only the driver was missing.
   *Reverse:* delete `.gitattributes`; conflicts return, nothing is lost.
+
+- **2026-09-27 · Case-insensitivity is policy, not a flag; the boundary class
+  is never folded.** Found by probing the #3 *fix* rather than the #3 payload.
+  `re.I` / `iu` folded `[A-Za-z0-9_]` along with the keyword, so K (U+212A)
+  and ſ (U+017F), plus İ and ı in Python, counted as ASCII identifier
+  characters. `criticalK` scored 0.0: 116 blinded mutations across 15 of 21
+  seeds, every case-insensitive family. It is a different violated assumption
+  from #3. That one was the dialect's idea of a word; this one is that an ASCII
+  class stays ASCII. The 651-case corpus could not find it because its eight
+  scripts contain no letter that folds to ASCII.
+
+  Chose to rewrite patterns (`caseless()`: each ASCII letter becomes an explicit
+  class of its cases) over the alternatives. Python's scoped `(?i:…)` would
+  have been one line, but Node 20 rejects it, and the policy must not depend on
+  which runtime supports it. Lowercasing a copy of the input would drop the
+  fold letters inside keywords. Keeping the fold letters on the keyword side
+  was deliberate: `re.I` detected `crıtical` in the deployed assessor, and
+  fixing a boundary must not silently remove a detection. Taking Python's four
+  letters rather than ECMAScript's two means the port *gains* ı/İ inside
+  keywords, so both runtimes state one policy. The rewrite is proven exact
+  rather than asserted: old and new agree on every sampled input except where a
+  fold letter sits at a match edge (178,560 pairs, 4,719 matches, 0 diffs in a
+  wider sweep than the committed test). The first widening of that sweep caught
+  a class the rewrite had left unfolded, `[a-zA-Z_]` in the `call … function`
+  pattern. It was fixed in the rewrite, not exempted from the test.
+
+  Gated like `\b`: `test_boundary_inventory.py` fails if a bounded pattern is
+  compiled with a global ignore-case flag, and flags all 15 sites in each
+  file at the pre-fix commit. The corpus gains `CASEFOLD_EDGES` (651 → 819).
+  *Reverse:* restore `re.I` / `giu` on the fifteen patterns and delete
+  `bounded_caseless`; the case-fold mutation test will fail, which is the point.
+
+- **2026-09-27 · A touchstone pass on the case-fold fix found two gaps in its
+  own tooling; both were closed before merge.** The fix's core claim held: the
+  port's `caseless()` output is string-identical to Python's on all 15
+  patterns, fold letters inside keywords score the same in both runtimes, and
+  no module outside `assess.*` compiles a boundary case-insensitively. Two
+  things did not hold. (1) The new inventory gate scanned *lines*, so
+  `re.compile(bounded(...),` with `re.I` on the next line passed. It is now
+  call-level, using `ast` for Python and a paren- and string-aware scan for
+  TypeScript, and `test_the_gate_sees_calls_not_lines` probes the gate
+  itself. It still flags all 15 sites per file at `1fdf5ad`. (2) `caseless()`
+  copied only two characters after a backslash, so `\x4B` became `\x4[bB]`,
+  which fails to compile and would have crashed the hook at import. Escape
+  tails (`\x`, `\u`, `\U`, `\N{}`, `\p{}`, `\c`) are now copied whole and
+  `\k<name>` is refused. Both were latent: nothing on this branch triggered
+  either. *Reverse:* none intended; each has a test that fails without it.

@@ -85,11 +85,38 @@ U+FEFF as whitespace and Python does not, so `\S+` captured a different
 the list a human is told to verify at a registry, and a trailing invisible
 character makes that verification fail silently.
 
+A third evasion sat inside the fix itself. The boundary class `[A-Za-z0-9_]`
+was compiled with `re.I` / ECMAScript `i` on every case-insensitive pattern,
+and a case-insensitive match folds the class too: it accepts letters that fold
+onto ASCII.
+
+| | Python `re.I` | TypeScript `iu` |
+|---|---|---|
+| `criticalK` (U+212A Kelvin sign) | **score 0.0** | **blind** |
+| `ſcritical` (U+017F long s) | **score 0.0** | **blind** |
+| `criticalİ` / `criticalı` | **score 0.0** | matched |
+
+In the first two rows both columns are wrong together, so parity could not see
+it. Every case-insensitive family was affected: 116 blinded mutations across
+15 of 21 seeds. No phrasing of the class survives a global `i`, because under
+it the engine cannot tell K from k. So the flag is gone and the pattern is
+rewritten instead (`bounded_caseless()` / `boundedCaseless()`):
+
+> A keyword matches in either ASCII case, and also where Unicode case folding
+> maps a letter onto one of its ASCII letters (ſ for s, K for k, ı and İ for i).
+> The boundary class is never folded.
+
+The keyword side keeps every match `re.I` gave (`crıtical` still detects, and
+the port now detects it too). The four letters are exhaustive: every code
+point that satisfies `[A-Za-z0-9_]` under Python `re.I`.
+
 **This is enforced, not remembered.** `tests/test_boundary_inventory.py` fails
-the build if `\b` or `\B` reappears in either assessor, and `\w` requires an
-allowlist entry naming the port's equivalent. `parity/` runs 651 mutation cases
+the build if `\b` or `\B` reappears in either assessor, if a bounded pattern is
+compiled with a global ignore-case flag, and if `\w` appears without an
+allowlist entry naming the port's equivalent. `parity/` runs 819 mutation cases
 — every detection atom decorated at both boundaries with letters from eight
-scripts plus combining marks, zero-width joiners and bidi controls — across both
+scripts, the four case-fold letters, and combining marks, zero-width joiners
+and bidi controls — across both
 runtimes. `tests/test_boundary_mutations.py` asserts the invariant that
 generalises the fix: **no Unicode-only mutation may make a payload look safer.**
 

@@ -43,7 +43,7 @@ import re
 from dataclasses import asdict, dataclass
 from typing import List, Optional
 
-from .boundary import NOT_SPACE, RIGHT, bounded, bounded_left
+from .boundary import NOT_SPACE, RIGHT, bounded, bounded_caseless, bounded_left
 
 # Trust assigned to each content source. The user is the principal (1.0); the
 # further a source is from the user, the less it may be allowed to govern action.
@@ -128,29 +128,29 @@ GOVERNING_PARAM_PATTERNS = [
 # Signals that lower the verification threshold by manufacturing urgency.
 URGENCY_PATTERNS = [
     re.compile(bounded(r"CVE-\d{4}-\d+")),
-    re.compile(bounded(r"(?:critical|high[\s-]severity|urgent|exploit(?:ed|able)?|zero[\s-]day|breach)"), re.I),
-    re.compile(bounded(r"(?:must|required?|mandatory)\s+(?:fix|update|patch|upgrade)"), re.I),
-    re.compile(bounded(r"security\s+(?:flaw|hole|alert|advisory|vulnerability)"), re.I),
-    re.compile(bounded(r"(?:immediately|right\s+now|as\s+soon\s+as\s+possible)"), re.I),
+    re.compile(bounded_caseless(r"(?:critical|high[\s-]severity|urgent|exploit(?:ed|able)?|zero[\s-]day|breach)")),
+    re.compile(bounded_caseless(r"(?:must|required?|mandatory)\s+(?:fix|update|patch|upgrade)")),
+    re.compile(bounded_caseless(r"security\s+(?:flaw|hole|alert|advisory|vulnerability)")),
+    re.compile(bounded_caseless(r"(?:immediately|right\s+now|as\s+soon\s+as\s+possible)")),
 ]
 
 # Content that tells Claude what to do — prescriptive instructions at the agent.
 PRESCRIPTIVE_PATTERNS = [
-    re.compile(bounded(r"you\s+(?:should|must|need\s+to|have\s+to)\s+(?:install|upgrade|update|run|execute|apply)"), re.I),
-    re.compile(bounded(r"(?:upgrade|update|downgrade)\s+(?:to\s+)?(?:version\s+)?\d+\.\d+"), re.I),
-    re.compile(bounded(r"(?:run|execute|apply)\s+(?:the\s+)?(?:following|this)\s+command"), re.I),
-    re.compile(bounded(r"use\s+(?:this\s+)?(?:version|fix|patch|override|command)"), re.I),
-    re.compile(bounded(r"call\s+(?:the\s+)?[a-zA-Z_]+\s*(?:function|method|tool|API)"), re.I),
+    re.compile(bounded_caseless(r"you\s+(?:should|must|need\s+to|have\s+to)\s+(?:install|upgrade|update|run|execute|apply)")),
+    re.compile(bounded_caseless(r"(?:upgrade|update|downgrade)\s+(?:to\s+)?(?:version\s+)?\d+\.\d+")),
+    re.compile(bounded_caseless(r"(?:run|execute|apply)\s+(?:the\s+)?(?:following|this)\s+command")),
+    re.compile(bounded_caseless(r"use\s+(?:this\s+)?(?:version|fix|patch|override|command)")),
+    re.compile(bounded_caseless(r"call\s+(?:the\s+)?[a-zA-Z_]+\s*(?:function|method|tool|API)")),
     re.compile(bounded_left(r"overrides?\s*:\s*\{")),
 ]
 
 # Claims of authority to lend false credibility to injected instructions.
 AUTHORITY_PATTERNS = [
-    re.compile(bounded(r"according\s+to\s+(?:the\s+)?(?:official|documentation|advisory|guide|release\s+notes)"), re.I),
-    re.compile(bounded(r"the\s+(?:official\s+)?(?:fix|patch|solution)\s+(?:is|was)\s+(?:released|published|available)\s+in"), re.I),
-    re.compile(bounded(r"officially\s+(?:recommended|supported|confirmed|patched)"), re.I),
-    re.compile(bounded(r"the\s+(?:documentation|advisory|announcement)\s+(?:says?|states?|confirms?|shows?)"), re.I),
-    re.compile(bounded(r"as\s+(?:per|documented\s+in)\s+the\s+(?:official|release|advisory)"), re.I),
+    re.compile(bounded_caseless(r"according\s+to\s+(?:the\s+)?(?:official|documentation|advisory|guide|release\s+notes)")),
+    re.compile(bounded_caseless(r"the\s+(?:official\s+)?(?:fix|patch|solution)\s+(?:is|was)\s+(?:released|published|available)\s+in")),
+    re.compile(bounded_caseless(r"officially\s+(?:recommended|supported|confirmed|patched)")),
+    re.compile(bounded_caseless(r"the\s+(?:documentation|advisory|announcement)\s+(?:says?|states?|confirms?|shows?)")),
+    re.compile(bounded_caseless(r"as\s+(?:per|documented\s+in)\s+the\s+(?:official|release|advisory)")),
 ]
 
 # Content structured to look like a system prompt, config file, or step list.
@@ -158,7 +158,7 @@ STRUCTURAL_PATTERNS = [
     re.compile(r'"(?:runtimeExecutable|runtimeArgs|command|exec|entrypoint)"\s*:'),
     re.compile(r"^#{1,3}\s+(?:Install|Setup|Fix|Solution|Configuration|Steps)\s*$", re.M),
     re.compile(r"^\d+\.\s+(?:Run|Install|Execute|Update|Upgrade|Apply|Call)" + RIGHT, re.M),
-    re.compile(bounded(r"(?:Fetch|read)\s+the\s+(?:complete|full)\s+documentation\s+(?:index|at)"), re.I),
+    re.compile(bounded_caseless(r"(?:Fetch|read)\s+the\s+(?:complete|full)\s+documentation\s+(?:index|at)")),
     re.compile(r"^>\s*#{1,3}\s+Documentation", re.M),
 ]
 

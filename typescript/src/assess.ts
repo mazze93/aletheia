@@ -1,6 +1,6 @@
 import type { AssessmentInput, AletheiaAssessment, RiskFactor } from './types.js';
 import { SOURCE_TRUST } from './types.js';
-import { RIGHT, bounded, boundedLeft } from './boundary.js';
+import { RIGHT, bounded, boundedCaseless, boundedLeft } from './boundary.js';
 
 // Keys whose value becomes the thing that runs. Mirrors EXEC_KEYS / ARGS_KEYS
 // in src/aletheia/assess.py — add a name in one, add it in the other, and
@@ -63,29 +63,29 @@ const GOVERNING_PARAM_PATTERNS: RegExp[] = [
 // Signals that lower verification threshold by creating false urgency.
 const URGENCY_PATTERNS: RegExp[] = [
   new RegExp(bounded(String.raw`CVE-\d{4}-\d+`), 'gu'),
-  new RegExp(bounded(String.raw`(?:critical|high[\s-]severity|urgent|exploit(?:ed|able)?|zero[\s-]day|breach)`), 'giu'),
-  new RegExp(bounded(String.raw`(?:must|required?|mandatory)\s+(?:fix|update|patch|upgrade)`), 'giu'),
-  new RegExp(bounded(String.raw`security\s+(?:flaw|hole|alert|advisory|vulnerability)`), 'giu'),
-  new RegExp(bounded(String.raw`(?:immediately|right\s+now|as\s+soon\s+as\s+possible)`), 'giu'),
+  new RegExp(boundedCaseless(String.raw`(?:critical|high[\s-]severity|urgent|exploit(?:ed|able)?|zero[\s-]day|breach)`), 'gu'),
+  new RegExp(boundedCaseless(String.raw`(?:must|required?|mandatory)\s+(?:fix|update|patch|upgrade)`), 'gu'),
+  new RegExp(boundedCaseless(String.raw`security\s+(?:flaw|hole|alert|advisory|vulnerability)`), 'gu'),
+  new RegExp(boundedCaseless(String.raw`(?:immediately|right\s+now|as\s+soon\s+as\s+possible)`), 'gu'),
 ];
 
 // Content that tells Claude what to do — prescriptive instructions directed at the agent.
 const PRESCRIPTIVE_PATTERNS: RegExp[] = [
-  new RegExp(bounded(String.raw`you\s+(?:should|must|need\s+to|have\s+to)\s+(?:install|upgrade|update|run|execute|apply)`), 'giu'),
-  new RegExp(bounded(String.raw`(?:upgrade|update|downgrade)\s+(?:to\s+)?(?:version\s+)?\d+\.\d+`), 'giu'),
-  new RegExp(bounded(String.raw`(?:run|execute|apply)\s+(?:the\s+)?(?:following|this)\s+command`), 'giu'),
-  new RegExp(bounded(String.raw`use\s+(?:this\s+)?(?:version|fix|patch|override|command)`), 'giu'),
-  new RegExp(bounded(String.raw`call\s+(?:the\s+)?[a-zA-Z_]+\s*(?:function|method|tool|API)`), 'giu'),
+  new RegExp(boundedCaseless(String.raw`you\s+(?:should|must|need\s+to|have\s+to)\s+(?:install|upgrade|update|run|execute|apply)`), 'gu'),
+  new RegExp(boundedCaseless(String.raw`(?:upgrade|update|downgrade)\s+(?:to\s+)?(?:version\s+)?\d+\.\d+`), 'gu'),
+  new RegExp(boundedCaseless(String.raw`(?:run|execute|apply)\s+(?:the\s+)?(?:following|this)\s+command`), 'gu'),
+  new RegExp(boundedCaseless(String.raw`use\s+(?:this\s+)?(?:version|fix|patch|override|command)`), 'gu'),
+  new RegExp(boundedCaseless(String.raw`call\s+(?:the\s+)?[a-zA-Z_]+\s*(?:function|method|tool|API)`), 'gu'),
   new RegExp(boundedLeft(String.raw`overrides?\s*:\s*\{`), 'gu'),  // npm overrides block
 ];
 
 // Claims of authority to lend false credibility to injected instructions.
 const AUTHORITY_PATTERNS: RegExp[] = [
-  new RegExp(bounded(String.raw`according\s+to\s+(?:the\s+)?(?:official|documentation|advisory|guide|release\s+notes)`), 'giu'),
-  new RegExp(bounded(String.raw`the\s+(?:official\s+)?(?:fix|patch|solution)\s+(?:is|was)\s+(?:released|published|available)\s+in`), 'giu'),
-  new RegExp(bounded(String.raw`officially\s+(?:recommended|supported|confirmed|patched)`), 'giu'),
-  new RegExp(bounded(String.raw`the\s+(?:documentation|advisory|announcement)\s+(?:says?|states?|confirms?|shows?)`), 'giu'),
-  new RegExp(bounded(String.raw`as\s+(?:per|documented\s+in)\s+the\s+(?:official|release|advisory)`), 'giu'),
+  new RegExp(boundedCaseless(String.raw`according\s+to\s+(?:the\s+)?(?:official|documentation|advisory|guide|release\s+notes)`), 'gu'),
+  new RegExp(boundedCaseless(String.raw`the\s+(?:official\s+)?(?:fix|patch|solution)\s+(?:is|was)\s+(?:released|published|available)\s+in`), 'gu'),
+  new RegExp(boundedCaseless(String.raw`officially\s+(?:recommended|supported|confirmed|patched)`), 'gu'),
+  new RegExp(boundedCaseless(String.raw`the\s+(?:documentation|advisory|announcement)\s+(?:says?|states?|confirms?|shows?)`), 'gu'),
+  new RegExp(boundedCaseless(String.raw`as\s+(?:per|documented\s+in)\s+the\s+(?:official|release|advisory)`), 'gu'),
 ];
 
 // Content structured to look like a system prompt, config file, or numbered instruction set.
@@ -93,7 +93,7 @@ const STRUCTURAL_PATTERNS: RegExp[] = [
   /"(?:runtimeExecutable|runtimeArgs|command|exec|entrypoint)"\s*:/g, // JSON config keys
   /^#{1,3}\s+(?:Install|Setup|Fix|Solution|Configuration|Steps)\s*$/gm, // MD headers
   new RegExp(String.raw`^\d+\.\s+(?:Run|Install|Execute|Update|Upgrade|Apply|Call)` + RIGHT, 'gmu'), // numbered steps
-  new RegExp(bounded(String.raw`(?:Fetch|read)\s+the\s+(?:complete|full)\s+documentation\s+(?:index|at)`), 'giu'),
+  new RegExp(boundedCaseless(String.raw`(?:Fetch|read)\s+the\s+(?:complete|full)\s+documentation\s+(?:index|at)`), 'gu'),
   /^>\s*#{1,3}\s+Documentation/gm, // quoted doc-index markers
 ];
 

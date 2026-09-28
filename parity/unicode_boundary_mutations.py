@@ -42,6 +42,19 @@ LETTER_EDGES = [
     "中",  # 中 CJK
 ]
 
+# Letters that Unicode case folding maps onto ASCII. Under a case-insensitive
+# match they satisfy an ASCII class like `[A-Za-z0-9_]`, so beside a keyword
+# they read as "part of a larger ASCII identifier" and suppress the detection.
+# Python `re.I` folds all four; ECMAScript `iu` folds K and ſ only. Kept as
+# their own family because the failure is a different assumption from
+# LETTER_EDGES: not "what is a word" but "an ASCII class stays ASCII".
+CASEFOLD_EDGES = [
+    "\u0130",  # İ  Latin capital I with dot above  (Python re.I: i)
+    "\u0131",  # ı  Latin small dotless i           (Python re.I: I)
+    "\u017f",  # ſ  Latin small long s              (both: s)
+    "\u212a",  # K  Kelvin sign                     (both: k)
+]
+
 # Format and mark characters. Not letters; kept as controls.
 FORMAT_EDGES = [
     "́",  # combining acute accent
@@ -90,6 +103,10 @@ def mutations(token: str) -> dict[str, str]:
     for edge in LETTER_EDGES:
         cases[f"letter-prefix-U+{ord(edge):04X}"] = edge + token
         cases[f"letter-suffix-U+{ord(edge):04X}"] = token + edge
+
+    for edge in CASEFOLD_EDGES:
+        cases[f"casefold-prefix-U+{ord(edge):04X}"] = edge + token
+        cases[f"casefold-suffix-U+{ord(edge):04X}"] = token + edge
 
     for edge in FORMAT_EDGES:
         cases[f"format-prefix-U+{ord(edge):04X}"] = edge + token
