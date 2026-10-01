@@ -184,5 +184,9 @@ never by default.
 
 ## Reporting
 
-Private repository. Raise an issue, or if the finding is itself sensitive, keep
-it out of the issue text and reference it indirectly.
+Report suspected vulnerabilities privately through
+[GitHub private vulnerability reporting](https://github.com/mazze93/aletheia/security/advisories/new).
+
+Do not disclose suspected vulnerabilities, exploit details, credentials,
+or sensitive logs in public issues or pull requests. Public issues are
+for non-sensitive bugs and feature requests.
