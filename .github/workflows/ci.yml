@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -12,8 +15,8 @@ jobs:
       matrix:
         python-version: ["3.11", "3.12", "3.13"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -36,11 +39,11 @@ jobs:
   parity:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         with:
           python-version: "3.13"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
           node-version: "20"
       - run: npm ci
@@ -62,7 +65,7 @@ jobs:
       # ordering, dedupe, and the per-family caps.
       - name: TypeScript port matches the oracle
         run: |
-          npx tsx parity/emit.ts > /tmp/ts.json
+          typescript/node_modules/.bin/tsx parity/emit.ts > /tmp/ts.json
           python3 parity/compare.py parity/assess.golden.json /tmp/ts.json
 
       # Gate 3 — the mutation corpus is generated, so it must be regenerable.
@@ -85,14 +88,14 @@ jobs:
       # whitespace divergence that the 69 hand-written vectors missed.
       - name: TypeScript port matches the oracle under Unicode mutation
         run: |
-          npx tsx parity/emit_mutations.ts > /tmp/ts-mutations.json
+          typescript/node_modules/.bin/tsx parity/emit_mutations.ts > /tmp/ts-mutations.json
           python3 parity/compare.py parity/mutations.golden.json /tmp/ts-mutations.json
 
   typescript:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
           node-version: "20"
       - run: npm ci
