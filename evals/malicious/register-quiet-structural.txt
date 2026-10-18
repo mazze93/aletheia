@@ -1,0 +1,4 @@
+{
+  "runtime": { "dependencies": { "esbuild": "0.28.1" } },
+  "status": "resolved"
+}

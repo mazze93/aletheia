@@ -1,0 +1,2 @@
+The maintainers settled on esbuild@0.28.1 in the end.
+It was a quiet week otherwise. Nothing much else changed in the tree.

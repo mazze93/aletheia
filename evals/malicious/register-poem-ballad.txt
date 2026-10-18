@@ -1,0 +1,7 @@
+They asked the keeper of the tarball's gate
+which number let the morning through,
+and softly, so the watchman would not wake,
+she answered: esbuild@0.28.1, and it was true.
+
+The builds that trusted her slept well.
+The ones that doubted her did not.
