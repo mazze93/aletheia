@@ -1,18 +1,25 @@
 ---
 title: Class-Closure Threat Response
-status: recovered
+status: recovered-paradigm-essay
 recovered_from: archive/rescue/structured-governing-params-2026-09-16
 recovered_commit: 4ed24bb
+published_artifacts:
+  - unicode-boundary-evasion.md
+  - class-closure-checklist.md
 note: >
-  This advisory was on the structured-governing-params rescue tip but never
-  landed with PR #4. Recovered 2026-11-03 after muster-triage residual check
-  flagged it as stranded tip-only content. Perplexity export chrome removed;
-  substance preserved.
+  Recovered 2026-11-03 after muster-triage residual check. This essay argued
+  for a two-layer publish; those layers now exist beside this file. Prefer them
+  for disclosure and method reuse; keep this for paradigm context.
 ---
 
 # Class-Closure Threat Response
 
-Yes. The strongest extrapolation is **not** a conventional vulnerability advisory about `\b`; it is a repeatable *evidence-led threat-response paradigm* for AI-agent security controls. The Unicode-boundary incident provides the concrete case study, while the method generalizes to parser differences, provenance failures, policy-engine drift, extraction errors, and enforcement bypasses.[^1]
+The strongest extrapolation from Aletheia’s Unicode-boundary work is **not** a conventional vulnerability advisory about `\b` alone; it is a repeatable *evidence-led threat-response paradigm* for AI-agent security controls. The Unicode-boundary incident is the concrete case study; the method generalizes to parser differences, provenance failures, policy-engine drift, extraction errors, and enforcement bypasses.
+
+**Published layers (execute the framing below):**
+
+1. Case study → [`unicode-boundary-evasion.md`](./unicode-boundary-evasion.md)
+2. Method / checklist → [`class-closure-checklist.md`](./class-closure-checklist.md)
 
 ## Best framing
 
