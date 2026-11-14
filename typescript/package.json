@@ -4,7 +4,7 @@
   "description": "Prompt injection detection agent — protects Claude by tracking content provenance and flagging untrusted governing parameters",
   "type": "module",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --target=node20 --outfile=dist/index.js --format=esm --packages=external",
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node24 --outfile=dist/index.js --format=esm --packages=external",
     "typecheck": "tsc --noEmit",
     "dev": "node --import tsx/esm src/index.ts"
   },
@@ -12,7 +12,7 @@
     "@anthropic-ai/claude-agent-sdk": "latest"
   },
   "devDependencies": {
-    "@types/node": "^22",
+    "@types/node": "^24",
     "esbuild": "latest",
     "tsx": "^4.23.15",
     "typescript": "^5"
