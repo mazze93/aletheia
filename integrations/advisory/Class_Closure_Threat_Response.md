@@ -80,7 +80,6 @@ is the work.
 
 Applied to Aletheia’s boundary work, then stated as a general rule:
 
-
 | # | Stage | What happened in Aletheia | General rule |
 | ---: | --- | --- | --- |
 | 1 | Establish the exploit | Unicode adjacent to security terms caused the Python detector to miss otherwise recognizable risk signals | Demonstrate the behavior in the real execution path, not only in a synthetic unit test |
