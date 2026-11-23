@@ -29,6 +29,24 @@ jobs:
       - name: eval corpus
         run: PYTHONPATH=src python3 -m unittest tests.test_evals -v
 
+      # Known failures may close, not vanish. test_corpus catches a known
+      # failure that silently *passes*; this catches one that silently
+      # *disappears* (line deleted, flag flipped, expect_action weakened)
+      # while the gap is still open. A removal only passes if the detector now
+      # really stops the case — the same fact test_corpus asserts the other
+      # way — so a genuine closure is not blocked.
+      - name: known-failure memory is monotonic
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ -n "$BASE" ] && [ "$BASE" != "0000000000000000000000000000000000000000" ]; then
+            git fetch --depth=1 origin "$BASE" 2>/dev/null || true
+            PYTHONPATH=src python3 evals/check_known_failures.py --base-ref "$BASE"
+          else
+            echo "::warning::no base ref (first commit to main); invariants only"
+            PYTHONPATH=src python3 evals/check_known_failures.py --current-only
+          fi
+
   # Two implementations of the same contract drift silently unless something
   # makes them argue. The golden file is the sworn statement; a difference
   # fails the build. Which side is *correct* is a policy decision, recorded
