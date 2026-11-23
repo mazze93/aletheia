@@ -287,3 +287,13 @@ the reasoning would otherwise be lost.
   tails (`\x`, `\u`, `\U`, `\N{}`, `\p{}`, `\c`) are now copied whole and
   `\k<name>` is refused. Both were latent: nothing on this branch triggered
   either. *Reverse:* none intended; each has a test that fails without it.
+
+
+- **2026-10-16 · Release pairing with STELE and Apatea.** Preserved the damaged
+  operator checkout and validated remote b6eaed3 in a persistent isolated clone.
+  Repaired six npm advisories using compatible lockfile updates; pinned CI
+  actions and required existing tsx rather than allowing npx to install tools.
+  Python gate semantics and fail-open/shadow/enforce policy are unchanged.
+  Verification: 44 Python tests, 77 contract parity vectors, 819 Unicode parity
+  vectors; the repaired Apatea runner rejects vacuous assessors before search.
+  Rollback: revert the lockfile/workflow change; no installed hooks changed.

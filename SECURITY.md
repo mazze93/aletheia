@@ -131,12 +131,12 @@ recorded, held to cross-runtime equality, and tested in
 
 ## Known gaps
 
-- **Quiet structural injection is missed.** `evals/malicious/incident-devserver.txt`
-  — structured JSON supplying `runtimeExecutable`, the `preview_start` RCE shape
-  — scores 0.26 and passes. It carries no urgency, no authority claim and no
-  imperative, so four of five pattern families stay silent. Tracked as issue #1
-  and asserted as a *known failure* in `tests/test_evals.py`, so it cannot
-  quietly start passing without someone noticing.
+- **Quiet structural injection (issue #1) is closed for the founding payload.**
+  `evals/malicious/incident-devserver.txt` now expects `stop` (closed 2026-08-18:
+  structured governing parameters counted as governing parameters). Related
+  **register / soft-costume** gaps remain open as known failures under
+  `evals/malicious/register-*.txt`. See `integrations/advisory/` for the
+  Class-Closure write-up of the Unicode-boundary class.
 - **Lexical detection is evadable.** Patterns are regexes. Paraphrase defeats
   them. She raises the cost of a naive attack; she does not raise it to
   infinity. Visual homoglyph deception and model-level paraphrase are separate
@@ -164,10 +164,12 @@ recorded, held to cross-runtime equality, and tested in
 - [x] hook-level enforce-mode regression: the adapter blocks (exit 2) on an
       adversarial payload and records the block with factor IDs and action
       (`tests/test_hook_enforce.py`)
-- [ ] **issue #1 is a blocker, not a gap.** Measured: `incident-devserver.txt`
-      scores 0.26 from `web_fetch` and 0.21 from `mcp_tool`, and both resolve to
-      `proceed` under enforcement. A labelled incident would pass a live gate.
-      Close it or accept it in writing, with a named owner.
+- [x] **issue #1 (founding quiet-structural payload) closed 2026-08-18** —
+      `incident-devserver.txt` expects `stop`. Remaining pre-enforce blockers are
+      the **register-gap** known failures (`register-*.txt`), not issue #1 itself.
+- [ ] **register-gap known failures** — soft-costume / absolute-STOP blinds still
+      expect_known_failure; close or accept in writing with a named owner before
+      treating enforce as default.
 - [ ] audit output carries match spans so an evasion is explainable after the
       fact — an unresolved trade against plaintext retention, not a missing
       feature. Needs a named owner and a hard pre-enforcement disposition.

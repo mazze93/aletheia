@@ -15,6 +15,12 @@ updates:
     directory: "/typescript"
     schedule:
       interval: "weekly"
+    ignore:
+      # The Node types follow the Node major that CI runs (24, set in
+      # ci.yml). A types major ahead of the runtime lets code typecheck
+      # against APIs CI does not have. Move both in one PR, not here.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
